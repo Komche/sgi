@@ -1,5 +1,6 @@
 <?php
-class Manager
+require("api/model/Managers.php");
+class Manager extends Managers
 {
 
     protected $last_name;
@@ -8,13 +9,13 @@ class Manager
     protected $phone_number;
 
 
-    protected function bdd()
+    protected static function bdd()
     {
         $dbname = 'akoybizc_aemn';
         $user = 'akoybizc_attaher';
         $pass = '@aemn2019';
         if ($_SERVER["SERVER_NAME"] == 'localhost') {
-            $dbname = 'aemn';
+            $dbname = 'saroapp';
             $user = 'root';
             $pass = '';
         }
@@ -77,7 +78,7 @@ class Manager
         if (count($fields) != 0) {
             foreach ($fields as $key => $field) {
                 if (empty($field) && trim($field) == "") {
-                    if (count($not_required) != 0) {
+                    if (count($not_required) != 0 && $not_required!=null) {
                         foreach ($not_required as $nkey => $nvalue) {
                             if ($key != $nkey) {
                                 return "$key est vide";
@@ -92,7 +93,7 @@ class Manager
         }
     }
 
-    public function messages($msg, $type_alerte)
+    public static function messages($msg, $type_alerte)
     {
        echo  `<div class="alert $type_alerte alert-dismissible">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
