@@ -7,7 +7,7 @@ if (isset($_SESSION['messages'])) {
 
 if (!empty($_GET['action'])) {
     extract($_GET);
-    if ($action=='addRole') {
+    if ($action=='role') {
         if (!empty($_POST)) {
             $data = $_POST;
             $res = addRoles($data);
@@ -16,8 +16,8 @@ if (!empty($_GET['action'])) {
                 $_SESSION['messages'] = $res;
             }
         }
-        require_once("view/addRoleView.php");
+        require_once("view/roleView.php");
     }
 }else {
-    require_once("view/addRoleView.php");
+    require_once("view/roleView.php");
 }

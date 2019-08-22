@@ -45,9 +45,9 @@
     <!-- Logo -->
     <a href="index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b>S</b>App</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><b>Saro</b>App</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -341,8 +341,10 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="index.php?action=addRole"><i class="fa fa-circle-o"></i> Ajout role</a></li>
-            <li><a href="index.php?action=showRole"><i class="fa fa-circle-o"></i> Voir role</a></li>
+            <li class="active"><a href="index.php?action=role"><i class="fa fa-circle-o"></i>Rôle</a></li>
+            <li><a href="index.php?action=module"><i class="fa fa-circle-o"></i>Module</a></li>
+            <li><a href="index.php?action=showRole"><i class="fa fa-circle-o"></i>Permission</a></li>
+            <li><a href="index.php?action=showRole"><i class="fa fa-circle-o"></i>Module</a></li>
           </ul>
         </li>
         <!--<li class="treeview">
