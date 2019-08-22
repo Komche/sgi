@@ -11,7 +11,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
+            <form role="form" method="post">
               <div class="box-body">
                 <div class="form-group">
                   <label for="name">Nom du role</label>
@@ -27,6 +27,11 @@
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Valider</button>
               </div>
+              <?php 
+                if (isset($_SESSION['messages'])) {
+                  Manager::messages($_SESSION['messages'], 'alert-danger');
+                }
+              ?>
             </form>
           </div>
 

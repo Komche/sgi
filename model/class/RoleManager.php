@@ -11,16 +11,19 @@ class RoleManager  extends Manager
 
         $res = self::is_not_empty($data);
         if ($res != 1) {
+            $res['message'] = $res;
             return $res;
         }
 
         foreach ($data as $key => $value) {
             if (is_numeric($value[$key])) {
-                return 'Un rôle doit être écrit avec du text';
+                $res['message'] = 'Un rôle doit être écrit avec du text';
+                return $res;
             }
 
             if (strlen($value[$key]) < 3) {
-                return 'Votre text est trop cours';
+                $res['message'] = 'Votre text est trop cours';
+                return $res;
             }
         }
     }
