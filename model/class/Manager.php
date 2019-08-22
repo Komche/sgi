@@ -78,15 +78,8 @@ class Manager extends Managers
         if (count($fields) != 0) {
             foreach ($fields as $key => $field) {
                 if (empty($field) && trim($field) == "") {
-                    if (count($not_required) != 0 && $not_required!=null) {
-                        foreach ($not_required as $nkey => $nvalue) {
-                            if ($key != $nkey) {
-                                return "$key est vide";
-                            }
-                        }
-                    } else {
-                        return "$key est vide";
-                    }
+                    return "$key est vide";
+                    
                 }
             }
             return 1;
@@ -95,11 +88,12 @@ class Manager extends Managers
 
     public static function messages($msg, $type_alerte)
     {
-       echo  `<div class="alert $type_alerte alert-dismissible">
+       // die(var_dump($msg));
+       echo  '<div class="alert '.$type_alerte.' alert-dismissible">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
         <h4><i class="icon fa fa-ban"></i> Saroapp!</h4>
-        $msg
-      </div>`;
+        '.$msg.'
+      </div>';
     }
 }
     

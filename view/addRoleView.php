@@ -26,12 +26,13 @@
 
               <div class="box-footer">
                 <button type="submit" class="btn btn-primary">Valider</button>
-              </div>
-              <?php 
+                <p></p>
+                <?php 
                 if (isset($_SESSION['messages'])) {
-                  Manager::messages($_SESSION['messages'], 'alert-danger');
+                  echo Manager::messages($_SESSION['messages'], 'alert-danger');
                 }
               ?>
+              </div>
             </form>
           </div>
 

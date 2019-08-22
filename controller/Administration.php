@@ -3,14 +3,15 @@ include_once('model/class/RoleManager.php');
 
 function addRoles($data)
 {
-
     $url = API_ROOT_PATH. "/object/roles";
     $res = RoleManager::addRole($url, $data);
-
-    $res = json_decode($res, true);
-
-    if (!$res['error']) {
-        header('Location: index.php');
+    if (isset($res['error'])) {
+        $res = json_decode($res, true);
+        if (!$res['error']) {
+            header('Location: index.php');
+        }else {
+            return $res['message'];
+        }
     }else {
         return $res['message'];
     }
@@ -18,5 +19,5 @@ function addRoles($data)
 
 function showError($var)
 {
-    die(print_r($var));
+    die(var_dump($var));
 }
