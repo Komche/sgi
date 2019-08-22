@@ -86,6 +86,28 @@ class Manager extends Managers
         }
     }
 
+    public static function getDatas($table)
+    {
+        $url = API_ROOT_PATH."/$table";
+        $data = self::file_get_data($url);
+        if ($data['error']) {
+            return $data['message'];
+        }else {
+            return $data['data'];
+        }
+    }
+
+    public static function getData($table, $field)
+    {
+        $url = API_ROOT_PATH."/$table";
+        $data = self::file_get_data($url);
+        if ($data['error']) {
+            return $data['message'];
+        }else {
+            return $data['data'];
+        }
+    }
+
     public static function messages($msg, $type_alerte)
     {
        // die(var_dump($msg));
@@ -94,6 +116,11 @@ class Manager extends Managers
         <h4><i class="icon fa fa-ban"></i> Saroapp!</h4>
         '.$msg.'
       </div>';
+    }
+
+    public static function showError($var)
+    {
+        die(var_dump($var));
     }
 }
     

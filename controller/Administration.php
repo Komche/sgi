@@ -10,14 +10,9 @@ function addRoles($data)
         if (!$res['error']) {
             header('Location: index.php');
         }else {
-            return $res['message'];
+            $_SESSION['messages'] = $res['message'];
         }
     }else {
-        return $res['message'];
+        $_SESSION['messages'] = $res['message'];
     }
-}
-
-function showError($var)
-{
-    die(var_dump($var));
 }

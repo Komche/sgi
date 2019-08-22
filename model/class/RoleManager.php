@@ -41,4 +41,5 @@ class RoleManager  extends Manager
 
         $res = self::file_post_contents($url, $data);
     }
+
 }
