@@ -1,5 +1,5 @@
 <?php 
-    $title = "Rôle";
+    $title = "Module";
     ob_start();
 ?>
     <div class="row">
@@ -14,12 +14,12 @@
             <form role="form" method="post">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="name">Nom du role</label>
-                  <input type="text" required class="form-control" id="name" name="name" placeholder="Le nom du rôle">
+                  <label for="name">Nom du module</label>
+                  <input type="text" required class="form-control" id="name" name="name" placeholder="Le nom du module">
                 </div>
                 <div class="form-group">
                   <label for="description">Description</label>
-                  <textarea required class="form-control" id="description" name="description" placeholder="description du rôle"> </textarea>
+                  <textarea required class="form-control" id="description" name="description" placeholder="description du module"> </textarea>
                 </div>
               </div>
               <!-- /.box-body -->
@@ -41,18 +41,18 @@
         <div class="col-md-6">
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Rôles</h3>
+              <h3 class="box-title">modules</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <table class="table table-bordered">
                 <tbody><tr>
-                  <th style="width: 10px">Nom du rôle</th>
+                  <th>Nom du module</th>
                   <th>Description</th>
                   <th>Action</th>
                 </tr>
                 <?php 
-                  $data = Manager::getDatas('roles');
+                  $data = Manager::getDatas('module');
                   if (is_array($data) || is_object($data)) {
                     foreach ($data as $value) {
                       

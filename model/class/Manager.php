@@ -29,50 +29,6 @@ class Manager extends Managers
     }
 
 
-    protected function verif($last_name, $first_name, $email, $phone_number, $code = null)
-    {
-        if ($code != null) {
-            if (strlen($last_name) >= 3 && strlen($first_name) >= 3) {
-
-                $syntaxe = '#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#';
-                if (preg_match($syntaxe, $email)) {
-                    if (strlen($phone_number) >= 8) {
-                        return 'ok';
-                    } else {
-                        return $erreur = "Le numéro de téléphone doit avoir au moins 8 chiffres";
-                    }
-
-                } else {
-                    return $erreur = "Votre email n\'est pas au bon format";
-                }
-
-
-            } else {
-                return $erreur = "Le nom et le prénom doivent avoir au moins trois(3) caractères";
-            }
-        } else {
-            if (strlen($last_name) >= 3 && strlen($first_name) >= 3) {
-
-                $syntaxe = '#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#';
-                if (preg_match($syntaxe, $email)) {
-                    if (strlen($phone_number) >= 8) {
-                        return 'ok';
-                    } else {
-                        return $erreur = "Le numéro de téléphone doit avoir au moins 8 chiffres";
-                    }
-
-                } else {
-                    return $erreur = "Votre email n\'est pas au bon format";
-                }
-
-
-            } else {
-                return $erreur = "Le nom et le prénom doivent avoir au moins trois(3) caractères";
-            }
-        }
-    }
-
-
     public static function is_not_empty($fields = [], $not_required = [null])
     {
         if (count($fields) != 0) {

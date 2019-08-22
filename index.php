@@ -10,13 +10,23 @@ if (!empty($_GET['action'])) {
     if ($action=='role') {
         if (!empty($_POST)) {
             $data = $_POST;
-            $res = addRoles($data);
+            $res = addData($data, 'roles');
 
             if ($res != 1) {
                 $_SESSION['messages'] = $res;
             }
         }
         require_once("view/roleView.php");
+    } else {
+        if (!empty($_POST)) {
+            $data = $_POST;
+            $res = addData($data, 'module');
+
+            if ($res != 1) {
+                $_SESSION['messages'] = $res;
+            }
+        }
+        require_once("view/moduleView.php");
     }
 }else {
     require_once("view/roleView.php");
