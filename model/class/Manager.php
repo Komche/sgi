@@ -42,14 +42,19 @@ class Manager extends Managers
         }
     }
 
-    public static function getDatas($table)
+    public static function getDatas($table, $field=null, $value=null)
     {
-        $url = API_ROOT_PATH."/$table";
-        $data = self::file_get_data($url);
-        if ($data['error']) {
-            return $data['message'];
+        if ($field!=null && $value!=null) {
+            $sql = "SELECT * FROM $table WHERE $field=?";
+            return self::getMultipleRecords($sql, [$value]);
         }else {
-            return $data['data'];
+            $url = API_ROOT_PATH."/$table";
+            $data = self::file_get_data($url);
+            if ($data['error']) {
+                return $data['message'];
+            }else {
+                return $data['data'];
+            }
         }
     }
 

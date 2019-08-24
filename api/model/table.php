@@ -43,6 +43,19 @@ class Table
                 $this->distinct($this->table, $this->property);
             } elseif ($this->val === 'exist') {
                 echo $this->is_not_use($this->table, $this->property, $_GET['val']);
+            }elseif (isset($_GET['s'])) {
+                $query .= "WHERE $this->property=:$this->property";
+
+                $req = $this->db->prepare($query);
+
+                $req->execute([$this->property => $this->val]);
+                if (self::$results['data'] = $req->fetchAll(PDO::FETCH_ASSOC)) {
+                    http_response_code(200);
+
+                    return json_encode(self::$results);
+                } else {
+                    $this->throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true);
+                }
             } else {
                 $query .= "WHERE $this->property=:$this->property";
 

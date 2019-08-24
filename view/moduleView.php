@@ -65,6 +65,9 @@
                     <a class="btn btn-primary">
                       <i class="fa fa-edit"></i> 
                     </a>
+                    <a href="index.php?action=permission&module=<?= $value['id'] ?>" class="btn btn-primary">
+                      <i class="fa fa-plus"></i> 
+                    </a>
                   </td>
                 </tr>
                 <?php 
