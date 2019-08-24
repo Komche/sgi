@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-group">
                   <label for="description">Description</label>
-                  <textarea required class="form-control" id="description" name="description" placeholder="description du rôle"> </textarea>
+                  <textarea required class="form-control" id="description" name="description" placeholder="description du rôle"></textarea>
                 </div>
               </div>
               <!-- /.box-body -->
@@ -63,7 +63,7 @@
                   <td><?= $value['description'] ?></td>
                   <td>
                     <a class="btn btn-primary">
-                      <i class="fa fa-edit"></i> Modifier
+                      <i class="fa fa-edit"></i>
                     </a>
                   </td>
                 </tr>

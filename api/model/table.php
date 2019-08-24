@@ -49,7 +49,7 @@ class Table
                 $req = $this->db->prepare($query);
 
                 $req->execute([$this->property => $this->val]);
-                if (self::$results['data'] = $req->fetchAll(PDO::FETCH_ASSOC)) {
+                if (self::$results['data'] = $req->fetch(PDO::FETCH_ASSOC)) {
                     http_response_code(200);
 
                     return json_encode(self::$results);

@@ -29,7 +29,7 @@ class Manager extends Managers
     }
 
 
-    public static function is_not_empty($fields = [], $not_required = [null])
+    public static function is_not_empty($fields = [])
     {
         if (count($fields) != 0) {
             foreach ($fields as $key => $field) {
@@ -53,15 +53,52 @@ class Manager extends Managers
         }
     }
 
-    public static function getData($table, $field)
+    public static function getData($table, $field, $value)
     {
-        $url = API_ROOT_PATH."/$table";
+        $url = API_ROOT_PATH."/$table/$field/$value";
         $data = self::file_get_data($url);
         if ($data['error']) {
             return $data['message'];
         }else {
             return $data['data'];
         }
+    }
+
+    public static function addoNTable($url, $data)
+    {
+        $res = self::verif($data);
+        if ($res != 1) {
+            return $res;
+        }
+
+        $res = self::file_post_contents($url, $data);
+    }
+
+    private static function verif($data)
+    {
+        if (!is_array($data)) {
+            return 'Une erreur s\'est produite';
+        }
+
+        $res = self::is_not_empty($data);
+        if ($res != 1) {
+            $res['message'] = $res;
+            return $res;
+        }
+        $res = array();
+        foreach ($data as $key => $value) {
+            /* if (is_numeric($value)) {
+                $res['message'] = "$key doit être écrit avec du text";
+                return $res;
+            } */
+
+            if (strlen($value) < 3) {
+                $res['message'] = 'Votre texte est trop cours';
+                return $res;
+            }
+        }
+
+        return 1;
     }
 
     public static function messages($msg, $type_alerte)

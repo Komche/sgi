@@ -50,7 +50,7 @@ $this->config['tables']['module'] = ['id','name','description',];
 
 $this->config['tables']['actions']['id'] = ['id'];$this->config['tables']['city']['id'] = ['id'];$this->config['tables']['company']['id'] = ['id'];$this->config['tables']['district']['id'] = ['id'];$this->config['tables']['emergency_geste']['id'] = ['id'];$this->config['tables']['engin']['id'] = ['id'];$this->config['tables']['engin_tools']['id'] = ['id'];$this->config['tables']['files']['id'] = ['id'];$this->config['tables']['history_data']['id'] = ['id'];$this->config['tables']['incident']['id'] = ['id'];$this->config['tables']['module']['id'] = ['id'];
 
-$this->config['tables']['module_role'] = ['id','role_id','permission_id',];
+$this->config['tables']['module_role'] = ['id','role_id','module',];
 
 $this->config['tables']['actions']['id'] = ['id'];$this->config['tables']['city']['id'] = ['id'];$this->config['tables']['company']['id'] = ['id'];$this->config['tables']['district']['id'] = ['id'];$this->config['tables']['emergency_geste']['id'] = ['id'];$this->config['tables']['engin']['id'] = ['id'];$this->config['tables']['engin_tools']['id'] = ['id'];$this->config['tables']['files']['id'] = ['id'];$this->config['tables']['history_data']['id'] = ['id'];$this->config['tables']['incident']['id'] = ['id'];$this->config['tables']['module']['id'] = ['id'];$this->config['tables']['module_role']['id'] = ['id'];
 

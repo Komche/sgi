@@ -4,15 +4,15 @@ include_once('model/class/RoleManager.php');
 function addData($data, $table)
 {
     $url = API_ROOT_PATH. "/object/$table";
-    $res = RoleManager::addRole($url, $data);
+    $res = Manager::addoNTable($url, $data);
     if (isset($res['error'])) {
         $res = json_decode($res, true);
         if (!$res['error']) {
             header('Location: index.php');
         }else {
-            $_SESSION['messages'] = $res['message'];
+            return $res['message'];
         }
     }else {
-        $_SESSION['messages'] = $res['message'];
+        return $res['message'];
     }
 }

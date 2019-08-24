@@ -17,7 +17,7 @@ if (!empty($_GET['action'])) {
             }
         }
         require_once("view/roleView.php");
-    } else {
+    } elseif($action=='module') {
         if (!empty($_POST)) {
             $data = $_POST;
             $res = addData($data, 'module');
@@ -27,6 +27,16 @@ if (!empty($_GET['action'])) {
             }
         }
         require_once("view/moduleView.php");
+    } elseif($action=='permission') {
+        if (!empty($_POST)) {
+            $data = $_POST;
+            $res = addData($data, 'actions');
+
+            if ($res != 1) {
+                $_SESSION['messages'] = $res;
+            }
+        }
+        require_once("view/permissionView.php");
     }
 }else {
     require_once("view/roleView.php");
