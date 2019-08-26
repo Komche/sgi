@@ -139,9 +139,9 @@ class Table
                 }
             }
             //s'il existe un champs password_ il sera crypter
-            // if (array_key_exists('password_', $this->values)) {
-            //     $this->values['password_'] = password_hash($this->values['password_'], PASSWORD_BCRYPT);
-            // }
+            if (array_key_exists('password_', $this->values)) {
+                $this->values['password_'] = password_hash($this->values['password_'], PASSWORD_BCRYPT);
+            }
 
             //s'il existe un champ email il sera verifer s'il est au bon format
             if (array_key_exists('email', $this->values)) {

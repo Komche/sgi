@@ -1,5 +1,6 @@
 <?php
 include_once('model/class/RoleManager.php');
+include_once('model/class/UserManager.php');
 
 function addData($data, $table)
 {

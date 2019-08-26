@@ -34,7 +34,7 @@ class Manager extends Managers
         if (count($fields) != 0) {
             foreach ($fields as $key => $field) {
                 if (empty($field) && trim($field) == "") {
-                    return "$key est vide";
+                    return "un des champs est vide";
                     
                 }
             }
