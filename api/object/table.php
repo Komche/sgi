@@ -91,7 +91,6 @@ switch ($request_method) {
         break;
     case 'DELETE':
         header("Access-Control-Allow-Methods: DELETE");
-        $property = $_GET['property'];
         echo $table->delete();
         break;
 

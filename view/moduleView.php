@@ -1,8 +1,11 @@
 <?php 
+    $role = 1;
+    if(isset($_GET['role'])) extract($_GET);
     $title = "Module";
     ob_start();
 ?>
     <div class="row">
+    <?php if(!isset($_GET['role'])):?>
     <div class="col-md-6">
           <!-- general form elements -->
           <div class="box box-primary">
@@ -37,14 +40,15 @@
           </div>
 
     </div>
-
-        <div class="col-md-6">
+    <?php endif;?>
+        <div class="<?=(isset($_GET['role']))? 'col-md-12' : 'col-md-6' ?>">
           <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">modules</h3>
+              <h3 class="box-title"><?= isset($_GET['role'])? Manager::getData('roles', 'id', $role)['name']: 'Module' ?></h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+            <form action="">
               <table class="table table-bordered">
                 <tbody><tr>
                   <th>Nom du module</th>
@@ -62,12 +66,24 @@
                   <td><?= $value['name'] ?></td>
                   <td><?= $value['description'] ?></td>
                   <td>
+                    <?php if(!isset($_GET['role'])): ?>
                     <a class="btn btn-primary">
                       <i class="fa fa-edit"></i> 
                     </a>
                     <a href="index.php?action=permission&module=<?= $value['id'] ?>" class="btn btn-primary">
                       <i class="fa fa-plus"></i> 
                     </a>
+                    <?php else: ?>
+                    <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                      <label>
+                        <input class="module_is_checked" onchange="addPermissionRole(this)" value="<?= $value['id'] ?>" type="checkbox"> ajouter au module
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                    <?php endif; ?>
                   </td>
                 </tr>
                 <?php 
@@ -78,6 +94,7 @@
                 ?>
               </tbody>
             </table>
+            </form>
             </div>
             <!-- /.box-body -->
             <div class="box-footer clearfix">

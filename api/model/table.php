@@ -56,6 +56,20 @@ class Table
                 } else {
                     $this->throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true);
                 }
+            }elseif (!empty($_GET['prop']) && !empty($_GET['val'])) {
+                extract($_GET);
+                $query .= "WHERE $this->property=:$this->property AND $prop=:$prop";
+
+                $req = $this->db->prepare($query);
+
+                $req->execute([$this->property => $this->val, $prop=>$val]);
+                if (self::$results['data'] = $req->fetchAll(PDO::FETCH_ASSOC)) {
+                    http_response_code(200);
+
+                    return json_encode(self::$results);
+                } else {
+                    $this->throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true);
+                }
             } else {
                 $query .= "WHERE $this->property=:$this->property";
 
@@ -194,12 +208,23 @@ class Table
         if ($this->is_not_use($this->table, $this->property, $this->val)) {
             $this->throwError(503, "Cet enregistrement n'existe pas", true);
         }
-        $sql = "DELETE FROM $this->table WHERE $this->property=?";
-        $del = $this->db->prepare($sql);
-        if ($del->execute([$this->val])) {
-            $this->throwError(200, "Enregistrement supprimer avec succès");
+        if (!empty($_GET['prop']) && !empty($_GET['val'])) {
+            extract($_GET);
+            $sql = "DELETE FROM $this->table WHERE $this->property=? AND $prop=?";
+            $del = $this->db->prepare($sql);
+            if ($del->execute([$this->val, $val])) {
+                $this->throwError(200, "Enregistrement supprimer avec succès");
+            } else {
+                $this->throwError(503, "Suppression échouée", true);
+            }
         } else {
-            $this->throwError(503, "Suppression échouée", true);
+            $sql = "DELETE FROM $this->table WHERE $this->property=?";
+            $del = $this->db->prepare($sql);
+            if ($del->execute([$this->val])) {
+                $this->throwError(200, "Enregistrement supprimer avec succès");
+            } else {
+                $this->throwError(503, "Suppression échouée", true);
+            }
         }
     }
 

@@ -37,6 +37,8 @@ if (!empty($_GET['action'])) {
             }
         }
         require_once("view/permissionView.php");
+    }elseif($action=='roleModule') {
+        require_once("view/roleModuleView.php");
     }
 }else {
     require_once("view/roleView.php");

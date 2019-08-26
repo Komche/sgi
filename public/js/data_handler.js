@@ -7,7 +7,73 @@ document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
 
     $_GET[decode(arguments[1])] = decode(arguments[2]);
 });
-getPermission();    
+getPermission();   
+$('input:checkbox.module_is_checked').each( function (i, v) {
+    $mr = getDataWith2Param('module_role', 'module',$(v).val(), 'role_id', $_GET['role']);
+    
+    $mr.done(function ($mr) {
+        if (!$mr.error) {            
+            $(v).attr('checked', true);
+        }
+    });
+
+    $mr.fail(function ($mr) {
+        $(v).attr('checked', false);
+        
+    });
+});
+
+function addPermissionRole(chec) {
+    $data = "role_id="+$_GET['role']+"&module="+$(chec).val();
+    //$data = JSON.stringify($($data).serializeObject());
+    $mr = getDataWith2Param('module_role', 'module', $(chec).val(), 'role_id', $_GET['role'])
+    console.log($data, $mr);
+    if ($(chec).prop('checked')==true) {
+        $mr.done(function ($mr) {
+            if ($mr.error) {
+                console.log($mr, $mr.error);
+                $.ajax({
+                    url: "http://localhost/saroapp/api/object/module_role",
+                    type: "POST",
+                    contentType: 'application/x-www-form-urlencoded',
+                    dataType: "json",
+                    data: $data,
+                    success: function (result) {
+                        console.log(result);
+                    },  
+                    error: function (xhr, resp, text) {
+                        // show error to console
+                        console.log(xhr, resp, text);
+                    }
+                });
+            }
+        });
+
+        $mr.fail(function ($mr) {
+            console.log($mr, $mr.error);
+            $.ajax({
+                url: "http://localhost/saroapp/api/object/module_role",
+                type: "POST",
+                contentType: 'application/x-www-form-urlencoded',
+                dataType: "json",
+                data: $data,
+                success: function (result) {
+                    console.log(result);
+                },  
+                error: function (xhr, resp, text) {
+                    // show error to console
+                    console.log(xhr, resp, text);
+                }
+            });
+        });
+    } else {
+        deleteDataWith2Param('module_role', 'module', $(chec).val(), 'role_id', $_GET['role']);
+    }
+}
+
+function getModuleRole() {
+    
+}
 function getPermission() {
     $permision = getDatas('actions', 'module', $_GET['module']);
     $permision.done(function ($permision) {
@@ -29,10 +95,9 @@ function getPermission() {
             });
             $('#body_permission').html($data);
         }
-    })
-
-
+    });
 }
+
 function addData(table) {
     var go;
         var form_data = JSON.stringify($('#add_permission').serializeObject());
@@ -97,6 +162,46 @@ function getDatas(table, field=null, value=null) {
         });
     }
 }
+
+function getDataWith2Param(table, field, value, $field2, $value2) {
+    return $.ajax({
+        url: 'http://localhost/saroapp/api/object/'+table+'/'+field+'/' + value+"/?prop="+$field2+"&val="+$value2,
+        type: "GET",
+        contentType: 'application/json',
+        dataType: "json",
+        error: function (xhr, resp, text) {
+            // show error to console
+            console.log(xhr, resp, text);
+        }
+    })
+}
+
+function deleteData(table, field, value) {
+    return $.ajax({
+        url: 'http://localhost/saroapp/api/object/'+table+'/'+field+'/' + value,
+        type: "DELETE",
+        contentType: 'application/json',
+        dataType: "json",
+        error: function (xhr, resp, text) {
+            // show error to console
+            console.log(xhr, resp, text);
+        }
+    });
+}
+
+function deleteDataWith2Param(table, field, value, $field2, $value2)  {
+    return $.ajax({
+        url: 'http://localhost/saroapp/api/object/'+table+'/'+field+'/' + value+"/?prop="+$field2+"&val="+$value2,
+        type: "DELETE",
+        contentType: 'application/json',
+        dataType: "json",
+        error: function (xhr, resp, text) {
+            // show error to console
+            console.log(xhr, resp, text);
+        }
+    });
+}
+
 function addTablRow() {
     $tr = `<tr id="addPermission">
     <form >

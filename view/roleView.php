@@ -35,7 +35,6 @@
               </div>
             </form>
           </div>
-
     </div>
 
         <div class="col-md-6">
@@ -64,6 +63,9 @@
                   <td>
                     <a class="btn btn-primary">
                       <i class="fa fa-edit"></i>
+                    </a>
+                    <a href="index.php?action=module&role=<?= $value['id'] ?>" class="btn btn-primary">
+                      <i class="fa fa-plus"></i> 
                     </a>
                   </td>
                 </tr>
