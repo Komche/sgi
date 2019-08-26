@@ -40,6 +40,16 @@ if (isset($_SESSION['user'])) {
                 }
             }
             require_once("view/permissionView.php");
+        }elseif($action=='regional_group') {
+            if (!empty($_POST)) {
+                $data = $_POST;
+                $res = addData($data, 'regional_group');
+    
+                if ($res != 1) {
+                    $_SESSION['messages'] = $res;
+                }
+            }
+            require_once("view/regionalGroupView.php");
         }elseif($action=='roleModule') {
             require_once("view/roleModuleView.php");
         }

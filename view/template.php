@@ -347,6 +347,20 @@
             <li><a href="index.php?action=showRole"><i class="fa fa-circle-o"></i>Module</a></li>
           </ul>
         </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-gears"></i> <span>Configuration</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="active"><a href="index.php?action=regional_group"><i class="fa fa-circle-o"></i>Groupement régional</a></li>
+            <li><a href="index.php?action=module"><i class="fa fa-circle-o"></i>Module</a></li>
+            <li><a href="index.php?action=permission"><i class="fa fa-circle-o"></i>Permission</a></li>
+            <li><a href="index.php?action=showRole"><i class="fa fa-circle-o"></i>Module</a></li>
+          </ul>
+        </li>
         <!--<li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>

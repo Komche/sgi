@@ -90,18 +90,18 @@ class Manager extends Managers
             $res['message'] = $res;
             return $res;
         }
-        $res = array();
+        /* $res = array();
         foreach ($data as $key => $value) {
-            /* if (is_numeric($value)) {
+            if (is_numeric($value)) {
                 $res['message'] = "$key doit être écrit avec du text";
                 return $res;
-            } */
+            }
 
-            if (strlen($value) < 3) {
+            if (strlen($value) < 3 && !is_int($value)) {
                 $res['message'] = 'Votre texte est trop cours';
                 return $res;
             }
-        }
+        } */
 
         return 1;
     }
