@@ -63,7 +63,7 @@ class Manager extends Managers
         $url = API_ROOT_PATH."/$table/$field/$value";
         $data = self::file_get_data($url);
         if ($data['error']) {
-            return $data['message'];
+            return 0;
         }else {
             return $data['data'];
         }

@@ -46,7 +46,7 @@
 
     <header class="main-header">
       <!-- Logo -->
-      <a href="index2.html" class="logo">
+      <a href="#" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>S</b>App</span>
         <!-- logo for regular state and mobile devices -->
@@ -70,13 +70,13 @@
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="public/vendor/dist/img/avatar.png" class="user-image" alt="User Image">
+                <img src="<?= !empty($_SESSION['user']['photo']) ? $_SESSION['user']['photo'] : 'public/vendor/dist/img/avatar.png' ?>" class=" user-image" alt="User Image">
                 <span class="hidden-xs"><?= $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'] ?></span>
               </a>
               <ul class="dropdown-menu">
                 <!-- User image -->
                 <li class="user-header">
-                  <img src="public/vendor/dist/img/avatar.png" class="img-circle" alt="User Image">
+                  <img src="<?= !empty($_SESSION['user']['photo']) ? $_SESSION['user']['photo'] : 'public/vendor/dist/img/avatar.png' ?>" class="img-circle" alt="User Image">
 
                   <p>
                     <?= $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'] ?>
@@ -104,7 +104,7 @@
                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                   </div>
                   <div class="pull-right">
-                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                    <a href="index.php?action=logout" class="btn btn-default btn-flat">Se deconnecter</a>
                   </div>
                 </li>
               </ul>
@@ -124,7 +124,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
           <div class="pull-left image">
-            <img src="public/vendor/dist/img/avatar.png" class="img-circle" alt="User Image">
+            <img src="<?= !empty($_SESSION['user']['photo']) ? $_SESSION['user']['photo'] : 'public/vendor/dist/img/avatar.png' ?>" class=" img-circle" alt="Photo d'utilisateur">
           </div>
           <div class="pull-left info">
             <p><?= $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'] ?></p>

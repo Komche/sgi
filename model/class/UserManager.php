@@ -23,31 +23,46 @@ class UserManager  extends Manager
 
         $res = self::is_not_empty($data);
         if ($res != 1) {
-            $res['message'] = $res;
             return $res;
         }
 
-        $res = array();
-        foreach ($data as $key => $value) {
-            /* if (is_numeric($value)) {
-                $res['message'] = "$key doit être écrit avec du text";
-                return $res;
-            } */
-
-            if (strlen($value) < 3) {
-                $res['message'] = 'Votre N° de téléphone est trop cours';
-                return $res;
-            }
-
-            
+        if (strlen($data['password_'])<6) {
+            return "Le mot de passe est très court, au moins 6 caractère sont requis";
         }
 
-        if (strlen($data['password_']<6)) {
-            $res['message'] = 'Votre N° de téléphone est trop cours';
-                return $res;
+        if (trim($data['password_'])!== trim($data['password_2'])) {
+            return "Les mot de passe ne correspondent pas, veuillez verifier";
         }
 
         return 1;
+    }
+
+    public static function activeUser($data)
+    {
+        $res = self::verifUser($data);
+
+        if ($res != 1) {
+            return $res;
+        }
+
+        $url = API_ROOT_PATH . "/users/phone_number/". $data['phone_number'];
+        $res = self::getData('users', 'phone_number', $data['phone_number']);
+        if ($res == 0) {
+            return "Ce numéro n'existe pas dans notre base de donnée";
+        }
+
+        unset($data['password_2']);
+        $data['updated_at'] = date('Y-m-d h:i:s', time());;
+        $data['status'] = 1;
+        $res = self::file_put_contents($url, $data);
+        $res = self::correct($res);
+        if ($res['error']) {
+            return $res['message'];
+        }
+
+        return 1;
+
+
     }
 
     public static function connectUser($data)
@@ -69,8 +84,10 @@ class UserManager  extends Manager
                 $_SESSION['user']['last_name'] = $res['last_name'];
                 $_SESSION['user']['matricule'] = $res['matricule'];
                 $_SESSION['user']['phone_number'] = $res['phone_number'];
-                $_SESSION['user']['casern'] = $res['casern'];
-                $_SESSION['user']['photo'] = $res['photo'];
+                $_SESSION['user']['casern'] = self::getData('rescue_center', 'id', $res['casern'])['label'];
+                $_SESSION['user']['role'] = self::getData('roles', 'id', $res['casern'])['name'];
+                $_SESSION['user']['type_agent'] = self::getData('type_agent', 'id', $res['type_agent'])['label'];
+                $_SESSION['user']['photo'] = self::getData('files', 'id', $res['photo'])['file_url'];;
                 return 1;
             }else {
                 return 'N° de téléphone ou mot de passe incorrecte';

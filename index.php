@@ -109,11 +109,23 @@ if (isset($_SESSION['user'])) {
             require_once("view/showUserView.php");
         }elseif($action=='roleModule') {
             require_once("view/roleModuleView.php");
+        } elseif ($action == 'logout') {
+            require_once("view/logout.php");
         }
     }else {
         require_once("view/roleView.php");
     }
-}else {
+}elseif (isset($_GET['signup'])) {
+    if (!empty($_POST)) {
+        $res = UserManager::activeUser($_POST);
+        if ($res != 1) {
+            $_SESSION['messages'] = $res;
+        } else {
+            header('Location: index.php');
+        }
+    }
+    require('view/registerView.php');
+} else {
     if (!empty($_POST)) {
         $res = UserManager::connectUser($_POST);
         if ($res != 1) {

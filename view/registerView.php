@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>SaroApp</title>
+  <title>Activation de compte</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
@@ -29,16 +29,16 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-<body class="hold-transition login-page">
-  <div class="login-box">
-    <div class="login-logo">
-      <a href="#"><b>Saro</b>App</a>
+<body class="hold-transition register-page">
+  <div class="register-box">
+    <div class="register-logo">
+      <a href="public/vendor/index2.html"><b>Saro</b>App</a>
     </div>
-    <!-- /.login-logo -->
-    <div class="login-box-body">
-      <p class="login-box-msg">Connexion</p>
 
-      <form action="" method="post">
+    <div class="register-box-body">
+      <p class="login-box-msg">Activation de compte </p>
+
+      <form action="#" method="post">
         <div class="form-group has-feedback">
           <input type="tel" name="phone_number" id="phone_number" class="form-control" placeholder="N° de téléphone">
           <span class="glyphicon glyphicon-phone form-control-feedback"></span>
@@ -47,12 +47,15 @@
           <input type="password" id="password_" name="password_" class="form-control" placeholder="Mot de passe">
           <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
+        <div class="form-group has-feedback">
+          <input type="password" id="password_2" name="password_2" class="form-control" placeholder="Mot de passe de confirmation">
+          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        </div>
         <div class="row">
           <!-- /.col -->
           <div class="col-xs-12">
-            <button type="submit" class="btn btn-primary btn-block btn-flat">Se connecter</button>
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Activer</button>
           </div>
-
           <!-- /.col -->
         </div>
       </form>
@@ -61,13 +64,11 @@
         echo Manager::messages($_SESSION['messages'], 'alert-danger');
       }
       ?>
-      <a href="#">Modifier le mot de passe</a><br>
-      <a href="index.php?signup" class="text-center">Activer son compte</a>
-
+      <a href="index.php" class="text-center">Se connecter</a>
     </div>
-    <!-- /.login-box-body -->
+    <!-- /.form-box -->
   </div>
-  <!-- /.login-box -->
+  <!-- /.register-box -->
 
   <!-- jQuery 3 -->
   <script src="public/vendor/bower_components/jquery/dist/jquery.min.js"></script>
