@@ -60,6 +60,16 @@ if (isset($_SESSION['user'])) {
                 }
             }
             require_once("view/companyView.php");
+        }elseif($action=='rescue') {
+            if (!empty($_POST)) {
+                $data = $_POST;
+                $res = addData($data, 'rescue_center');
+    
+                if ($res != 1) {
+                    $_SESSION['messages'] = $res;
+                }
+            }
+            require_once("view/rescueCenterView.php");
         }elseif($action=='roleModule') {
             require_once("view/roleModuleView.php");
         }

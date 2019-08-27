@@ -357,8 +357,8 @@
           <ul class="treeview-menu">
             <li class="active"><a href="index.php?action=regional_group"><i class="fa fa-circle-o"></i>Groupement régional</a></li>
             <li><a href="index.php?action=compagnie"><i class="fa fa-circle-o"></i>Compagnie</a></li>
-            <li><a href="index.php?action=permission"><i class="fa fa-circle-o"></i>Permission</a></li>
-            <li><a href="index.php?action=showRole"><i class="fa fa-circle-o"></i>Module</a></li>
+            <li><a href="index.php?action=rescue"><i class="fa fa-circle-o"></i>Centre de secours</a></li>
+            <li><a href="index.php?action=cities"><i class="fa fa-circle-o"></i>Ville</a></li>
           </ul>
         </li>
         <!--<li class="treeview">
