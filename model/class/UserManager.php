@@ -64,6 +64,7 @@ class UserManager  extends Manager
             
             $res = $res['data'];
             if (password_verify($data['password_'], $res['password_'])) {
+                $_SESSION['user']['id'] = $res['id'];
                 $_SESSION['user']['first_name'] = $res['first_name'];
                 $_SESSION['user']['last_name'] = $res['last_name'];
                 $_SESSION['user']['matricule'] = $res['matricule'];

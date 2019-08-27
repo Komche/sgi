@@ -151,7 +151,8 @@ class Table
             $req = $this->db->prepare($sql);
             if (!empty($this->values)) {
                 if ($req->execute($this->values)) {
-                    $this->throwError(201, "Enregistrement effectué avec succès");
+                    $lastId = $this->db->lastInsertId();
+                    $this->throwError(201, "Enregistrement effectué avec succès", null, $lastId);
                 } else {
                     $this->throwError(503, "Enregistrement échoué", true);
                 }
@@ -310,13 +311,14 @@ class Table
      * @param boolean|false $is_error
      * @return json_encode($result)
      */
-    public static function throwError($code = null, $message, $is_error = false)
+    public static function throwError($code = null, $message, $is_error = false, $lastId=null)
     {
         if (array_key_exists('data', self::$results))
             unset(self::$results['data']);
         http_response_code($code);
         self::$results['error'] = $is_error;
         self::$results['message'] = $message;
+        self::$results['lastId'] = $lastId;
         echo json_encode(self::$results);
         die();
     }

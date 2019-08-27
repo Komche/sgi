@@ -1,5 +1,5 @@
 <?php 
-    $title = "Groupement régional";
+    $title = "Compagnie";
     ob_start();
 ?>
     <div class="row">
@@ -14,14 +14,14 @@
             <form role="form" method="post">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="label">Nom du groupement</label>
-                  <input type="text" required class="form-control" id="label" name="label" placeholder="Le nom du groupement">
+                  <label for="label">Nom de la compagnie</label>
+                  <input type="text" required class="form-control" id="label" name="label" placeholder="Le nom de la compagnie">
                 </div>
                 <div class="form-group">
-                  <label>Groupement National</label>
-                  <select class="form-control" id="national_group" name="national_group">
+                  <label>Groupement Régional</label>
+                  <select class="form-control" id="regional_group" name="regional_group">
                   <?php 
-                  $data = Manager::getDatas('national_group');
+                  $data = Manager::getDatas('regional_group');
                   if (is_array($data) || is_object($data)) {
                     foreach ($data as $value) {
                       
@@ -79,13 +79,13 @@
             <div class="box-body">
               <table class="table table-bordered">
                 <tbody><tr>
-                  <th>Groupement régional</th>
-                  <th>Groupement National</th>
+                  <th>Compagnie</th>
+                  <th>Groupement Régional</th>
                   <th>Ville</th>
                   <th>Action</th>
                 </tr>
                 <?php 
-                  $data = Manager::getDatas('regional_group');
+                  $data = Manager::getDatas('company');
                   if (is_array($data) || is_object($data)) {
                     foreach ($data as $value) {
                       
@@ -93,7 +93,7 @@
                 ?>
                 <tr>
                   <td><?= $value['label'] ?></td>
-                  <td><?= Manager::getData('national_group', 'id', $value['national_group'])['label'] ?></td>
+                  <td><?= Manager::getData('regional_group', 'id', $value['regional_group'])['label'] ?></td>
                   <td><?= Manager::getData('city', 'id', $value['city'])['label'] ?></td>
                   <td>
                     <a class="btn btn-primary">

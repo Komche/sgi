@@ -120,5 +120,21 @@ class Manager extends Managers
     {
         die(var_dump($var));
     }
+
+    public static function addHistory($table, $lastId)
+    {
+        $url = API_ROOT_PATH."/history_data";
+        $data = array();
+        $data['created_by'] = $_SESSION['user']['id'];
+        $data['action'] = 'ajout';
+        $data['table_name'] = $table;
+        $data['id'] = $lastId;
+        $res = self::addoNTable($url, $data);
+        if (isset($res['error'])) {
+            return 1;
+        }else {
+            return $res['message'];
+        }
+    }
 }
     

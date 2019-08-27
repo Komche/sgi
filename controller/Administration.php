@@ -9,7 +9,17 @@ function addData($data, $table)
     if (isset($res['error'])) {
         $res = json_decode($res, true);
         if (!$res['error']) {
-            header('Location: index.php');
+            $lastId = $res['lastId'];
+            if (!empty($lastId)) {
+                $res = Manager::addHistory($table, $lastId);
+                if ($res != 1) {
+                    header('Location: index.php');
+                }else {
+                    return $res['message'];
+                }
+            }else {
+                return $res['message'];
+            }
         }else {
             return $res['message'];
         }

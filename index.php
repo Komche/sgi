@@ -50,6 +50,16 @@ if (isset($_SESSION['user'])) {
                 }
             }
             require_once("view/regionalGroupView.php");
+        }elseif($action=='compagnie') {
+            if (!empty($_POST)) {
+                $data = $_POST;
+                $res = addData($data, 'company');
+    
+                if ($res != 1) {
+                    $_SESSION['messages'] = $res;
+                }
+            }
+            require_once("view/companyView.php");
         }elseif($action=='roleModule') {
             require_once("view/roleModuleView.php");
         }
