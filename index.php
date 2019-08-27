@@ -70,6 +70,16 @@ if (isset($_SESSION['user'])) {
                 }
             }
             require_once("view/rescueCenterView.php");
+        }elseif($action=='cities') {
+            if (!empty($_POST)) {
+                $data = $_POST;
+                $res = addData($data, 'city');
+    
+                if ($res != 1) {
+                    $_SESSION['messages'] = $res;
+                }
+            }
+            require_once("view/cityView.php");
         }elseif($action=='roleModule') {
             require_once("view/roleModuleView.php");
         }
