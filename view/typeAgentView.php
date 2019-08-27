@@ -1,5 +1,5 @@
 <?php 
-    $title = "Villes";
+    $title = "Type des agents";
     ob_start();
 ?>
     <div class="row">
@@ -14,8 +14,8 @@
             <form role="form" method="post">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="label">Nom de la ville</label>
-                  <input type="text" required class="form-control" id="label" name="label" placeholder="Le nom de la ville">
+                  <label for="label">Nom du type d'agent</label>
+                  <input type="text" required class="form-control" id="label" name="label" placeholder="Type d'agent">
                 </div>
               </div>
               <div class="box-footer">
@@ -40,11 +40,11 @@
             <div class="box-body">
               <table class="table table-bordered">
                 <tbody><tr>
-                  <th>Villes</th>
+                  <th>Type des agents</th>
                   <th>Action</th>
                 </tr>
                 <?php 
-                  $data = Manager::getDatas('city');
+                  $data = Manager::getDatas('type_agent');
                   if (is_array($data) || is_object($data)) {
                     foreach ($data as $value) {
                       

@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="public/vendor/bower_components/bootstrap-daterangepicker/daterangepicker.css">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="public/vendor/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+  <link rel="stylesheet" href="public/vendor/style.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -343,8 +344,9 @@
           <ul class="treeview-menu">
             <li class="active"><a href="index.php?action=role"><i class="fa fa-circle-o"></i>Rôle</a></li>
             <li><a href="index.php?action=module"><i class="fa fa-circle-o"></i>Module</a></li>
-            <li><a href="index.php?action=permission"><i class="fa fa-circle-o"></i>Permission</a></li>
-            <li><a href="index.php?action=showRole"><i class="fa fa-circle-o"></i>Module</a></li>
+            <li><a href="index.php?action=addUser"><i class="fa fa-circle-o"></i>Ajouter un utilisateur</a></li>
+            <li><a href="index.php?action=showUser"><i class="fa fa-circle-o"></i>Liste des utilisateurs</a></li>
+            <li><a href="index.php?action=type"><i class="fa fa-circle-o"></i>Type des agents</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -805,6 +807,7 @@
 <script src="public/vendor/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="public/vendor/dist/js/demo.js"></script>
+<script src="public/vendor/js/display_profile_image.js"></script>
 <script src="public/vendor/js/jquery.serializeObject.js"></script>
 <script src="public/vendor/js/moment-with-locales.min.js"></script>
 <script src="public/js/script.js"></script>

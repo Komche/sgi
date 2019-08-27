@@ -15,7 +15,7 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="label">Nom du centre de secours</label>
-                  <input type="text" required class="form-control" id="label" name="label" placeholder="Le nom de la compagnie">
+                  <input type="text" required class="form-control" id="label" name="label" placeholder="Le nom du center de sécours">
                 </div>
                 <div class="form-group">
                   <label>Compagnie</label>

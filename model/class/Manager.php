@@ -77,6 +77,13 @@ class Manager extends Managers
         }
 
         $res = self::file_post_contents($url, $data);
+        return $res;
+    }
+
+    public static function correct($res) {
+        $res = json_decode($res);
+        $res = (array)$res;
+        return $res;
     }
 
     private static function verif($data)
@@ -128,8 +135,9 @@ class Manager extends Managers
         $data['created_by'] = $_SESSION['user']['id'];
         $data['action'] = 'ajout';
         $data['table_name'] = $table;
-        $data['id'] = $lastId;
+        $data['table_id'] = $lastId;
         $res = self::addoNTable($url, $data);
+        $res = self::correct($res);
         if (isset($res['error'])) {
             return 1;
         }else {

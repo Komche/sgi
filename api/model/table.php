@@ -152,7 +152,7 @@ class Table
             if (!empty($this->values)) {
                 if ($req->execute($this->values)) {
                     $lastId = $this->db->lastInsertId();
-                    $this->throwError(201, "Enregistrement effectué avec succès", null, $lastId);
+                    $this->throwError(201, "Enregistrement effectué avec succès", false, $lastId);
                 } else {
                     $this->throwError(503, "Enregistrement échoué", true);
                 }

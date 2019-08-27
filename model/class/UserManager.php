@@ -79,4 +79,63 @@ class UserManager  extends Manager
         }
     }
 
+    // upload's user profile profile picture and returns the name of the file
+    public static function uploadProfilePicture($file)
+    {
+        //Manager::showError($file['profile_picture']);
+        // if file was sent from signup form ...
+        if (!empty($file) && !empty($file['name'])) {
+            // Get image name
+            $profile_picture = date("Y.m.d.H.i.s") . $file['name'];
+            // define Where image will be stored
+            $target = "public/img/" . $profile_picture;
+            // upload image to folder
+            if (move_uploaded_file($file['tmp_name'], $target)) {
+                $url = API_ROOT_PATH."/files";
+                $res = array();
+                $res['file_name'] = $file['name'];
+                $res['file_url'] = $target;
+                $res['file_type'] = $file['type'];
+                $res['file_size'] = $file['size'];
+                //Manager::showError($res);
+                $res = self::addoNTable($url, $res);
+                $res = self::correct($res);
+                if ($res['error']) {
+                    return 'Erreur lors de l\'jout de la photo';
+                }else {
+                    return $res['lastId'];
+                }
+                exit();
+            } else {
+                return 'Erreur lors de l\'jout de la photo';
+            }
+        }
+    }
+
+    public static function addUser($data)
+    {
+        $res = self::is_not_empty($data);
+        if ($res!=1) {
+            return $res;
+        }
+
+        $data['photo'] = self::uploadProfilePicture($data['profile_picture']);
+        $data['photo'] = intval($data['photo']);
+        if (!is_int($data['photo']) && $data['photo']==0) {
+            return $data['photo'];
+        }
+        
+        unset($data['profile_picture']);
+        $url = API_ROOT_PATH."/users";
+        $res = self::addoNTable($url, $data);
+        //Manager::showError($data);
+        $res = self::correct($res);
+        if ($res['error']) {
+            Manager::showError($res);
+            return $res;
+        }
+        
+        return 1;
+    }
+
 }
