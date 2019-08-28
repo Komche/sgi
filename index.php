@@ -109,6 +109,8 @@ if (isset($_SESSION['user'])) {
             require_once("view/showUserView.php");
         }elseif($action=='roleModule') {
             require_once("view/roleModuleView.php");
+        } elseif ($action == 'profile') {
+            require_once("view/profileView.php");
         } elseif ($action == 'logout') {
             require_once("view/logout.php");
         }

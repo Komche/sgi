@@ -11,17 +11,19 @@ class Manager extends Managers
 
     protected static function bdd()
     {
-        $dbname = 'akoybizc_aemn';
-        $user = 'akoybizc_attaher';
-        $pass = '@aemn2019';
+        $dbname = 'wecre1217302';
+        $user = 'wecre1217302';
+        $pass = '@damoukomche';
+        $host = '91.216.107.162';
         if ($_SERVER["SERVER_NAME"] == 'localhost') {
             $dbname = 'saroapp';
             $user = 'root';
             $pass = '';
+            $host = 'localhost';
         }
         try {
             $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-            $bdd = new PDO("mysql:host=localhost;dbname=$dbname;charset=utf8", "$user", "$pass", $pdo_options);
+            $bdd = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", "$user", "$pass", $pdo_options);
         } catch (Exception $e) {
             die('Erreur :' . $e->getMessage());
         }
@@ -35,24 +37,23 @@ class Manager extends Managers
             foreach ($fields as $key => $field) {
                 if (empty($field) && trim($field) == "") {
                     return "un des champs est vide";
-                    
                 }
             }
             return 1;
         }
     }
 
-    public static function getDatas($table, $field=null, $value=null)
+    public static function getDatas($table, $field = null, $value = null)
     {
-        if ($field!=null && $value!=null) {
+        if ($field != null && $value != null) {
             $sql = "SELECT * FROM $table WHERE $field=?";
             return self::getMultipleRecords($sql, [$value]);
-        }else {
-            $url = API_ROOT_PATH."/$table";
+        } else {
+            $url = API_ROOT_PATH . "/$table";
             $data = self::file_get_data($url);
             if ($data['error']) {
                 return $data['message'];
-            }else {
+            } else {
                 return $data['data'];
             }
         }
@@ -60,11 +61,11 @@ class Manager extends Managers
 
     public static function getData($table, $field, $value)
     {
-        $url = API_ROOT_PATH."/$table/$field/$value";
+        $url = API_ROOT_PATH . "/$table/$field/$value";
         $data = self::file_get_data($url);
         if ($data['error']) {
             return 0;
-        }else {
+        } else {
             return $data['data'];
         }
     }
@@ -80,9 +81,10 @@ class Manager extends Managers
         return $res;
     }
 
-    public static function correct($res) {
+    public static function correct($res)
+    {
         $res = json_decode($res);
-        $res = (array)$res;
+        $res = (array) $res;
         return $res;
     }
 
@@ -115,11 +117,11 @@ class Manager extends Managers
 
     public static function messages($msg, $type_alerte)
     {
-       // die(var_dump($msg));
-       echo  '<div class="alert '.$type_alerte.' alert-dismissible">
+        // die(var_dump($msg));
+        echo  '<div class="alert ' . $type_alerte . ' alert-dismissible">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
         <h4><i class="icon fa fa-ban"></i> Saroapp!</h4>
-        '.$msg.'
+        ' . $msg . '
       </div>';
     }
 
@@ -130,7 +132,7 @@ class Manager extends Managers
 
     public static function addHistory($table, $lastId)
     {
-        $url = API_ROOT_PATH."/history_data";
+        $url = API_ROOT_PATH . "/history_data";
         $data = array();
         $data['created_by'] = $_SESSION['user']['id'];
         $data['action'] = 'ajout';
@@ -140,9 +142,8 @@ class Manager extends Managers
         $res = self::correct($res);
         if (isset($res['error'])) {
             return 1;
-        }else {
+        } else {
             return $res['message'];
         }
     }
 }
-    
