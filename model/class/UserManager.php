@@ -87,7 +87,7 @@ class UserManager  extends Manager
                 $_SESSION['user']['casern'] = self::getData('rescue_center', 'id', $res['casern'])['label'];
                 $_SESSION['user']['role'] = self::getData('roles', 'id', $res['casern'])['name'];
                 $_SESSION['user']['type_agent'] = self::getData('type_agent', 'id', $res['type_agent'])['label'];
-                $_SESSION['user']['photo'] = self::getData('files', 'id', $res['photo'])['file_url'];;
+                $_SESSION['user']['photo'] = self::getData('files', 'id', $res['photo'])['file_url'];
                 return 1;
             }else {
                 return 'N° de téléphone ou mot de passe incorrecte';
@@ -148,7 +148,6 @@ class UserManager  extends Manager
         //Manager::showError($data);
         $res = self::correct($res);
         if ($res['error']) {
-            Manager::showError($res);
             return $res;
         }
         

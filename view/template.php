@@ -131,7 +131,19 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
           <li class="header">Menu</li>
-          <li class="active treeview">
+          <li class="treeview">
+            <a href="#">
+              <i class="fa fa-hand-paper-o"></i> <span>Geste d'urgence</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li class="active"><a href="index.php?action=addEmergency"><i class="fa fa-circle-o"></i>Ajouter un geste de secours</a></li>
+              <li><a href="index.php?action=showEmergency"><i class="fa fa-circle-o"></i>Liste</a></li>
+            </ul>
+          </li>
+          <li class="treeview">
             <a href="#">
               <i class="fa fa-dashboard"></i> <span>Administration</span>
               <span class="pull-right-container">
@@ -160,6 +172,7 @@
               <li><a href="index.php?action=cities"><i class="fa fa-circle-o"></i>Ville</a></li>
             </ul>
           </li>
+
           <!--<li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>
@@ -604,6 +617,7 @@
   <script src="public/vendor/dist/js/adminlte.min.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="public/vendor/dist/js/pages/dashboard.js"></script>
+  <script src="public/vendor/bower_components/ckeditor/ckeditor.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="public/vendor/dist/js/demo.js"></script>
   <script src="public/vendor/js/display_profile_image.js"></script>
@@ -613,6 +627,13 @@
   <script src="public/js/data_handler.js"></script>
 
   <script>
+    $(function() {
+      // Replace the <textarea id="editor1"> with a CKEditor
+      // instance, using default configuration.
+      CKEDITOR.replace('editor1')
+      //bootstrap WYSIHTML5 - text editor
+      $('.textarea').wysihtml5()
+    });
     $(function() {
       $('#example1').DataTable()
       $('#example2').DataTable({

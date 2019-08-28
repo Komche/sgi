@@ -11,10 +11,10 @@ class Manager extends Managers
 
     protected static function bdd()
     {
-        $dbname = 'wecre1217302';
-        $user = 'wecre1217302';
+        $dbname = 'akoybizc_saroapp';
+        $user = 'akoybizcom';
         $pass = '@damoukomche';
-        $host = '91.216.107.162';
+        $host = 'localhost';
         if ($_SERVER["SERVER_NAME"] == 'localhost') {
             $dbname = 'saroapp';
             $user = 'root';

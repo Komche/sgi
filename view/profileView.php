@@ -1,5 +1,5 @@
 <?php
-$title = "Rôle";
+$title = "Profile";
 ob_start();
 ?>
 <div class="row">

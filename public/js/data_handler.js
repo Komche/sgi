@@ -1,4 +1,10 @@
-
+host = $(location).attr('hostname');
+protocol = $(location).attr('protocol');
+folder = '';
+if (host == 'localhost') {
+    folder = '/ccfn';
+}
+myurl = protocol + '//' + host + folder + '/api/object/';
 var $_GET = {};
 document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
     function decode(s) {
@@ -33,7 +39,7 @@ function addPermissionRole(chec) {
             if ($mr.error) {
                 console.log($mr, $mr.error);
                 $.ajax({
-                    url: "http://localhost/saroapp/api/object/module_role",
+                    url: myurl+"module_role",
                     type: "POST",
                     contentType: 'application/x-www-form-urlencoded',
                     dataType: "json",
@@ -52,7 +58,7 @@ function addPermissionRole(chec) {
         $mr.fail(function ($mr) {
             console.log($mr, $mr.error);
             $.ajax({
-                url: "http://localhost/saroapp/api/object/module_role",
+                url: myurl+"module_role",
                 type: "POST",
                 contentType: 'application/x-www-form-urlencoded',
                 dataType: "json",
@@ -106,7 +112,7 @@ function addData(table) {
         console.log(form_data, $('#add_permission'));
         if (go) {
             $.ajax({
-                url: "http://localhost/saroapp/api/object/"+table,
+                url: myurl+table,
                 type: "POST",
                 contentType: 'application/json',
                 dataType: "json",
@@ -126,7 +132,7 @@ function addData(table) {
 
 function getData(table, field, value) {
     return $.ajax({
-        url: 'http://localhost/saroapp/api/object/'+table+'/'+field+'/' + value,
+        url: myurl+table+'/'+field+'/' + value,
         type: "GET",
         contentType: 'application/json',
         dataType: "json",
@@ -140,7 +146,7 @@ function getData(table, field, value) {
 function getDatas(table, field=null, value=null) {
     if (field!=null, value!=null) {
     return $.ajax({
-            url: 'http://localhost/saroapp/api/object/'+table+'/'+field+'/' + value+'/?s',
+            url: myurl+table+'/'+field+'/' + value+'/?s',
             type: "GET",
             contentType: 'application/json',
             dataType: "json",
@@ -151,7 +157,7 @@ function getDatas(table, field=null, value=null) {
         });
     } else {
         return $.ajax({
-            url: 'http://localhost/saroapp/api/object/'+table,
+            url: myurl+table,
             type: "GET",
             contentType: 'application/json',
             dataType: "json",
@@ -165,7 +171,7 @@ function getDatas(table, field=null, value=null) {
 
 function getDataWith2Param(table, field, value, $field2, $value2) {
     return $.ajax({
-        url: 'http://localhost/saroapp/api/object/'+table+'/'+field+'/' + value+"/?prop="+$field2+"&val="+$value2,
+        url: myurl+table+'/'+field+'/' + value+"/?prop="+$field2+"&val="+$value2,
         type: "GET",
         contentType: 'application/json',
         dataType: "json",
@@ -178,7 +184,7 @@ function getDataWith2Param(table, field, value, $field2, $value2) {
 
 function deleteData(table, field, value) {
     return $.ajax({
-        url: 'http://localhost/saroapp/api/object/'+table+'/'+field+'/' + value,
+        url: myurl+table+'/'+field+'/' + value,
         type: "DELETE",
         contentType: 'application/json',
         dataType: "json",
@@ -191,7 +197,7 @@ function deleteData(table, field, value) {
 
 function deleteDataWith2Param(table, field, value, $field2, $value2)  {
     return $.ajax({
-        url: 'http://localhost/saroapp/api/object/'+table+'/'+field+'/' + value+"/?prop="+$field2+"&val="+$value2,
+        url: myurl+table+'/'+field+'/' + value+"/?prop="+$field2+"&val="+$value2,
         type: "DELETE",
         contentType: 'application/json',
         dataType: "json",

@@ -1,6 +1,7 @@
 <?php
 include_once('model/class/RoleManager.php');
 include_once('model/class/UserManager.php');
+include_once('model/class/EmergencyManager.php');
 
 function addData($data, $table)
 {
