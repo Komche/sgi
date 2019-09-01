@@ -131,7 +131,7 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
           <li class="header">Menu</li>
-          <li class="treeview">
+          <!--<li class="treeview">
             <a href="#">
               <i class="fa fa-hand-paper-o"></i> <span>Geste d'urgence</span>
               <span class="pull-right-container">
@@ -171,19 +171,22 @@
               <li><a href="index.php?action=rescue"><i class="fa fa-circle-o"></i>Centre de secours</a></li>
               <li><a href="index.php?action=cities"><i class="fa fa-circle-o"></i>Ville</a></li>
             </ul>
-          </li>
+          </li>-->
           <?php
 			$res = Manager::getDatas('module_role', 'role_id', $_SESSION['user']['roleId']);
 			$thisSMenu = array();
             foreach ($res as $key => $value) {
-				$name = Manager::getData('module', 'id', $value['module'])['name'];
-				$menu = new MenuManager($name);
-				$sMenu = getActions();
+				
+				$name = Manager::getData('module', 'id', $value['module']);
+				
+				$menu = new MenuManager($name['name']);
+				$sMenu = getActions($name['id']);
 				foreach ($sMenu as $key => $smValue) {
 					$thisSMenu["index.php?action=" . $smValue['action_url']] = $smValue['name'];
 				}
 				$menu->setmSousMenu($thisSMenu);
-				echo $menu->getMenu('fa-hand-paper-o');
+				echo $menu->getMenu($name['icon']);
+				$thisSMenu = (array) null;
             }
             // $menu->setmSousMenu(['index.php?action=module'=> 'Test', 'index.php?action=test'=>'test 1']);
             // echo $menu->getMenu();

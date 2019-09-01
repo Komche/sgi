@@ -42,14 +42,11 @@ function getModules()
     $_SESSION['user']['roles']['modules'] = $res;
 }
 
-function getActions()
+function getActions($moduleId)
 {
-   $module = $_SESSION['user']['roles']['modules'];
    $res = array();
    // Manager::showError($module)
    $sql = "SELECT * FROM actions WHERE module=?";
-   foreach ($module as $key => $value) {
-       $res = Manager::getMultiplesRecords($sql, [$value['module']]);
-   }
+       $res = Manager::getMultiplesRecords($sql, [$moduleId]);
    return $res;
 }

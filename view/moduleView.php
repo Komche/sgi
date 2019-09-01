@@ -21,6 +21,10 @@ ob_start();
               <input type="text" required class="form-control" id="name" name="name" placeholder="Le nom du module">
             </div>
             <div class="form-group">
+              <label for="name">icon</label>
+              <input type="text"  class="form-control" id="icon" name="icon" placeholder="icon sous-format fontawsome (pas obligatoire)">
+            </div>
+            <div class="form-group">
               <label for="description">Description</label>
               <textarea required class="form-control" id="description" name="description" placeholder="description du module"></textarea>
             </div>
