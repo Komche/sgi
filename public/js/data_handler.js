@@ -2,7 +2,7 @@ host = $(location).attr('hostname');
 protocol = $(location).attr('protocol');
 folder = '';
 if (host == 'localhost') {
-    folder = '/ccfn';
+    folder = '/saroapp';
 }
 myurl = protocol + '//' + host + folder + '/api/object/';
 var $_GET = {};
@@ -104,30 +104,39 @@ function getPermission() {
     });
 }
 
+function setActionUrl(name) {
+    arrName = name.split(' ', 2);    
+    name = arrName[0]+"-"+arrName[1];
+    name = name.toLowerCase();    
+    return name;
+}
+
 function addData(table) {
     var go;
-        var form_data = JSON.stringify($('#add_permission').serializeObject());
-        var data = $('#add_permission').serializeObject();
-        go = canContinue(data);
-        console.log(form_data, $('#add_permission'));
-        if (go) {
-            $.ajax({
-                url: myurl+table,
-                type: "POST",
-                contentType: 'application/json',
-                dataType: "json",
-                data: form_data,
-                success: function (result) {
-                    console.log(result);
-                    
-                    getPermission();
-                },
-                error: function (xhr, resp, text) {
-                    // show error to console
-                    console.log(xhr, resp, text);
-                }
-            });
-        }
+    var data = $('#add_permission').serializeObject();
+    data.action_url = setActionUrl(data.name);
+    var form_data = JSON.stringify(data);
+    
+    go = canContinue(data);
+    console.log(form_data, $('#add_permission'));
+    if (go) {
+        $.ajax({
+            url: myurl+table,
+            type: "POST",
+            contentType: 'application/json',
+            dataType: "json",
+            data: form_data,
+            success: function (result) {
+                console.log(result);
+                
+                getPermission();
+            },
+            error: function (xhr, resp, text) {
+                // show error to console
+                console.log(xhr, resp, text);
+            }
+        });
+    }
 }
 
 function getData(table, field, value) {
@@ -170,6 +179,8 @@ function getDatas(table, field=null, value=null) {
 }
 
 function getDataWith2Param(table, field, value, $field2, $value2) {
+    console.log(myurl + table + '/' + field + '/' + value + "/?prop=" + $field2 + "&val=" + $value2);
+    
     return $.ajax({
         url: myurl+table+'/'+field+'/' + value+"/?prop="+$field2+"&val="+$value2,
         type: "GET",

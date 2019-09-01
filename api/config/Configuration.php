@@ -11,7 +11,7 @@ class Configuration
         // $this->config['db_name'] = 'akoybiz';
         // $this->config['username'] = 'root';
         // $this->config['password_'] = '';
-        include_once 'var.php';
+        require 'var.php';
         //information pour Json Web Token
         $this->config['jwt'] = null;
         // [
@@ -22,7 +22,7 @@ class Configuration
         //     'data'=>[] // donnée à envoyer
         // ];
        $this->config['key']= null; //vous seul devrait connaitre cette cle;
-
+       
         //Infromation des tables de la base de donnée
         //$this->config['tables'] = ['category', 'chats', 'city', 'comments', 'country', 'files', 'profile', 'publication', 'roles', 'users', 'user_akoy'];
 
@@ -47,6 +47,8 @@ class Configuration
         //$this->config['tables']['users']['required'] = ['email', 'password_'];
 
         //print_r($this->config['tables']); die();
+        global $db;
+        $db = $this->config['db'];
     }
 
     //$mydatabase['name'] = "api_db";
@@ -54,13 +56,14 @@ class Configuration
 
     public function getConnection()
     {
+        global $db;
         $this->conn = null;
-        $host = $this->config['host'];
-        $db_name = $this->config['db_name'];
-
+        $host = $db['host'];
+        $db_name = $db['db_name'];
+        //die(var_dump($db));
         try {
             $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-            $this->conn = new PDO("mysql:host=$host;dbname=$db_name", $this->config['username'], $this->config['password_'], $pdo_options);
+            $this->conn = new PDO("mysql:host=$host;dbname=$db_name", $db['username'], $db['password_'], $pdo_options);
             $this->conn->exec("set names utf8");
         } catch (Exception $e) {
             echo "Erreur de connection: $e->getMessage()";

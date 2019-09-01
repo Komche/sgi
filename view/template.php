@@ -172,7 +172,22 @@
               <li><a href="index.php?action=cities"><i class="fa fa-circle-o"></i>Ville</a></li>
             </ul>
           </li>
-
+          <?php
+			$res = Manager::getDatas('module_role', 'role_id', $_SESSION['user']['roleId']);
+			$thisSMenu = array();
+            foreach ($res as $key => $value) {
+				$name = Manager::getData('module', 'id', $value['module'])['name'];
+				$menu = new MenuManager($name);
+				$sMenu = getActions();
+				foreach ($sMenu as $key => $smValue) {
+					$thisSMenu["index.php?action=" . $smValue['action_url']] = $smValue['name'];
+				}
+				$menu->setmSousMenu($thisSMenu);
+				echo $menu->getMenu('fa-hand-paper-o');
+            }
+            // $menu->setmSousMenu(['index.php?action=module'=> 'Test', 'index.php?action=test'=>'test 1']);
+            // echo $menu->getMenu();
+          ?>
           <!--<li class="treeview">
           <a href="#">
             <i class="fa fa-files-o"></i>

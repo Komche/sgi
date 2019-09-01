@@ -1,16 +1,16 @@
 <?php
         //Pour la connexion à la base de donnée
-        $this->config["host"] = 'localhost';
-        $this->config["db_name"] = 'saroapp';
-        $this->config["username"] = 'root';
-        $this->config["password_"] = '';
+        $this->config["db"]["host"] = 'localhost';
+        $this->config["db"]["db_name"] = 'saroapp';
+        $this->config["db"]["username"] = 'root';
+        $this->config["db"]["password_"] = '';
 $this->config["tables"] = ['actions','city','company','district','emergency_geste','engin','engin_tools','files','history_data','incident','module','module_role','national_group','plan','regional_group','rescue_center','roles','type_agent','users',];
 
-$this->config['tables']['actions'] = ['id','name','description','module',];
+$this->config['tables']['actions'] = ['id','name','description','action_url','module',];
 
 $this->config['tables']['actions']['id'] = ['id'];
 
-$this->config['tables']['city'] = ['id','label','regional_group',];
+$this->config['tables']['city'] = ['id','label',];
 
 $this->config['tables']['actions']['id'] = ['id'];$this->config['tables']['city']['id'] = ['id'];
 

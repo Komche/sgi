@@ -30,6 +30,17 @@ class Manager extends Managers
         return $bdd;
     }
 
+    public static function getMultiplesRecords($sql, $params = [])
+    {
+        $req = self::bdd()->prepare($sql);
+        if (!empty($params) && !empty($params)) { // parameters must exist before you call bind_param() method
+            $req->execute($params);
+        }
+        if ($res = $req->fetchAll(PDO::FETCH_ASSOC)) {
+            return $res;
+        }
+    }
+
 
     public static function is_not_empty($fields = [])
     {

@@ -8,6 +8,7 @@ if (isset($_SESSION['messages'])) {
 
 
 if (isset($_SESSION['user'])) {
+    getModules();
     if (!empty($_GET['action'])) {
         extract($_GET);
         if ($action=='role') {
@@ -33,6 +34,7 @@ if (isset($_SESSION['user'])) {
         } elseif($action=='permission') {
             if (!empty($_POST)) {
                 $data = $_POST;
+                $data['action_url'] = setActionUrl($data['name']);
                 $res = addData($data, 'actions');
     
                 if ($res != 1) {

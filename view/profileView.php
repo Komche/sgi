@@ -10,7 +10,7 @@ ob_start();
       <div class="box-body box-profile">
         <img class="profile-user-img img-responsive img-circle" src="<?= !empty($_SESSION['user']['photo']) ? $_SESSION['user']['photo'] : 'public/vendor/dist/img/avatar.png' ?>" alt="User profile picture">
 
-        <h3 class="profile-username text-center"><?= $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'] ?></h3>
+        <h3 class="profile-username text-center"><?= $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'] . ' ('.$_SESSION['user']['role'] .')' ?></h3>
 
         <p class="text-muted text-center"><?= $_SESSION['user']['type_agent']  ?></p>
 
