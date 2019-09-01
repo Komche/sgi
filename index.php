@@ -123,6 +123,23 @@ if (isset($_SESSION['user'])) {
         }elseif($action=='showEmergency') {
            
             require_once("view/showEmergencyGestView.php");
+        } elseif ($action == 'ajout-plan') {
+            //Manager::showError($_FILES);
+            if (!empty($_POST) && !empty($_FILES)) {
+                $data = $_POST;
+                $data['file'] = $_FILES['file'];
+                $res = EmergencyManager::addPlan($data);
+                //Manager::showError($data);
+                if ($res != 1) {
+                    $_SESSION['messages'] = $res;
+                } else {
+                    header('Location: index.php?action=voir-plan');
+                }
+            }
+            require_once("view/addPlanView.php");
+        } elseif ($action == 'voir-plan') {
+
+            require_once("view/showPlanView.php");
         } elseif ($action == 'showUser') {
 
             require_once("view/showUserView.php");

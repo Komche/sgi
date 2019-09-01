@@ -62,4 +62,28 @@ class EmergencyManager  extends Manager
 
         return 1;
     }
+
+    public static function addPlan($data)
+    {
+        $res = self::is_not_empty($data);
+        if ($res != 1) {
+            return $res;
+        }
+
+        $data['file'] = self::uploadFilePicture($data['file']);
+        $data['file'] = intval($data['file']);
+        if (!is_int($data['file']) && $data['file'] == 0) {
+            return $data['file'];
+        }
+
+        $url = API_ROOT_PATH . "/plan";
+        $res = self::addoNTable($url, $data);
+        //Manager::showError($res);
+        $res = self::correct($res);
+        if ($res['error']) {
+            return $res;
+        }
+
+        return 1;
+    }
 }
