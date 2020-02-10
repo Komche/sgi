@@ -44,8 +44,8 @@ class UserManager  extends Manager
         if ($res != 1) {
             return $res;
         }
-
         $url = API_ROOT_PATH . "/users/phone_number/". $data['phone_number'];
+        //die($url);
         $res = self::getData('users', 'phone_number', $data['phone_number']);
         if ($res == 0) {
             return "Ce numéro n'existe pas dans notre base de donnée";
@@ -71,9 +71,9 @@ class UserManager  extends Manager
         if ($res != 1) {
             return $res;
         }
-        $url = API_ROOT_PATH."/users/phone_number/".$data['phone_number'];
-        $res = self::file_get_data($url);
-        if ($res['error']) {
+        
+        $res = self::getData('users', 'phone_number', $data['phone_number']);
+        if (!empty($res['error'])) {
             return 'N° de téléphone ou mot de passe incorrecte';
         }else {
             
@@ -84,11 +84,11 @@ class UserManager  extends Manager
                 $_SESSION['user']['last_name'] = $res['last_name'];
                 $_SESSION['user']['matricule'] = $res['matricule'];
                 $_SESSION['user']['phone_number'] = $res['phone_number'];
-                $_SESSION['user']['casern'] = self::getData('rescue_center', 'id', $res['casern'])['label'];
-                $_SESSION['user']['role'] = self::getData('roles', 'id', $res['role'])['name'];
-                $_SESSION['user']['roleId'] = self::getData('roles', 'id', $res['role'])['id'];
-                $_SESSION['user']['type_agent'] = self::getData('type_agent', 'id', $res['type_agent'])['label'];
-                $_SESSION['user']['photo'] = self::getData('files', 'id', $res['photo'])['file_url'];
+                $_SESSION['user']['casern'] = self::getData('rescue_center', 'id', $res['casern'])['data']['label'];
+                $_SESSION['user']['role'] = self::getData('roles', 'id', $res['role'])['data']['name'];
+                $_SESSION['user']['roleId'] = self::getData('roles', 'id', $res['role'])['data']['id'];
+                $_SESSION['user']['type_agent'] = self::getData('type_agent', 'id', $res['type_agent'])['data']['label'];
+                $_SESSION['user']['photo'] = self::getData('files', 'id', $res['photo'])['data']['file_url'];
                 return 1;
             }else {
                 return 'N° de téléphone ou mot de passe incorrecte';

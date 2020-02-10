@@ -48,7 +48,7 @@ ob_start();
   <div class="<?= (isset($_GET['role'])) ? 'col-md-12' : 'col-md-6' ?>">
     <div class="box">
       <div class="box-header with-border">
-        <h3 class="box-title"><b><?= isset($_GET['role']) ? Manager::getData('roles', 'id', $role)['name'] : 'Module' ?></b></h3>
+        <h3 class="box-title"><b><?= isset($_GET['role']) ? Manager::getData('roles', 'id', $role)['data']['name'] : 'Module' ?></b></h3>
       </div>
       <!-- /.box-header -->
       <div class="box-body">
@@ -61,7 +61,8 @@ ob_start();
                 <th>Action</th>
               </tr>
               <?php
-              $data = Manager::getDatas('module');
+              $data = Manager::getData('module');
+              $data = $data['data'];
               if (is_array($data) || is_object($data)) {
                 foreach ($data as $value) {
 

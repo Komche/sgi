@@ -7,6 +7,7 @@ class Manager extends Managers
     protected $first_name;
     protected $email;
     protected $phone_number;
+    private static $results = [];
 
 
     protected static function bdd()
@@ -42,19 +43,9 @@ class Manager extends Managers
     }
 
 
-    public static function is_not_empty($fields = [])
-    {
-        if (count($fields) != 0) {
-            foreach ($fields as $key => $field) {
-                if (empty($field) && trim($field) == "") {
-                    return "un des champs est vide";
-                }
-            }
-            return 1;
-        }
-    }
+    
 
-    public static function getDatas($table, $field = null, $value = null)
+   /* public static function getDatas($table, $field = null, $value = null)
     {
         if ($field != null && $value != null) {
             $sql = "SELECT * FROM $table WHERE $field=?";
@@ -68,16 +59,64 @@ class Manager extends Managers
                 return $data['data'];
             }
         }
-    }
+    }*/
 
-    public static function getData($table, $field, $value)
+    /**
+     * get data format json
+     * 
+     * @return json_encode($result)
+     */
+    public function getData($table, $property=null, $val=null, $many=false)
     {
-        $url = API_ROOT_PATH . "/$table/$field/$value";
-        $data = self::file_get_data($url);
-        if ($data['error']) {
-            return 0;
+        $query = "SELECT * FROM $table ";
+        if ($property != null && $val != null) {
+            if ($val === 'last') {
+                $this->lastID($table, $property);
+            } elseif ($val === 'distinct') {
+                $this->distinct($table, $property);
+            } elseif ($val === 'exist') {
+                echo $this->is_not_use($table, $property, $_GET['val']);
+            }elseif ($many) {
+                $query .= "WHERE $property=:$property";
+
+                $req = self::bdd()->prepare($query);
+
+                $req->execute([$property => $val]);
+                if (self::$results['data'] = $req->fetchAll(PDO::FETCH_ASSOC)) {
+                    return self::$results;
+                } else {
+                    $this->throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true);
+                }
+            }elseif (!empty($_GET['prop']) && !empty($_GET['val'])) {
+                extract($_GET);
+                $query .= "WHERE $property=:$property AND $prop=:$prop";
+
+                $req = self::bdd()->prepare($query);
+
+                $req->execute([$property => $val, $prop=>$val]);
+                if (self::$results['data'] = $req->fetchAll(PDO::FETCH_ASSOC)) {
+                    return self::$results;
+                } else {
+                    $this->throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true);
+                }
+            } else {
+                $query .= "WHERE $property=:$property";
+
+                $req = self::bdd()->prepare($query);
+                $req->execute([$property => $val]);
+                if (self::$results['data'] = $req->fetch(PDO::FETCH_ASSOC)) {
+                    return self::$results;
+                } else {
+                    $this->throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true);
+                }
+            }
         } else {
-            return $data['data'];
+            $req = self::bdd()->query($query);
+            if (self::$results['data'] = $req->fetchAll(PDO::FETCH_ASSOC)) {
+                    return self::$results;
+            } else {
+                $this->throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true);
+            }
         }
     }
 
@@ -99,7 +138,7 @@ class Manager extends Managers
         return $res;
     }
 
-    private static function verif($data)
+    public static function verif($data)
     {
         if (!is_array($data)) {
             return 'Une erreur s\'est produite';
@@ -157,4 +196,98 @@ class Manager extends Managers
             return $res['message'];
         }
     }
+
+    /**
+     * check if fields is empty
+     * 
+     * @param array $fields
+     * @return boolean
+     */
+    public function is_not_empty($fields = [])
+    {
+        if (count($fields) != 0) {
+            foreach ($fields as $key => $field) {
+                if (empty($field) && trim($field) == "") {
+                    $this->throwError(503, "$key est vide");
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    /**
+     * get the last id of table
+     * 
+     * @param mixed $table
+     * @param mixed $field
+     * @return array
+     */
+    public function lastID($table, $fields)
+    {
+        $sql = "SELECT $fields FROM $table ORDER BY $fields DESC LIMIT 1;";
+        $req = $this->db->query($sql);
+
+        if (self::$results['data'] = $req->fetch(PDO::FETCH_ASSOC)) {
+            echo json_encode(self::$results);
+        }
+    }
+
+    /**
+     * get the last id of table
+     * 
+     * @param mixed $table
+     * @param mixed $field
+     * @return array
+     */
+    public function distinct($table, $fields)
+    {
+        $sql = "SELECT DISTINCT $fields FROM $table ORDER BY $fields DESC;";
+        $req = $this->db->query($sql);
+
+        if (self::$results['data'] = $req->fetchAll(PDO::FETCH_ASSOC)) {
+            echo json_encode(self::$results);
+        }
+    }
+
+    /**
+     * check if row exist in a table
+     * 
+     * @param mixed $table
+     * @param mixed $field
+     * @param mixed $value
+     * @return boolean
+     */
+    public function is_not_use($table, $field, $value)
+    {
+        $sql = "SELECT * FROM $table WHERE $field=:value";
+
+        $req = $this->db->prepare($sql);
+        $req->execute(array('value' => $value));
+        if ($req->fetch()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * error manager
+     * 
+     * @param int|null $code
+     * @param mixed $message
+     * @param boolean|false $is_error
+     * @return json_encode($result)
+     */
+    public static function throwError($code = null, $message, $is_error = false, $lastId=null)
+    {
+        if (array_key_exists('data', self::$results))
+            unset(self::$results['data']);
+        self::$results['error'] = $is_error;
+        self::$results['message'] = $message;
+        self::$results['lastId'] = $lastId;
+        echo  self::$results;
+        die();
+    }
+
 }

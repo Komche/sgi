@@ -4,7 +4,7 @@ ob_start();
 ?>
 <div class="row">
   <?php
-  $datas = Manager::getDatas('emergency_geste');
+  $datas = Manager::getData('emergency_geste')['data'];
   foreach ($datas as $key => $value) {
 
 
@@ -24,13 +24,13 @@ ob_start();
         <!-- /.box-tools -->
       </div>
       <!-- /.box-header -->
-      <div class="box-body" style="">
-        <img class="img-responsive pad" src="<?= Manager::getData('files', 'id', $value['files'])['file_url']; ?>" alt="Photo">
+      <div class="box-body" >
+        <img class="img-responsive pad" src="<?= Manager::getData('files', 'id', $value['files'])['data']['file_url']; ?>" alt="Photo">
 
         <p><?= $value['title'] ?></p>
       </div>
       <!-- /.box-body -->
-      <div class="box-footer box-comments" style="">
+      <div class="box-footer box-comments" >
         <?= $value['description'] ?>
 
       </div>

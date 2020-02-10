@@ -1,9 +1,9 @@
 <?php
         //Pour la connexion à la base de donnée
-        $this->config["db"]["host"] = 'localhost';
-        $this->config["db"]["db_name"] = 'saroapp';
-        $this->config["db"]["username"] = 'root';
-        $this->config["db"]["password_"] = '';
+        $this->config["host"] = 'localhost';
+        $this->config["db_name"] = 'saroapp';
+        $this->config["username"] = 'root';
+        $this->config["password_"] = '';
 $this->config["tables"] = ['actions','city','company','district','emergency_geste','engin','engin_tools','files','history_data','incident','module','module_role','national_group','plan','regional_group','rescue_center','roles','type_agent','users',];
 
 $this->config['tables']['actions'] = ['id','name','description','action_url','module',];
@@ -46,7 +46,7 @@ $this->config['tables']['incident'] = ['id','nature','gender','phone_number','ob
 
 $this->config['tables']['actions']['id'] = ['id'];$this->config['tables']['city']['id'] = ['id'];$this->config['tables']['company']['id'] = ['id'];$this->config['tables']['district']['id'] = ['id'];$this->config['tables']['emergency_geste']['id'] = ['id'];$this->config['tables']['engin']['id'] = ['id'];$this->config['tables']['engin_tools']['id'] = ['id'];$this->config['tables']['files']['id'] = ['id'];$this->config['tables']['history_data']['id'] = ['id'];$this->config['tables']['incident']['id'] = ['id'];
 
-$this->config['tables']['module'] = ['id','name','description',];
+$this->config['tables']['module'] = ['id','name','icon','description',];
 
 $this->config['tables']['actions']['id'] = ['id'];$this->config['tables']['city']['id'] = ['id'];$this->config['tables']['company']['id'] = ['id'];$this->config['tables']['district']['id'] = ['id'];$this->config['tables']['emergency_geste']['id'] = ['id'];$this->config['tables']['engin']['id'] = ['id'];$this->config['tables']['engin_tools']['id'] = ['id'];$this->config['tables']['files']['id'] = ['id'];$this->config['tables']['history_data']['id'] = ['id'];$this->config['tables']['incident']['id'] = ['id'];$this->config['tables']['module']['id'] = ['id'];
 

@@ -10,7 +10,7 @@ ob_start();
         <div class="row">
           <?php
           $i=0;
-          $datas = Manager::getDatas('plan');
+          $datas = Manager::getData('plan');
           foreach ($datas as $key => $value) {
 
             $i++;

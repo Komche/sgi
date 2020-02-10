@@ -62,7 +62,9 @@ class Managers{
         if (($json = curl_exec($ch)) === false) {
             die('Curl error: ' . curl_error($ch));
         } else {
-            return json_decode($json, true);
+            $json = utf8_encode($json);
+            //die(print_r(json_decode(stripslashes($json), JSON_PRETTY_PRINT)));
+            return json_decode($json);
         }
 
         // Close handle

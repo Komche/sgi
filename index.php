@@ -156,6 +156,7 @@ if (isset($_SESSION['user'])) {
 }elseif (isset($_GET['signup'])) {
     if (!empty($_POST)) {
         $res = UserManager::activeUser($_POST);
+        //print_r($_POST); die;
         if ($res != 1) {
             $_SESSION['messages'] = $res;
         } else {

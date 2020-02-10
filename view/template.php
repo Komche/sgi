@@ -42,6 +42,7 @@
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
+          <?php //print_r($_SESSION['user']); die;?>
   <div class="wrapper">
 
     <header class="main-header">
@@ -173,14 +174,17 @@
             </ul>
           </li>-->
           <?php
-			$res = Manager::getDatas('module_role', 'role_id', $_SESSION['user']['roleId']);
+      $res = Manager::getData('module_role', 'role_id', $_SESSION['user']['roleId'], true);
+      $res = $res['data'];
 			$thisSMenu = array();
             foreach ($res as $key => $value) {
 				
 				$name = Manager::getData('module', 'id', $value['module']);
-				
+        $name = $name['data'];
+        
 				$menu = new MenuManager($name['name']);
-				$sMenu = getActions($name['id']);
+        $sMenu = getActions($name['id']);
+        //print_r($sMenu);
 				foreach ($sMenu as $key => $smValue) {
 					$thisSMenu["index.php?action=" . $smValue['action_url']] = $smValue['name'];
 				}

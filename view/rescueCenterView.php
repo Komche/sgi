@@ -21,7 +21,7 @@
                   <label>Compagnie</label>
                   <select class="form-control" id="company" name="company">
                   <?php 
-                  $data = Manager::getDatas('company');
+                  $data = Manager::getData('company');
                   if (is_array($data) || is_object($data)) {
                     foreach ($data as $value) {
                       
@@ -40,7 +40,7 @@
                   <label>Ville</label>
                   <select class="form-control" id="city" name="city">
                   <?php 
-                  $data = Manager::getDatas('city');
+                  $data = Manager::getData('city');
                   if (is_array($data) || is_object($data)) {
                     foreach ($data as $value) {
                       
@@ -85,7 +85,7 @@
                   <th>Action</th>
                 </tr>
                 <?php 
-                  $data = Manager::getDatas('rescue_center');
+                  $data = Manager::getData('rescue_center');
                   if (is_array($data) || is_object($data)) {
                     foreach ($data as $value) {
                       

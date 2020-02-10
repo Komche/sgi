@@ -51,7 +51,8 @@
                   <th>Action</th>
                 </tr>
                 <?php 
-                  $data = Manager::getDatas('roles');
+                  $data = Manager::getData('roles');
+                  $data = $data['data'];
                   if (is_array($data) || is_object($data)) {
                     foreach ($data as $value) {
                       

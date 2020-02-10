@@ -21,7 +21,7 @@
                   <label>Groupement National</label>
                   <select class="form-control" id="national_group" name="national_group">
                   <?php 
-                  $data = Manager::getDatas('national_group');
+                  $data = Manager::getData('national_group');
                   if (is_array($data) || is_object($data)) {
                     foreach ($data as $value) {
                       
@@ -40,7 +40,7 @@
                   <label>Ville</label>
                   <select class="form-control" id="city" name="city">
                   <?php 
-                  $data = Manager::getDatas('city');
+                  $data = Manager::getData('city');
                   if (is_array($data) || is_object($data)) {
                     foreach ($data as $value) {
                       
@@ -85,7 +85,7 @@
                   <th>Action</th>
                 </tr>
                 <?php 
-                  $data = Manager::getDatas('regional_group');
+                  $data = Manager::getData('regional_group');
                   if (is_array($data) || is_object($data)) {
                     foreach ($data as $value) {
                       

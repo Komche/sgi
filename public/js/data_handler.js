@@ -33,7 +33,7 @@ function addPermissionRole(chec) {
     $data = "role_id="+$_GET['role']+"&module="+$(chec).val();
     //$data = JSON.stringify($($data).serializeObject());
     $mr = getDataWith2Param('module_role', 'module', $(chec).val(), 'role_id', $_GET['role'])
-    console.log($data, $mr);
+    console.log($data, $mr, "ci");
     if ($(chec).prop('checked')==true) {
         $mr.done(function ($mr) {
             if ($mr.error) {
@@ -81,6 +81,8 @@ function getModuleRole() {
     
 }
 function getPermission() {
+    console.log("perm");
+    
     $permision = getDatas('actions', 'module', $_GET['module']);
     $permision.done(function ($permision) {
         if (!$permision.error) {
@@ -153,6 +155,8 @@ function getData(table, field, value) {
 }
 
 function getDatas(table, field=null, value=null) {
+    console.log( myurl+table+'/'+field+'/' + value+'/?s');
+    
     if (field!=null, value!=null) {
     return $.ajax({
             url: myurl+table+'/'+field+'/' + value+'/?s',
@@ -161,7 +165,9 @@ function getDatas(table, field=null, value=null) {
             dataType: "json",
             error: function (xhr, resp, text) {
                 // show error to console
-                console.log(xhr, resp, text);
+                console.log(xhr, resp);
+                console.log(text, "entexte");
+                
             }
         });
     } else {

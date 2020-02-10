@@ -10,7 +10,7 @@
           <div class="box">
             <div class="box-header with-border">
             <i class="fa fa-server"></i>
-              <h3 class="box-title"><?= Manager::getData('module', 'id', $module)['name']?></h3>
+              <h3 class="box-title"><?= Manager::getData('module', 'id', $module)['data']['name']?></h3>
               <a onclick="addTableRow()" style="float: right" class="btn btn-primary">
                       <i class="fa fa-plus"></i> 
               </a>

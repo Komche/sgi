@@ -114,13 +114,12 @@ class HttpRequest
         }
 
         //print_r($uriParts);
-        
         // find and setup parameters starting from $_GET to $_POST
         foreach ($uriParts as $key => $value) {
             if ($value == 'object') {
                 $this->parameters['table_1'] = next($uriParts);
             } elseif ($value == $this->parameters['table_1']) {
-                $this->parameters[ 'property_1'] = next($uriParts);
+                $this->parameters['property_1'] = next($uriParts);
             } elseif ($value == $this->parameters[ 'property_1']) {
                 $this->parameters['val_1'] = next($uriParts);
             }

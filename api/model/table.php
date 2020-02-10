@@ -74,11 +74,9 @@ class Table
                 $query .= "WHERE $this->property=:$this->property";
 
                 $req = $this->db->prepare($query);
-
                 $req->execute([$this->property => $this->val]);
                 if (self::$results['data'] = $req->fetch(PDO::FETCH_ASSOC)) {
                     http_response_code(200);
-
                     return json_encode(self::$results);
                 } else {
                     $this->throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true);

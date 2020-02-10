@@ -48,7 +48,7 @@ class Configuration
 
         //print_r($this->config['tables']); die();
         global $db;
-        $db = $this->config['db'];
+        $db = $this->config;
     }
 
     //$mydatabase['name'] = "api_db";

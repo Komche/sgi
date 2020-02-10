@@ -38,7 +38,7 @@ function setActionUrl($name)
 
 function getModules()
 {
-    $res = Manager::getDatas('module_role', 'role_id', $_SESSION['user']['roleId']);
+    $res = Manager::getData('module_role', 'role_id', $_SESSION['user']['roleId']);
     $_SESSION['user']['roles']['modules'] = $res;
 }
 
