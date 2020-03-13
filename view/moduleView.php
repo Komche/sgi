@@ -66,10 +66,10 @@ ob_start();
               if (is_array($data) || is_object($data)) {
                 foreach ($data as $value) {
 
-
+                  //var_dump(Manager::getData('module', "id", $value['sub_module'])); die;
                   ?>
                   <tr>
-                    <td><?= $value['name'] ?></td>
+                    <td><?php echo $value['name']; echo (!empty($value['sub_module'])) ? "<b> - sous menu de (".Manager::getData('module', "id", $value['sub_module'])['data']['name'].")</b>" : ""   ?></td>
                     <td><?= $value['description'] ?></td>
                     <td>
                       <?php if (!isset($_GET['role'])) : ?>

@@ -44,7 +44,7 @@
                   <th>Action</th>
                 </tr>
                 <?php 
-                  $data = Manager::getData('type_agent');
+                  $data = Manager::getData('type_agent')['data'];
                   if (is_array($data) || is_object($data)) {
                     foreach ($data as $value) {
                       

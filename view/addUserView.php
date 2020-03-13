@@ -33,7 +33,7 @@
                   <label>Centre de sécours</label>
                   <select class="form-control" id="casern" name="casern">
                   <?php 
-                  $data = Manager::getData('rescue_center');
+                  $data = Manager::getData('rescue_center')['data'];
                   //Manager::showError($data);
                   if (is_array($data) || is_object($data)) {
                     foreach ($data as $value) {
@@ -53,7 +53,7 @@
                   <label>Type d'agent</label>
                   <select class="form-control" id="type_agent" name="type_agent">
                   <?php 
-                  $data = Manager::getData('type_agent');
+                  $data = Manager::getData('type_agent')['data'];
                   if (is_array($data) || is_object($data)) {
                     foreach ($data as $value) {
                       
@@ -72,7 +72,7 @@
                   <label>Rôle</label>
                   <select class="form-control" id="role" name="role">
                   <?php 
-                  $data = Manager::getData('roles');
+                  $data = Manager::getData('roles')['data'];
                   if (is_array($data) || is_object($data)) {
                     foreach ($data as $value) {
                       

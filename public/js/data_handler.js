@@ -32,7 +32,7 @@ $('input:checkbox.module_is_checked').each( function (i, v) {
 function addPermissionRole(chec) {
     $data = "role_id="+$_GET['role']+"&module="+$(chec).val();
     //$data = JSON.stringify($($data).serializeObject());
-    $mr = getDataWith2Param('module_role', 'module', $(chec).val(), 'role_id', $_GET['role'])
+    $mr = getDataWith2Param('module_role', 'module', $(chec).val(), 'role_id', $_GET['role']);
     console.log($data, $mr, "ci");
     if ($(chec).prop('checked')==true) {
         $mr.done(function ($mr) {
@@ -83,7 +83,9 @@ function getModuleRole() {
 function getPermission() {
     console.log("perm");
     
-    $permision = getDatas('actions', 'module', $_GET['module']);
+    $permision = getDatas('module', 'sub_module', $_GET['module']);
+    //console.log("module", $permision);
+    
     $permision.done(function ($permision) {
         if (!$permision.error) {
             $data ='';
@@ -196,7 +198,7 @@ function getDataWith2Param(table, field, value, $field2, $value2) {
             // show error to console
             console.log(xhr, resp, text);
         }
-    })
+    });
 }
 
 function deleteData(table, field, value) {

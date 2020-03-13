@@ -2,8 +2,8 @@
 
 class MenuManager {
     
-    private $mName;
-    private $mSousMenu;
+    public $mName;
+    public $mSousMenu;
 
     public function __construct($mName) {
         $this->mName = $mName;

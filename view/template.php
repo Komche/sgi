@@ -42,16 +42,17 @@
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
-          <?php //print_r($_SESSION['user']); die;?>
+  <?php //print_r($_SESSION['user']); die;
+  ?>
   <div class="wrapper">
 
     <header class="main-header">
       <!-- Logo -->
       <a href="#" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>S</b>App</span>
+        <span class="logo-mini"><b>A</b>EMN</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Saro</b>App</span>
+        <span class="logo-lg"><b>Base</b>AEMN</span>
       </a>
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="navbar navbar-static-top">
@@ -174,26 +175,30 @@
             </ul>
           </li>-->
           <?php
-      $res = Manager::getData('module_role', 'role_id', $_SESSION['user']['roleId'], true);
-      $res = $res['data'];
-			$thisSMenu = array();
-            foreach ($res as $key => $value) {
-				
-				$name = Manager::getData('module', 'id', $value['module']);
-        $name = $name['data'];
-        
-				$menu = new MenuManager($name['name']);
-        $sMenu = getActions($name['id']);
-        //print_r($sMenu);
-				foreach ($sMenu as $key => $smValue) {
-					$thisSMenu["index.php?action=" . $smValue['action_url']] = $smValue['name'];
-				}
-				$menu->setmSousMenu($thisSMenu);
-				echo $menu->getMenu($name['icon']);
-				$thisSMenu = (array) null;
+          $res = Manager::getData('module_role', 'role_id', $_SESSION['user']['roleId'], true);
+          $res = $res['data'];
+          $thisSMenu = array();
+          foreach ($res as $key => $value) {
+
+            $name = Manager::getData('module', 'id', $value['module']);
+            if (empty($name['data']['sub_module'])) {
+              //echo ($value['module']);
+              $name = $name['data'];
+              $menu = new MenuManager($name['name']);
+              $sMenu = getActions($name['id']);
+              //print_r($sMenu); die;
+              foreach ($sMenu as $key => $smValue) {
+                  if (haveAction($_SESSION['user']['roleId'], $smValue['id'])) {                    
+                    $thisSMenu["index.php?action=" . $smValue['action_url']] = $smValue['name'];
+                  }
+              }
+              $menu->setmSousMenu($thisSMenu);
+              echo $menu->getMenu($name['icon']);
+              $thisSMenu = (array) null;
             }
-            // $menu->setmSousMenu(['index.php?action=module'=> 'Test', 'index.php?action=test'=>'test 1']);
-            // echo $menu->getMenu();
+          }
+          // $menu->setmSousMenu(['index.php?action=module'=> 'Test', 'index.php?action=test'=>'test 1']);
+          // echo $menu->getMenu();
           ?>
           <!--<li class="treeview">
           <a href="#">

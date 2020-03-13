@@ -3,6 +3,7 @@ include_once('model/class/RoleManager.php');
 include_once('model/class/UserManager.php');
 include_once('model/class/EmergencyManager.php');
 include_once('model/class/MenuManager.php');
+include_once('model/class/Files.php');
 
 function addData($data, $table)
 {
@@ -46,7 +47,21 @@ function getActions($moduleId)
 {
    $res = array();
    // Manager::showError($module)
-   $sql = "SELECT * FROM actions WHERE module=?";
+   $sql = "SELECT * FROM module WHERE sub_module=?";
        $res = Manager::getMultiplesRecords($sql, [$moduleId]);
    return $res;
+}
+
+function haveAction($role, $module)
+{
+   $res = array();
+   // Manager::showError($module)
+   $sql = "SELECT * FROM module_role WHERE role_id=? AND module=?";
+   $res = Manager::getMultiplesRecords($sql, [$role, $module]);
+   if ((is_array($res) || is_object($res)) && count($res)>0) {
+       return true;
+   }else {
+       return false;
+   }
+   
 }

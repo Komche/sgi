@@ -110,6 +110,8 @@ if (isset($_SESSION['user'])) {
             //Manager::showError($_FILES);
             if (!empty($_POST) && !empty($_FILES)) {
                 $data = $_POST;
+                $file = new Files();
+                var_dump($file->uploadFilePicture($_FILES['files'])); die;
                 $data['files'] = $_FILES['files'];
                 $res = EmergencyManager::addEmergency($data);
                 //Manager::showError($data);

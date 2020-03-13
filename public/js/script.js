@@ -20,11 +20,11 @@ function addTableRow() {
                 <input required class="form-control" id="description" name="description" placeholder="description du module">
             </div>
             <div style="display:none" class="form-group">
-                <input required class="form-control" id="module" name="module" value="`+$_GET['module']+`" placeholder="description du module">
+                <input required class="form-control" id="sub_module" name="sub_module" value="`+$_GET['module']+`" placeholder="description du module">
             </div>
             </td>
             <td>
-            <button type="button" onclick="addData('actions')" class="btn btn-primary">
+            <button type="button" onclick="addData('module')" class="btn btn-primary">
                 <i class="fa  fa-check-square"></i>
                 Valider
             </button>
