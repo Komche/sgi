@@ -387,7 +387,7 @@
       <div class="pull-right hidden-xs">
         <!-- <b>Version</b> 2.4.13-->
       </div>
-      <strong>Copyright &copy; 2019 <a href="#">Saroapp</a>.</strong>
+      <strong>Copyright &copy; 2019 <a href="#">AEMN</a>.</strong>
 
     </footer>
 
@@ -592,7 +592,7 @@
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span></button>
-          <h4 class="modal-title">Saroapp</h4>
+          <h4 class="modal-title">AEMN</h4>
         </div>
         <div id="danger_content" class="modal-body">
 

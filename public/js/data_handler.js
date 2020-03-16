@@ -2,7 +2,7 @@ host = $(location).attr('hostname');
 protocol = $(location).attr('protocol');
 folder = '';
 if (host == 'localhost') {
-    folder = '/saroapp';
+    folder = '/baseaemn';
 }
 myurl = protocol + '//' + host + folder + '/api/object/';
 var $_GET = {};

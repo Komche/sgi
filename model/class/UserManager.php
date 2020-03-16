@@ -84,7 +84,6 @@ class UserManager  extends Manager
                 $_SESSION['user']['last_name'] = $res['last_name'];
                 $_SESSION['user']['matricule'] = $res['matricule'];
                 $_SESSION['user']['phone_number'] = $res['phone_number'];
-                $_SESSION['user']['casern'] = self::getData('rescue_center', 'id', $res['casern'])['data']['label'];
                 $_SESSION['user']['role'] = self::getData('roles', 'id', $res['role'])['data']['name'];
                 $_SESSION['user']['roleId'] = self::getData('roles', 'id', $res['role'])['data']['id'];
                 $_SESSION['user']['type_agent'] = self::getData('type_agent', 'id', $res['type_agent'])['data']['label'];

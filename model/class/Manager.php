@@ -173,7 +173,7 @@ class Manager extends Managers
         // die(var_dump($msg));
         echo  '<div class="alert ' . $type_alerte . ' alert-dismissible">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <h4><i class="icon fa fa-ban"></i> Saroapp!</h4>
+        <h4><i class="icon fa fa-ban"></i> AEMN!</h4>
         ' . $msg . '
       </div>';
     }

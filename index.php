@@ -168,6 +168,7 @@ if (isset($_SESSION['user'])) {
     require('view/registerView.php');
 } else {
     if (!empty($_POST)) {
+        
         $res = UserManager::connectUser($_POST);
         if ($res != 1) {
             $_SESSION['messages'] = $res;

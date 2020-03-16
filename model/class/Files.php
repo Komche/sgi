@@ -27,10 +27,10 @@ class Files
             if (move_uploaded_file($file['tmp_name'], $target)) {
                 $url = API_ROOT_PATH . "/files";
                 $res = array();
-                $this->file_name = $file['name'];
-                $this->file_url = $target;
-                $this->file_type = $file['type'];
-                $this->file_size = $file['size'];
+                $this->setFile_name($file['name']);
+                $this->setFile_url($target);
+                $this->setFile_type($file['type']);
+                $this->setFile_size($file['size']);
                 $manager = new Manager();
                 $res = $manager->insert($this);
                 Manager::showError($res);
@@ -49,4 +49,84 @@ class Files
     }
 
     
+
+    /**
+     * Get the value of file_name
+     */ 
+    public function getFile_name()
+    {
+        return $this->file_name;
+    }
+
+    /**
+     * Set the value of file_name
+     *
+     * @return  self
+     */ 
+    public function setFile_name($file_name)
+    {
+        $this->file_name = $file_name;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of file_url
+     */ 
+    public function getFile_url()
+    {
+        return $this->file_url;
+    }
+
+    /**
+     * Set the value of file_url
+     *
+     * @return  self
+     */ 
+    public function setFile_url($file_url)
+    {
+        $this->file_url = $file_url;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of file_type
+     */ 
+    public function getFile_type()
+    {
+        return $this->file_type;
+    }
+
+    /**
+     * Set the value of file_type
+     *
+     * @return  self
+     */ 
+    public function setFile_type($file_type)
+    {
+        $this->file_type = $file_type;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of file_size
+     */ 
+    public function getFile_size()
+    {
+        return $this->file_size;
+    }
+
+    /**
+     * Set the value of file_size
+     *
+     * @return  self
+     */ 
+    public function setFile_size($file_size)
+    {
+        $this->file_size = $file_size;
+
+        return $this;
+    }
 }
