@@ -1,19 +1,21 @@
 
 <?php 
 class module_role {
-	 public $id;
 	 public $role_id;
 	 public $module;
 
 
 
-                    /**
-                    * Get the value of id
-                    */ 
-                    public function getId()
-                    {
-                        return $this->id;
+                public function __construct($module_role) {
+                    if (is_array($module_role)) {
+                         $this->role_id = isset($module_role['role_id']) ? $module_role['role_id'] : NULL;
+$this->module = isset($module_role['module']) ? $module_role['module'] : NULL;
+
                     }
+                }
+                
+
+
                     /**
                     * Get the value of role_id
                     */ 
@@ -30,17 +32,6 @@ class module_role {
                     }
 
 
-                    /**
-                    * Set the value of id
-                    *
-                    * @return  self
-                    */ 
-                   public function setId($id)
-                   {
-                    $this->id = $id;
-               
-                       return $this;
-                   }
                     /**
                     * Set the value of role_id
                     *

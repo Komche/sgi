@@ -1,7 +1,6 @@
 
 <?php 
 class membre {
-	 public $matricule;
 	 public $nom;
 	 public $prenom;
 	 public $adresse;
@@ -13,13 +12,22 @@ class membre {
 
 
 
-                    /**
-                    * Get the value of matricule
-                    */ 
-                    public function getMatricule()
-                    {
-                        return $this->matricule;
+                public function __construct($membre) {
+                    if (is_array($membre)) {
+                         $this->nom = isset($membre['nom']) ? $membre['nom'] : NULL;
+$this->prenom = isset($membre['prenom']) ? $membre['prenom'] : NULL;
+$this->adresse = isset($membre['adresse']) ? $membre['adresse'] : NULL;
+$this->numero = isset($membre['numero']) ? $membre['numero'] : NULL;
+$this->photo = isset($membre['photo']) ? $membre['photo'] : NULL;
+$this->typeMembre = isset($membre['typeMembre']) ? $membre['typeMembre'] : NULL;
+$this->etablissement = isset($membre['etablissement']) ? $membre['etablissement'] : NULL;
+$this->commission = isset($membre['commission']) ? $membre['commission'] : NULL;
+
                     }
+                }
+                
+
+
                     /**
                     * Get the value of nom
                     */ 
@@ -78,17 +86,6 @@ class membre {
                     }
 
 
-                    /**
-                    * Set the value of matricule
-                    *
-                    * @return  self
-                    */ 
-                   public function setMatricule($matricule)
-                   {
-                    $this->matricule = $matricule;
-               
-                       return $this;
-                   }
                     /**
                     * Set the value of nom
                     *

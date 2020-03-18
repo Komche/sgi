@@ -14,11 +14,14 @@ if (isset($_SESSION['user'])) {
         if ($action=='role') {
             if (!empty($_POST)) {
                 $data = $_POST;
-                $res = addData($data, 'roles');
+                $roles = new roles($data);
+                //var_dump($roles); die;
+                $res = insert($roles);
+                //$res = addData($data, 'roles');
     
-                if ($res != 1) {
+                //if ($res['code'] != 1) {
                     $_SESSION['messages'] = $res;
-                }
+               // }
             }
             require_once("view/roleView.php");
         } elseif($action=='module') {

@@ -4,6 +4,8 @@ include_once('model/class/UserManager.php');
 include_once('model/class/EmergencyManager.php');
 include_once('model/class/MenuManager.php');
 include_once('model/class/Files.php');
+include_once('model/database/module.php');
+include_once('model/database/roles.php');
 
 function addData($data, $table)
 {
@@ -29,6 +31,11 @@ function addData($data, $table)
     }else {
         return $res['message'];
     }
+}
+
+function insert($table) {
+    $manager = new Manager();
+    return $manager->insert($table);
 }
 
 function setActionUrl($name)

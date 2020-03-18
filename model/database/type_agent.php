@@ -1,18 +1,19 @@
 
 <?php 
 class type_agent {
-	 public $id;
 	 public $label;
 
 
 
-                    /**
-                    * Get the value of id
-                    */ 
-                    public function getId()
-                    {
-                        return $this->id;
+                public function __construct($type_agent) {
+                    if (is_array($type_agent)) {
+                         $this->label = isset($type_agent['label']) ? $type_agent['label'] : NULL;
+
                     }
+                }
+                
+
+
                     /**
                     * Get the value of label
                     */ 
@@ -22,17 +23,6 @@ class type_agent {
                     }
 
 
-                    /**
-                    * Set the value of id
-                    *
-                    * @return  self
-                    */ 
-                   public function setId($id)
-                   {
-                    $this->id = $id;
-               
-                       return $this;
-                   }
                     /**
                     * Set the value of label
                     *

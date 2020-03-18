@@ -1,18 +1,19 @@
 
 <?php 
 class ville {
-	 public $idRegion;
 	 public $nomRegion;
 
 
 
-                    /**
-                    * Get the value of idRegion
-                    */ 
-                    public function getIdRegion()
-                    {
-                        return $this->idRegion;
+                public function __construct($ville) {
+                    if (is_array($ville)) {
+                         $this->nomRegion = isset($ville['nomRegion']) ? $ville['nomRegion'] : NULL;
+
                     }
+                }
+                
+
+
                     /**
                     * Get the value of nomRegion
                     */ 
@@ -22,17 +23,6 @@ class ville {
                     }
 
 
-                    /**
-                    * Set the value of idRegion
-                    *
-                    * @return  self
-                    */ 
-                   public function setIdRegion($idRegion)
-                   {
-                    $this->idRegion = $idRegion;
-               
-                       return $this;
-                   }
                     /**
                     * Set the value of nomRegion
                     *

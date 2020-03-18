@@ -1,7 +1,6 @@
 
 <?php 
 class users {
-	 public $id;
 	 public $first_name;
 	 public $last_name;
 	 public $matricule;
@@ -17,13 +16,26 @@ class users {
 
 
 
-                    /**
-                    * Get the value of id
-                    */ 
-                    public function getId()
-                    {
-                        return $this->id;
+                public function __construct($users) {
+                    if (is_array($users)) {
+                         $this->first_name = isset($users['first_name']) ? $users['first_name'] : NULL;
+$this->last_name = isset($users['last_name']) ? $users['last_name'] : NULL;
+$this->matricule = isset($users['matricule']) ? $users['matricule'] : NULL;
+$this->phone_number = isset($users['phone_number']) ? $users['phone_number'] : NULL;
+$this->casern = isset($users['casern']) ? $users['casern'] : NULL;
+$this->type_agent = isset($users['type_agent']) ? $users['type_agent'] : NULL;
+$this->created_at = isset($users['created_at']) ? $users['created_at'] : NULL;
+$this->updated_at = isset($users['updated_at']) ? $users['updated_at'] : NULL;
+$this->photo = isset($users['photo']) ? $users['photo'] : NULL;
+$this->role = isset($users['role']) ? $users['role'] : NULL;
+$this->status = isset($users['status']) ? $users['status'] : NULL;
+$this->password_ = isset($users['password_']) ? $users['password_'] : NULL;
+
                     }
+                }
+                
+
+
                     /**
                     * Get the value of first_name
                     */ 
@@ -110,17 +122,6 @@ class users {
                     }
 
 
-                    /**
-                    * Set the value of id
-                    *
-                    * @return  self
-                    */ 
-                   public function setId($id)
-                   {
-                    $this->id = $id;
-               
-                       return $this;
-                   }
                     /**
                     * Set the value of first_name
                     *

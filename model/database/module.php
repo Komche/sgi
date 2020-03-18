@@ -1,7 +1,6 @@
 
 <?php 
 class module {
-	 public $id;
 	 public $name;
 	 public $icon;
 	 public $description;
@@ -10,13 +9,19 @@ class module {
 
 
 
-                    /**
-                    * Get the value of id
-                    */ 
-                    public function getId()
-                    {
-                        return $this->id;
+                public function __construct($module) {
+                    if (is_array($module)) {
+                         $this->name = isset($module['name']) ? $module['name'] : NULL;
+$this->icon = isset($module['icon']) ? $module['icon'] : NULL;
+$this->description = isset($module['description']) ? $module['description'] : NULL;
+$this->action_url = isset($module['action_url']) ? $module['action_url'] : NULL;
+$this->sub_module = isset($module['sub_module']) ? $module['sub_module'] : NULL;
+
                     }
+                }
+                
+
+
                     /**
                     * Get the value of name
                     */ 
@@ -54,17 +59,6 @@ class module {
                     }
 
 
-                    /**
-                    * Set the value of id
-                    *
-                    * @return  self
-                    */ 
-                   public function setId($id)
-                   {
-                    $this->id = $id;
-               
-                       return $this;
-                   }
                     /**
                     * Set the value of name
                     *

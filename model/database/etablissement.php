@@ -1,20 +1,23 @@
 
 <?php 
 class etablissement {
-	 public $idEtablissement;
 	 public $nom;
 	 public $adresse;
 	 public $filiere;
 
 
 
-                    /**
-                    * Get the value of idEtablissement
-                    */ 
-                    public function getIdEtablissement()
-                    {
-                        return $this->idEtablissement;
+                public function __construct($etablissement) {
+                    if (is_array($etablissement)) {
+                         $this->nom = isset($etablissement['nom']) ? $etablissement['nom'] : NULL;
+$this->adresse = isset($etablissement['adresse']) ? $etablissement['adresse'] : NULL;
+$this->filiere = isset($etablissement['filiere']) ? $etablissement['filiere'] : NULL;
+
                     }
+                }
+                
+
+
                     /**
                     * Get the value of nom
                     */ 
@@ -38,17 +41,6 @@ class etablissement {
                     }
 
 
-                    /**
-                    * Set the value of idEtablissement
-                    *
-                    * @return  self
-                    */ 
-                   public function setIdEtablissement($idEtablissement)
-                   {
-                    $this->idEtablissement = $idEtablissement;
-               
-                       return $this;
-                   }
                     /**
                     * Set the value of nom
                     *

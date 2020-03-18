@@ -1,19 +1,21 @@
 
 <?php 
 class bureauCommission {
-	 public $bureau;
 	 public $commission;
 	 public $exercice;
 
 
 
-                    /**
-                    * Get the value of bureau
-                    */ 
-                    public function getBureau()
-                    {
-                        return $this->bureau;
+                public function __construct($bureauCommission) {
+                    if (is_array($bureauCommission)) {
+                         $this->commission = isset($bureauCommission['commission']) ? $bureauCommission['commission'] : NULL;
+$this->exercice = isset($bureauCommission['exercice']) ? $bureauCommission['exercice'] : NULL;
+
                     }
+                }
+                
+
+
                     /**
                     * Get the value of commission
                     */ 
@@ -30,17 +32,6 @@ class bureauCommission {
                     }
 
 
-                    /**
-                    * Set the value of bureau
-                    *
-                    * @return  self
-                    */ 
-                   public function setBureau($bureau)
-                   {
-                    $this->bureau = $bureau;
-               
-                       return $this;
-                   }
                     /**
                     * Set the value of commission
                     *

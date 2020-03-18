@@ -1,7 +1,6 @@
 
 <?php 
 class files {
-	 public $id;
 	 public $file_name;
 	 public $file_url;
 	 public $file_type;
@@ -9,13 +8,18 @@ class files {
 
 
 
-                    /**
-                    * Get the value of id
-                    */ 
-                    public function getId()
-                    {
-                        return $this->id;
+                public function __construct($files) {
+                    if (is_array($files)) {
+                         $this->file_name = isset($files['file_name']) ? $files['file_name'] : NULL;
+$this->file_url = isset($files['file_url']) ? $files['file_url'] : NULL;
+$this->file_type = isset($files['file_type']) ? $files['file_type'] : NULL;
+$this->file_size = isset($files['file_size']) ? $files['file_size'] : NULL;
+
                     }
+                }
+                
+
+
                     /**
                     * Get the value of file_name
                     */ 
@@ -46,17 +50,6 @@ class files {
                     }
 
 
-                    /**
-                    * Set the value of id
-                    *
-                    * @return  self
-                    */ 
-                   public function setId($id)
-                   {
-                    $this->id = $id;
-               
-                       return $this;
-                   }
                     /**
                     * Set the value of file_name
                     *

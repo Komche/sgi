@@ -1,7 +1,6 @@
 
 <?php 
 class bureau {
-	 public $idBureau;
 	 public $libellebureau;
 	 public $typebureau;
 	 public $poste;
@@ -9,13 +8,18 @@ class bureau {
 
 
 
-                    /**
-                    * Get the value of idBureau
-                    */ 
-                    public function getIdBureau()
-                    {
-                        return $this->idBureau;
+                public function __construct($bureau) {
+                    if (is_array($bureau)) {
+                         $this->libellebureau = isset($bureau['libellebureau']) ? $bureau['libellebureau'] : NULL;
+$this->typebureau = isset($bureau['typebureau']) ? $bureau['typebureau'] : NULL;
+$this->poste = isset($bureau['poste']) ? $bureau['poste'] : NULL;
+$this->idRegion = isset($bureau['idRegion']) ? $bureau['idRegion'] : NULL;
+
                     }
+                }
+                
+
+
                     /**
                     * Get the value of libellebureau
                     */ 
@@ -46,17 +50,6 @@ class bureau {
                     }
 
 
-                    /**
-                    * Set the value of idBureau
-                    *
-                    * @return  self
-                    */ 
-                   public function setIdBureau($idBureau)
-                   {
-                    $this->idBureau = $idBureau;
-               
-                       return $this;
-                   }
                     /**
                     * Set the value of libellebureau
                     *

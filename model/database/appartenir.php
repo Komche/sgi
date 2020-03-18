@@ -1,19 +1,21 @@
 
 <?php 
 class appartenir {
-	 public $membre;
 	 public $etablissement;
 	 public $exercice;
 
 
 
-                    /**
-                    * Get the value of membre
-                    */ 
-                    public function getMembre()
-                    {
-                        return $this->membre;
+                public function __construct($appartenir) {
+                    if (is_array($appartenir)) {
+                         $this->etablissement = isset($appartenir['etablissement']) ? $appartenir['etablissement'] : NULL;
+$this->exercice = isset($appartenir['exercice']) ? $appartenir['exercice'] : NULL;
+
                     }
+                }
+                
+
+
                     /**
                     * Get the value of etablissement
                     */ 
@@ -30,17 +32,6 @@ class appartenir {
                     }
 
 
-                    /**
-                    * Set the value of membre
-                    *
-                    * @return  self
-                    */ 
-                   public function setMembre($membre)
-                   {
-                    $this->membre = $membre;
-               
-                       return $this;
-                   }
                     /**
                     * Set the value of etablissement
                     *

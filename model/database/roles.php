@@ -1,19 +1,21 @@
 
 <?php 
 class roles {
-	 public $id;
 	 public $name;
 	 public $description;
 
 
 
-                    /**
-                    * Get the value of id
-                    */ 
-                    public function getId()
-                    {
-                        return $this->id;
+                public function __construct($roles) {
+                    if (is_array($roles)) {
+                         $this->name = isset($roles['name']) ? $roles['name'] : NULL;
+$this->description = isset($roles['description']) ? $roles['description'] : NULL;
+
                     }
+                }
+                
+
+
                     /**
                     * Get the value of name
                     */ 
@@ -30,17 +32,6 @@ class roles {
                     }
 
 
-                    /**
-                    * Set the value of id
-                    *
-                    * @return  self
-                    */ 
-                   public function setId($id)
-                   {
-                    $this->id = $id;
-               
-                       return $this;
-                   }
                     /**
                     * Set the value of name
                     *

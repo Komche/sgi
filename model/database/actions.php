@@ -1,7 +1,6 @@
 
 <?php 
 class actions {
-	 public $id;
 	 public $name;
 	 public $description;
 	 public $action_url;
@@ -9,13 +8,18 @@ class actions {
 
 
 
-                    /**
-                    * Get the value of id
-                    */ 
-                    public function getId()
-                    {
-                        return $this->id;
+                public function __construct($actions) {
+                    if (is_array($actions)) {
+                         $this->name = isset($actions['name']) ? $actions['name'] : NULL;
+$this->description = isset($actions['description']) ? $actions['description'] : NULL;
+$this->action_url = isset($actions['action_url']) ? $actions['action_url'] : NULL;
+$this->module = isset($actions['module']) ? $actions['module'] : NULL;
+
                     }
+                }
+                
+
+
                     /**
                     * Get the value of name
                     */ 
@@ -46,17 +50,6 @@ class actions {
                     }
 
 
-                    /**
-                    * Set the value of id
-                    *
-                    * @return  self
-                    */ 
-                   public function setId($id)
-                   {
-                    $this->id = $id;
-               
-                       return $this;
-                   }
                     /**
                     * Set the value of name
                     *

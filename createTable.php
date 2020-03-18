@@ -24,24 +24,34 @@ if (!empty($_POST)) {
                 //(empty($text_field)) ? $text_field = '$this->config[\'tables\'][\'' . $tables . '\'] = [' : $text_field .= '$this->config[\'tables\'][\'' . $tables . '\'] = [';
                 //(empty($text_field_id)) ? $text_field_id = '$this->config[\'tables\'][\'' . $tables . '\'][\'id\'] = [' : $text_field_id .= '$this->config[\'tables\'][\'' . $tables . '\'][\'id\'] = [';
                 //$text_field .= '$this->config[\'tables\'][\'' . $tables . '\'] = [';
+
+                $const = "
+                public function __construct($$tables) {
+                    if (is_array($$tables)) {
+                         ";
                 foreach ($fields as $key => $field) {
-                    // if ($key == 0) {
-                    $text_field .= "\t public $" . $field . ";\n";
-                    // } 
+                    if ($key != 0) {
+                        $text_field .= "\t public $" . $field . ";\n";
+                        $const .= '$this->' . $field . " = isset($$tables" . "['" . $field . "']) ? $$tables" . "['" . $field . "'] : NULL;\n";
+                    }
                 }
-                //$text_field_id .= '];';
+                $const .= "
+                    }
+                }
+                ";
                 file_put_contents("model/database/$tables.php", "\n" . $text_field . PHP_EOL, FILE_APPEND | LOCK_EX, null);
-                //file_put_contents("config/var.php", "\n" . $text_field_id . PHP_EOL, FILE_APPEND | LOCK_EX, null);
+                file_put_contents("model/database/$tables.php", "\n" . $const . PHP_EOL, FILE_APPEND | LOCK_EX, null);
                 $get = "";
                 $set = "";
                 foreach ($fields as $key => $field) {
-                    $get .= "
+                    if ($key != 0) {
+                        $get .= "
                     /**
                     * Get the value of $field
                     */ 
-                    public function get".ucfirst($field)."()
+                    public function get" . ucfirst($field) . "()
                     {
-                        return ".'$this->'.$field.";
+                        return " . '$this->' . $field . ";
                     }";
 
                     $set .= "
@@ -50,12 +60,13 @@ if (!empty($_POST)) {
                     *
                     * @return  self
                     */ 
-                   public function set".ucfirst($field)."($$field)
+                   public function set" . ucfirst($field) . "($$field)
                    {
-                    ".'$this->'.$field." = $$field;
+                    " . '$this->' . $field . " = $$field;
                
-                       return ".'$this'.";
+                       return " . '$this' . ";
                    }";
+                    }
                 }
                 $set .= "\n}";
                 //$text_field_id .= '];';

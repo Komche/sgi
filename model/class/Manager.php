@@ -289,6 +289,7 @@ class Manager extends Managers
         self::$results['error'] = $is_error;
         self::$results['message'] = $message;
         self::$results['lastId'] = $lastId;
+        self::$results['code'] = $code;
         return  self::$results;
         
     }
@@ -323,13 +324,13 @@ class Manager extends Managers
                 try {
                     $req->execute($table);
                     $lastId = self::bdd()->lastInsertId();
-                    return $this->throwError(201, "Enregistrement effectué avec succès", false, $lastId)['lastid'];
+                    return $this->throwError(1, "Enregistrement effectué avec succès", false, $lastId)['message'];
                 } catch (PDOException $e) {
-                    return $this->throwError(503, "Enregistrement échoué; $e", true)[''];
+                    return $this->throwError(503, "Enregistrement échoué; $e", true)['message'];
                 }
                 
             } else {
-                return $this->throwError(400, "Un ou plusieurs champs mal renseigner", true);
+                return $this->throwError(400, "Un ou plusieurs champs mal renseigner", true)['message'];
             }
         }
     }

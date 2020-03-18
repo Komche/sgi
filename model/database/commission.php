@@ -1,18 +1,19 @@
 
 <?php 
 class commission {
-	 public $idCommission;
 	 public $nomCommission;
 
 
 
-                    /**
-                    * Get the value of idCommission
-                    */ 
-                    public function getIdCommission()
-                    {
-                        return $this->idCommission;
+                public function __construct($commission) {
+                    if (is_array($commission)) {
+                         $this->nomCommission = isset($commission['nomCommission']) ? $commission['nomCommission'] : NULL;
+
                     }
+                }
+                
+
+
                     /**
                     * Get the value of nomCommission
                     */ 
@@ -22,17 +23,6 @@ class commission {
                     }
 
 
-                    /**
-                    * Set the value of idCommission
-                    *
-                    * @return  self
-                    */ 
-                   public function setIdCommission($idCommission)
-                   {
-                    $this->idCommission = $idCommission;
-               
-                       return $this;
-                   }
                     /**
                     * Set the value of nomCommission
                     *
