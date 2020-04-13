@@ -26,32 +26,80 @@ if (!empty($_POST)) {
                 //$text_field .= '$this->config[\'tables\'][\'' . $tables . '\'] = [';
 
                 $const = "
-                public function __construct($$tables) {
-                    if (is_array($$tables)) {
+                public function __construct($$tables=null) {
+                    " . '$this->' . "$tables = $$tables;
                          ";
                 foreach ($fields as $key => $field) {
-                    if ($key != 0) {
-                        $text_field .= "\t public $" . $field . ";\n";
-                        $const .= '$this->' . $field . " = isset($$tables" . "['" . $field . "']) ? $$tables" . "['" . $field . "'] : NULL;\n";
-                    }
+                    //if ($key != 0) {
+                    $text_field .= "\t public $" . $field . ";\n";
+                    //$const .= '$this->' . $field . " = isset($$tables" . "['" . $field . "']) ? $$tables" . "['" . $field . "'] : NULL;\n";
+                    //}
                 }
+
+                $list = "";
+                $set = "";
+                $oth = $fields;
+                $last_key = count($oth)-1;
+                $l_last_key = $last_key - 1;
+                var_dump($oth);
+                foreach ($oth as $otherkey => $otherfield) {
+                    $set .= '$this->' . "$otherfield = $$otherfield;\n";
+                    if ($otherkey ==  $last_key) {
+                        $list .= "$$otherfield";
+                    }else
+                    $list .= "$$otherfield, ";
+                }
+
                 $const .= "
-                    }
                 }
+
+                public function all()
+                {
+                    return " . '$this->' . "$tables;
+                }
+
+                public function role($list)
+                    {
+                        $set
+                    }
                 ";
+                $text_field .= "\t public $" . $tables . "=array();\n";
                 file_put_contents("model/database/$tables.php", "\n" . $text_field . PHP_EOL, FILE_APPEND | LOCK_EX, null);
                 file_put_contents("model/database/$tables.php", "\n" . $const . PHP_EOL, FILE_APPEND | LOCK_EX, null);
+
+
+
                 $get = "";
                 $set = "";
+                $otherFields = $fields;
                 foreach ($fields as $key => $field) {
-                    if ($key != 0) {
-                        $get .= "
+                    //if ($key != 0) {
+                    $get .= "
                     /**
                     * Get the value of $field
                     */ 
-                    public function get" . ucfirst($field) . "()
+                    public function get" . ucfirst($field) . "($$field)
                     {
-                        return " . '$this->' . $field . ";
+                        if ($$field != null && is_array(" . '$this->' . "$tables) && count(" . '$this->' . "$tables)!=0) {
+                            " . '$table_name = strtolower(get_class($this));' . "
+                            " . '$query = "SELECT * FROM $table_name WHERE ' . "$field" . ' = ?";' . "
+                            " . '$req = Manager::bdd()->prepare($query);' . "
+                            " . '$req->execute([' . "$$field" . ']);' . "
+                            " . '$data = "";' . "
+                            " . 'if ($data = $req->fetchAll(PDO::FETCH_ASSOC)) {' . "\n" .
+                        '$d=$data[0];' . "\n";
+                    foreach ($otherFields as $otherkey => $otherfield) {
+                        $get .= '$this->' . "set" . ucfirst($otherfield) . "(" . '$d[' . "'$otherfield'" . ']);' . "\n";
+                    }
+
+
+                    $get .= '$this->' . "$tables =" . '$data' . "; \n return " . '$this' . ";
+                                }
+                            
+                        } else {
+                            return " . '$this->' . $field . ";
+                        }
+                        
                     }";
 
                     $set .= "
@@ -66,7 +114,7 @@ if (!empty($_POST)) {
                
                        return " . '$this' . ";
                    }";
-                    }
+                    //}
                 }
                 $set .= "\n}";
                 //$text_field_id .= '];';

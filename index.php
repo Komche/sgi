@@ -5,7 +5,12 @@ require('controller/Administration.php');
 if (isset($_SESSION['messages'])) {
     unset($_SESSION['messages']);
 }
-
+// $test = "hh";
+// //echo(Manager::print_var_name($test));  die();
+// $roles = new roles();
+// $roles->role(11, "Test", "Mon test");
+// Manager::update($roles, "id", 11);
+// var_dump(Manager::getDatas($roles)->getName("test")->all()); die;
 
 if (isset($_SESSION['user'])) {
     getModules();

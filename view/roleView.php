@@ -28,8 +28,12 @@
                 <button type="submit" class="btn btn-primary">Valider</button>
                 <p></p>
                 <?php 
-                if (isset($_SESSION['messages'])) {
-                  echo Manager::messages($_SESSION['messages'], 'alert-danger');
+                if (!empty($_SESSION['messages'])) {
+                  if ($_SESSION['messages']['code']==1) {
+                    echo Manager::messages($_SESSION['messages']['message'], 'alert-success');
+                  }else {
+                    echo Manager::messages($_SESSION['messages']['message'], 'alert-danger');
+                  }
                 }
               ?>
               </div>

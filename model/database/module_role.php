@@ -1,37 +1,121 @@
 
 <?php 
 class module_role {
+	 public $id;
 	 public $role_id;
 	 public $module;
+	 public $module_role=array();
 
 
 
-                public function __construct($module_role) {
-                    if (is_array($module_role)) {
-                         $this->role_id = isset($module_role['role_id']) ? $module_role['role_id'] : NULL;
-$this->module = isset($module_role['module']) ? $module_role['module'] : NULL;
+                public function __construct($module_role=null) {
+                    $this->module_role = $module_role;
+                         
+                }
+
+                public function all()
+                {
+                    return $this->module_role;
+                }
+
+                public function role($id, $role_id, $module)
+                    {
+                        $this->id = $id;
+$this->role_id = $role_id;
+$this->module = $module;
 
                     }
-                }
                 
 
 
                     /**
+                    * Get the value of id
+                    */ 
+                    public function getId($id)
+                    {
+                        if ($id != null && is_array($this->module_role) && count($this->module_role)!=0) {
+                            $table_name = strtolower(get_class($this));
+                            $query = "SELECT * FROM $table_name WHERE id = ?";
+                            $req = Manager::bdd()->prepare($query);
+                            $req->execute([$id]);
+                            $data = "";
+                            if ($data = $req->fetchAll(PDO::FETCH_ASSOC)) {
+$d=$data[0];
+$this->setId($d['id']);
+$this->setRole_id($d['role_id']);
+$this->setModule($d['module']);
+$this->module_role =$data; 
+ return $this;
+                                }
+                            
+                        } else {
+                            return $this->id;
+                        }
+                        
+                    }
+                    /**
                     * Get the value of role_id
                     */ 
-                    public function getRole_id()
+                    public function getRole_id($role_id)
                     {
-                        return $this->role_id;
+                        if ($role_id != null && is_array($this->module_role) && count($this->module_role)!=0) {
+                            $table_name = strtolower(get_class($this));
+                            $query = "SELECT * FROM $table_name WHERE role_id = ?";
+                            $req = Manager::bdd()->prepare($query);
+                            $req->execute([$role_id]);
+                            $data = "";
+                            if ($data = $req->fetchAll(PDO::FETCH_ASSOC)) {
+$d=$data[0];
+$this->setId($d['id']);
+$this->setRole_id($d['role_id']);
+$this->setModule($d['module']);
+$this->module_role =$data; 
+ return $this;
+                                }
+                            
+                        } else {
+                            return $this->role_id;
+                        }
+                        
                     }
                     /**
                     * Get the value of module
                     */ 
-                    public function getModule()
+                    public function getModule($module)
                     {
-                        return $this->module;
+                        if ($module != null && is_array($this->module_role) && count($this->module_role)!=0) {
+                            $table_name = strtolower(get_class($this));
+                            $query = "SELECT * FROM $table_name WHERE module = ?";
+                            $req = Manager::bdd()->prepare($query);
+                            $req->execute([$module]);
+                            $data = "";
+                            if ($data = $req->fetchAll(PDO::FETCH_ASSOC)) {
+$d=$data[0];
+$this->setId($d['id']);
+$this->setRole_id($d['role_id']);
+$this->setModule($d['module']);
+$this->module_role =$data; 
+ return $this;
+                                }
+                            
+                        } else {
+                            return $this->module;
+                        }
+                        
                     }
 
 
+                    /**
+                    * Set the value of id
+                    *
+                    * @return  self
+                    */ 
+                   public function setId($id)
+                   {
+                    $this->id = $id;
+               
+                       return $this;
+                   }
                     /**
                     * Set the value of role_id
                     *

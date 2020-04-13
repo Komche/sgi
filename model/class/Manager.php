@@ -10,7 +10,7 @@ class Manager extends Managers
     private static $results = [];
 
 
-    protected static function bdd()
+    public static function bdd()
     {
         $dbname = 'akoybizc_saroapp';
         $user = 'akoybizcom';
@@ -25,8 +25,8 @@ class Manager extends Managers
         try {
             $pdo_options = array(
                 PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,PDO::ATTR_PERSISTENT => true
-               );
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_PERSISTENT => true
+            );
             $bdd = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", "$user", "$pass", $pdo_options);
         } catch (Exception $e) {
             die('Erreur :' . $e->getMessage());
@@ -46,9 +46,9 @@ class Manager extends Managers
     }
 
 
-    
 
-   /* public static function getDatas($table, $field = null, $value = null)
+
+    /* public static function getDatas($table_name, $field = null, $value = null)
     {
         if ($field != null && $value != null) {
             $sql = "SELECT * FROM $table WHERE $field=?";
@@ -69,7 +69,7 @@ class Manager extends Managers
      * 
      * @return json_encode($result)
      */
-    public static function getData($table, $property=null, $val=null, $many=false)
+    public static function getData($table, $property = null, $val = null, $many = false)
     {
         $query = "SELECT * FROM $table ";
         if ($property != null && $val != null) {
@@ -79,7 +79,7 @@ class Manager extends Managers
                 self::distinct($table, $property);
             } elseif ($val === 'exist') {
                 echo self::is_not_use($table, $property, $_GET['val']);
-            }elseif ($many) {
+            } elseif ($many) {
                 $query .= "WHERE $property=:$property";
 
                 $req = self::bdd()->prepare($query);
@@ -88,19 +88,19 @@ class Manager extends Managers
                 if (self::$results['data'] = $req->fetchAll(PDO::FETCH_ASSOC)) {
                     return self::$results;
                 } else {
-                   echo self::throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true)['message'];
+                    echo self::throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true)['message'];
                 }
-            }elseif (!empty($_GET['prop']) && !empty($_GET['val'])) {
+            } elseif (!empty($_GET['prop']) && !empty($_GET['val'])) {
                 extract($_GET);
                 $query .= "WHERE $property=:$property AND $prop=:$prop";
 
                 $req = self::bdd()->prepare($query);
 
-                $req->execute([$property => $val, $prop=>$val]);
+                $req->execute([$property => $val, $prop => $val]);
                 if (self::$results['data'] = $req->fetchAll(PDO::FETCH_ASSOC)) {
                     return self::$results;
                 } else {
-                   echo self::throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true)['message'];
+                    echo self::throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true)['message'];
                 }
             } else {
                 $query .= "WHERE $property=:$property";
@@ -110,15 +110,15 @@ class Manager extends Managers
                 if (self::$results['data'] = $req->fetch(PDO::FETCH_ASSOC)) {
                     return self::$results;
                 } else {
-                   echo self::throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true)['message'];
+                    echo self::throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true)['message'];
                 }
             }
         } else {
             $req = self::bdd()->query($query);
             if (self::$results['data'] = $req->fetchAll(PDO::FETCH_ASSOC)) {
-                    return self::$results;
+                return self::$results;
             } else {
-               echo self::throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true)['message'];
+                echo self::throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true)['message'];
             }
         }
     }
@@ -282,7 +282,7 @@ class Manager extends Managers
      * @param boolean|false $is_error
      * @return json_encode($result)
      */
-    public static function throwError($code = null, $message, $is_error = false, $lastId=null)
+    public static function throwError($code = null, $message, $is_error = false, $lastId = null)
     {
         if (array_key_exists('data', self::$results))
             unset(self::$results['data']);
@@ -291,7 +291,31 @@ class Manager extends Managers
         self::$results['lastId'] = $lastId;
         self::$results['code'] = $code;
         return  self::$results;
-        
+    }
+
+    public static function print_var_name($variable)
+    {
+        foreach ($GLOBALS as $var_name => $var_value) {
+            if ($var_value == $variable) {
+                return $var_name;
+            }
+        }
+
+        return false;
+    }
+
+    public static function get_properties_name($object, $property)
+    {
+        $properties = get_object_vars($object);
+        $keys = array_keys($properties);
+        //print_r($properties); die;
+        foreach ($properties as $var_name => $var_value) {
+            if ($var_name == $property) {
+                return $var_value;
+            }
+        }
+
+        return false;
     }
 
     public  function insert($object)
@@ -324,15 +348,129 @@ class Manager extends Managers
                 try {
                     $req->execute($table);
                     $lastId = self::bdd()->lastInsertId();
-                    return $this->throwError(1, "Enregistrement effectué avec succès", false, $lastId)['message'];
+                    return $this->throwError(1, "Enregistrement effectué avec succès", false, $lastId);
                 } catch (PDOException $e) {
-                    return $this->throwError(503, "Enregistrement échoué; $e", true)['message'];
+                    return $this->throwError(0, "Enregistrement échoué; $e", true);
                 }
-                
             } else {
-                return $this->throwError(400, "Un ou plusieurs champs mal renseigner", true)['message'];
+                return $this->throwError(0, "Un ou plusieurs champs mal renseigner", true);
+            }
+        }
+    }
+    /*
+    * get data format json
+    * 
+    * @return json_encode($result)
+    */
+    public static function getDatas($object, $property = null, $val = null, $many = false)
+    {
+        $table = get_object_vars($object);
+        $table_name = strtolower(get_class($object));
+        $query = "SELECT * FROM $table_name ";
+        if ($property != null && $val != null) {
+            if ($val === 'last') {
+                self::lastID($table_name, $property);
+            } elseif ($val === 'distinct') {
+                self::distinct($table_name, $property);
+            } elseif ($val === 'exist') {
+                echo self::is_not_use($table_name, $property, $_GET['val']);
+            } elseif ($many) {
+                $query .= "WHERE $property=:$property";
+
+                $req = self::bdd()->prepare($query);
+
+                $req->execute([$property => $val]);
+                if (self::$results['data'] = $req->fetchAll(PDO::FETCH_ASSOC)) {
+                    return self::$results;
+                } else {
+                    echo self::throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true)['message'];
+                }
+            } elseif (!empty($_GET['prop']) && !empty($_GET['val'])) {
+                extract($_GET);
+                $query .= "WHERE $property=:$property AND $prop=:$prop";
+
+                $req = self::bdd()->prepare($query);
+
+                $req->execute([$property => $val, $prop => $val]);
+                if (self::$results['data'] = $req->fetchAll(PDO::FETCH_ASSOC)) {
+                    $object_table = new $$table(self::$results['data']);
+                    return $object_table;
+                } else {
+                    echo self::throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true)['message'];
+                }
+            } else {
+                $query .= "WHERE $property=:$property";
+
+                $req = self::bdd()->prepare($query);
+                $req->execute([$property => $val]);
+                if (self::$results['data'] = $req->fetch(PDO::FETCH_ASSOC)) {
+                    return self::$results;
+                } else {
+                    echo self::throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true)['message'];
+                }
+            }
+        } else {
+            $req = self::bdd()->query($query);
+            if (self::$results['data'] = $req->fetchAll(PDO::FETCH_ASSOC)) {
+                //var_dump(self::$results['data']);
+                $object_table = new $table_name(self::$results['data']);
+                return $object_table;
+            } else {
+                echo self::throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true)['message'];
             }
         }
     }
 
+     /**
+     * update data
+     * 
+     * @return void
+     */
+    public static function update($object)
+    {
+        if (!function_exists('array_key_first')) {
+            function array_key_first(array $arr) {
+                foreach($arr as $key => $unused) {
+                    return $key;
+                }
+                return NULL;
+            }
+        }
+        // recupération de propriété de nom de l'objet
+        $table = get_object_vars($object);
+        $table_name = strtolower(get_class($object));
+        
+        // on enlève la propriété dont la valeur est null
+        foreach ($table as $key => $value) {
+            if ($table[$key]==null) {
+                unset($table[$key]);
+            }
+        }
+
+        //on recupère le id de la table
+        $id= array_key_first($table);
+
+        // realisation de la requête
+        if (count($table) > 0) {
+            $temp  = array_keys($table);
+            $last_key = end($temp);
+            $sql = "UPDATE $table_name SET ";
+            foreach ($table as $key => $field) {
+                
+                if ($last_key != $key) {
+                    $sql .= "$key=:$key, ";
+                } else {
+                    $sql .= "$key=:$key ";
+                }
+            }
+            $sql .= "WHERE $id=:$id";
+
+            $req = self::bdd()->prepare($sql);
+            if ($req->execute($table)) {
+                self::throwError(200, "Enregistrement modifié avec succès");
+            } else {
+                self::throwError(503, "modification échouée", true);
+            }
+        }
+    }
 }
