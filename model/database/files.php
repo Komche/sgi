@@ -35,7 +35,7 @@ $this->file_size = $file_size;
                     /**
                     * Get the value of id
                     */ 
-                    public function getId($id)
+                    public function getId($id=null)
                     {
                         if ($id != null && is_array($this->files) && count($this->files)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -62,7 +62,7 @@ $this->files =$data;
                     /**
                     * Get the value of file_name
                     */ 
-                    public function getFile_name($file_name)
+                    public function getFile_name($file_name=null)
                     {
                         if ($file_name != null && is_array($this->files) && count($this->files)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -89,7 +89,7 @@ $this->files =$data;
                     /**
                     * Get the value of file_url
                     */ 
-                    public function getFile_url($file_url)
+                    public function getFile_url($file_url=null)
                     {
                         if ($file_url != null && is_array($this->files) && count($this->files)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -116,7 +116,7 @@ $this->files =$data;
                     /**
                     * Get the value of file_type
                     */ 
-                    public function getFile_type($file_type)
+                    public function getFile_type($file_type=null)
                     {
                         if ($file_type != null && is_array($this->files) && count($this->files)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -143,7 +143,7 @@ $this->files =$data;
                     /**
                     * Get the value of file_size
                     */ 
-                    public function getFile_size($file_size)
+                    public function getFile_size($file_size=null)
                     {
                         if ($file_size != null && is_array($this->files) && count($this->files)!=0) {
                             $table_name = strtolower(get_class($this));

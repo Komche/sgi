@@ -70,52 +70,7 @@
           </div>
     </div>
 
-    <div class="col-md-6">
-          <div class="box">
-            <div class="box-header with-border">
-              <h3 class="box-title"><?=$title ?></h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table class="table table-bordered">
-                <tbody><tr>
-                  <th>Centre de secours</th>
-                  <th>Compagnie</th>
-                  <th>Ville</th>
-                  <th>Action</th>
-                </tr>
-                <?php 
-                  $data = Manager::getData('rescue_center');
-                  if (is_array($data) || is_object($data)) {
-                    foreach ($data as $value) {
-                      
-                   
-                ?>
-                <tr>
-                  <td><?= $value['label'] ?></td>
-                  <td><?= Manager::getData('company', 'id', $value['company'])['label'] ?></td>
-                  <td><?= Manager::getData('city', 'id', $value['city'])['label'] ?></td>
-                  <td>
-                    <a class="btn btn-primary">
-                      <i class="fa fa-edit"></i>
-                    </a>
-                  </td>
-                </tr>
-                <?php 
-                   }
-                  }else {
-                     Manager::messages('Aucune donnée trouvé', 'alert-warning');
-                  }
-                ?>
-              </tbody>
-            </table>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer clearfix">
-              </ul>
-            </div>
-          </div>
-      </div>
+    
     </div>
 <?php 
     $content = ob_get_clean();

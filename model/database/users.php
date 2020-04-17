@@ -51,7 +51,7 @@ $this->password_ = $password_;
                     /**
                     * Get the value of id
                     */ 
-                    public function getId($id)
+                    public function getId($id=null)
                     {
                         if ($id != null && is_array($this->users) && count($this->users)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -86,7 +86,7 @@ $this->users =$data;
                     /**
                     * Get the value of first_name
                     */ 
-                    public function getFirst_name($first_name)
+                    public function getFirst_name($first_name=null)
                     {
                         if ($first_name != null && is_array($this->users) && count($this->users)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -121,7 +121,7 @@ $this->users =$data;
                     /**
                     * Get the value of last_name
                     */ 
-                    public function getLast_name($last_name)
+                    public function getLast_name($last_name=null)
                     {
                         if ($last_name != null && is_array($this->users) && count($this->users)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -156,7 +156,7 @@ $this->users =$data;
                     /**
                     * Get the value of matricule
                     */ 
-                    public function getMatricule($matricule)
+                    public function getMatricule($matricule=null)
                     {
                         if ($matricule != null && is_array($this->users) && count($this->users)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -191,7 +191,7 @@ $this->users =$data;
                     /**
                     * Get the value of phone_number
                     */ 
-                    public function getPhone_number($phone_number)
+                    public function getPhone_number($phone_number=null)
                     {
                         if ($phone_number != null && is_array($this->users) && count($this->users)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -226,7 +226,7 @@ $this->users =$data;
                     /**
                     * Get the value of casern
                     */ 
-                    public function getCasern($casern)
+                    public function getCasern($casern=null)
                     {
                         if ($casern != null && is_array($this->users) && count($this->users)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -261,7 +261,7 @@ $this->users =$data;
                     /**
                     * Get the value of type_agent
                     */ 
-                    public function getType_agent($type_agent)
+                    public function getType_agent($type_agent=null)
                     {
                         if ($type_agent != null && is_array($this->users) && count($this->users)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -296,7 +296,7 @@ $this->users =$data;
                     /**
                     * Get the value of created_at
                     */ 
-                    public function getCreated_at($created_at)
+                    public function getCreated_at($created_at=null)
                     {
                         if ($created_at != null && is_array($this->users) && count($this->users)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -331,7 +331,7 @@ $this->users =$data;
                     /**
                     * Get the value of updated_at
                     */ 
-                    public function getUpdated_at($updated_at)
+                    public function getUpdated_at($updated_at=null)
                     {
                         if ($updated_at != null && is_array($this->users) && count($this->users)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -366,7 +366,7 @@ $this->users =$data;
                     /**
                     * Get the value of photo
                     */ 
-                    public function getPhoto($photo)
+                    public function getPhoto($photo=null)
                     {
                         if ($photo != null && is_array($this->users) && count($this->users)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -401,7 +401,7 @@ $this->users =$data;
                     /**
                     * Get the value of role
                     */ 
-                    public function getRole($role)
+                    public function getRole($role=null)
                     {
                         if ($role != null && is_array($this->users) && count($this->users)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -436,7 +436,7 @@ $this->users =$data;
                     /**
                     * Get the value of status
                     */ 
-                    public function getStatus($status)
+                    public function getStatus($status=null)
                     {
                         if ($status != null && is_array($this->users) && count($this->users)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -471,7 +471,7 @@ $this->users =$data;
                     /**
                     * Get the value of password_
                     */ 
-                    public function getPassword_($password_)
+                    public function getPassword_($password_=null)
                     {
                         if ($password_ != null && is_array($this->users) && count($this->users)!=0) {
                             $table_name = strtolower(get_class($this));

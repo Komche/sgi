@@ -1,8 +1,8 @@
 
 <?php 
 class ville {
-	 public $idRegion;
-	 public $nomRegion;
+	 public $idVille;
+	 public $nomVille;
 	 public $ville=array();
 
 
@@ -17,84 +17,84 @@ class ville {
                     return $this->ville;
                 }
 
-                public function role($idRegion, $nomRegion)
+                public function role($idVille, $nomVille)
                     {
-                        $this->idRegion = $idRegion;
-$this->nomRegion = $nomRegion;
+                        $this->idVille = $idVille;
+$this->nomVille = $nomVille;
 
                     }
                 
 
 
                     /**
-                    * Get the value of idRegion
+                    * Get the value of idVille
                     */ 
-                    public function getIdRegion($idRegion)
+                    public function getIdVille($idVille=null)
                     {
-                        if ($idRegion != null && is_array($this->ville) && count($this->ville)!=0) {
+                        if ($idVille != null && is_array($this->ville) && count($this->ville)!=0) {
                             $table_name = strtolower(get_class($this));
-                            $query = "SELECT * FROM $table_name WHERE idRegion = ?";
+                            $query = "SELECT * FROM $table_name WHERE idVille = ?";
                             $req = Manager::bdd()->prepare($query);
-                            $req->execute([$idRegion]);
+                            $req->execute([$idVille]);
                             $data = "";
                             if ($data = $req->fetchAll(PDO::FETCH_ASSOC)) {
 $d=$data[0];
-$this->setIdRegion($d['idRegion']);
-$this->setNomRegion($d['nomRegion']);
+$this->setIdVille($d['idVille']);
+$this->setNomVille($d['nomVille']);
 $this->ville =$data; 
  return $this;
                                 }
                             
                         } else {
-                            return $this->idRegion;
+                            return $this->idVille;
                         }
                         
                     }
                     /**
-                    * Get the value of nomRegion
+                    * Get the value of nomVille
                     */ 
-                    public function getNomRegion($nomRegion)
+                    public function getNomVille($nomVille=null)
                     {
-                        if ($nomRegion != null && is_array($this->ville) && count($this->ville)!=0) {
+                        if ($nomVille != null && is_array($this->ville) && count($this->ville)!=0) {
                             $table_name = strtolower(get_class($this));
-                            $query = "SELECT * FROM $table_name WHERE nomRegion = ?";
+                            $query = "SELECT * FROM $table_name WHERE nomVille = ?";
                             $req = Manager::bdd()->prepare($query);
-                            $req->execute([$nomRegion]);
+                            $req->execute([$nomVille]);
                             $data = "";
                             if ($data = $req->fetchAll(PDO::FETCH_ASSOC)) {
 $d=$data[0];
-$this->setIdRegion($d['idRegion']);
-$this->setNomRegion($d['nomRegion']);
+$this->setIdVille($d['idVille']);
+$this->setNomVille($d['nomVille']);
 $this->ville =$data; 
  return $this;
                                 }
                             
                         } else {
-                            return $this->nomRegion;
+                            return $this->nomVille;
                         }
                         
                     }
 
 
                     /**
-                    * Set the value of idRegion
+                    * Set the value of idVille
                     *
                     * @return  self
                     */ 
-                   public function setIdRegion($idRegion)
+                   public function setIdVille($idVille)
                    {
-                    $this->idRegion = $idRegion;
+                    $this->idVille = $idVille;
                
                        return $this;
                    }
                     /**
-                    * Set the value of nomRegion
+                    * Set the value of nomVille
                     *
                     * @return  self
                     */ 
-                   public function setNomRegion($nomRegion)
+                   public function setNomVille($nomVille)
                    {
-                    $this->nomRegion = $nomRegion;
+                    $this->nomVille = $nomVille;
                
                        return $this;
                    }

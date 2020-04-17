@@ -4,7 +4,7 @@ class etablissement {
 	 public $idEtablissement;
 	 public $nom;
 	 public $adresse;
-	 public $filiere;
+	 public $ville;
 	 public $etablissement=array();
 
 
@@ -19,12 +19,12 @@ class etablissement {
                     return $this->etablissement;
                 }
 
-                public function role($idEtablissement, $nom, $adresse, $filiere)
+                public function role($idEtablissement, $nom, $adresse, $ville)
                     {
                         $this->idEtablissement = $idEtablissement;
 $this->nom = $nom;
 $this->adresse = $adresse;
-$this->filiere = $filiere;
+$this->ville = $ville;
 
                     }
                 
@@ -33,7 +33,7 @@ $this->filiere = $filiere;
                     /**
                     * Get the value of idEtablissement
                     */ 
-                    public function getIdEtablissement($idEtablissement)
+                    public function getIdEtablissement($idEtablissement=null)
                     {
                         if ($idEtablissement != null && is_array($this->etablissement) && count($this->etablissement)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -46,7 +46,7 @@ $d=$data[0];
 $this->setIdEtablissement($d['idEtablissement']);
 $this->setNom($d['nom']);
 $this->setAdresse($d['adresse']);
-$this->setFiliere($d['filiere']);
+$this->setVille($d['ville']);
 $this->etablissement =$data; 
  return $this;
                                 }
@@ -59,7 +59,7 @@ $this->etablissement =$data;
                     /**
                     * Get the value of nom
                     */ 
-                    public function getNom($nom)
+                    public function getNom($nom=null)
                     {
                         if ($nom != null && is_array($this->etablissement) && count($this->etablissement)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -72,7 +72,7 @@ $d=$data[0];
 $this->setIdEtablissement($d['idEtablissement']);
 $this->setNom($d['nom']);
 $this->setAdresse($d['adresse']);
-$this->setFiliere($d['filiere']);
+$this->setVille($d['ville']);
 $this->etablissement =$data; 
  return $this;
                                 }
@@ -85,7 +85,7 @@ $this->etablissement =$data;
                     /**
                     * Get the value of adresse
                     */ 
-                    public function getAdresse($adresse)
+                    public function getAdresse($adresse=null)
                     {
                         if ($adresse != null && is_array($this->etablissement) && count($this->etablissement)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -98,7 +98,7 @@ $d=$data[0];
 $this->setIdEtablissement($d['idEtablissement']);
 $this->setNom($d['nom']);
 $this->setAdresse($d['adresse']);
-$this->setFiliere($d['filiere']);
+$this->setVille($d['ville']);
 $this->etablissement =$data; 
  return $this;
                                 }
@@ -109,28 +109,28 @@ $this->etablissement =$data;
                         
                     }
                     /**
-                    * Get the value of filiere
+                    * Get the value of ville
                     */ 
-                    public function getFiliere($filiere)
+                    public function getVille($ville=null)
                     {
-                        if ($filiere != null && is_array($this->etablissement) && count($this->etablissement)!=0) {
+                        if ($ville != null && is_array($this->etablissement) && count($this->etablissement)!=0) {
                             $table_name = strtolower(get_class($this));
-                            $query = "SELECT * FROM $table_name WHERE filiere = ?";
+                            $query = "SELECT * FROM $table_name WHERE ville = ?";
                             $req = Manager::bdd()->prepare($query);
-                            $req->execute([$filiere]);
+                            $req->execute([$ville]);
                             $data = "";
                             if ($data = $req->fetchAll(PDO::FETCH_ASSOC)) {
 $d=$data[0];
 $this->setIdEtablissement($d['idEtablissement']);
 $this->setNom($d['nom']);
 $this->setAdresse($d['adresse']);
-$this->setFiliere($d['filiere']);
+$this->setVille($d['ville']);
 $this->etablissement =$data; 
  return $this;
                                 }
                             
                         } else {
-                            return $this->filiere;
+                            return $this->ville;
                         }
                         
                     }
@@ -170,13 +170,13 @@ $this->etablissement =$data;
                        return $this;
                    }
                     /**
-                    * Set the value of filiere
+                    * Set the value of ville
                     *
                     * @return  self
                     */ 
-                   public function setFiliere($filiere)
+                   public function setVille($ville)
                    {
-                    $this->filiere = $filiere;
+                    $this->ville = $ville;
                
                        return $this;
                    }

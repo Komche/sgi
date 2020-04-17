@@ -35,7 +35,7 @@ $this->module = $module;
                     /**
                     * Get the value of id
                     */ 
-                    public function getId($id)
+                    public function getId($id=null)
                     {
                         if ($id != null && is_array($this->actions) && count($this->actions)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -62,7 +62,7 @@ $this->actions =$data;
                     /**
                     * Get the value of name
                     */ 
-                    public function getName($name)
+                    public function getName($name=null)
                     {
                         if ($name != null && is_array($this->actions) && count($this->actions)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -89,7 +89,7 @@ $this->actions =$data;
                     /**
                     * Get the value of description
                     */ 
-                    public function getDescription($description)
+                    public function getDescription($description=null)
                     {
                         if ($description != null && is_array($this->actions) && count($this->actions)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -116,7 +116,7 @@ $this->actions =$data;
                     /**
                     * Get the value of action_url
                     */ 
-                    public function getAction_url($action_url)
+                    public function getAction_url($action_url=null)
                     {
                         if ($action_url != null && is_array($this->actions) && count($this->actions)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -143,7 +143,7 @@ $this->actions =$data;
                     /**
                     * Get the value of module
                     */ 
-                    public function getModule($module)
+                    public function getModule($module=null)
                     {
                         if ($module != null && is_array($this->actions) && count($this->actions)!=0) {
                             $table_name = strtolower(get_class($this));

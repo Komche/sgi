@@ -4,8 +4,8 @@ class bureau {
 	 public $idBureau;
 	 public $libellebureau;
 	 public $typebureau;
-	 public $poste;
-	 public $idRegion;
+	 public $idVille;
+	 public $sub_bureau;
 	 public $bureau=array();
 
 
@@ -20,13 +20,13 @@ class bureau {
                     return $this->bureau;
                 }
 
-                public function role($idBureau, $libellebureau, $typebureau, $poste, $idRegion)
+                public function role($idBureau, $libellebureau, $typebureau, $idVille, $sub_bureau)
                     {
                         $this->idBureau = $idBureau;
 $this->libellebureau = $libellebureau;
 $this->typebureau = $typebureau;
-$this->poste = $poste;
-$this->idRegion = $idRegion;
+$this->idVille = $idVille;
+$this->sub_bureau = $sub_bureau;
 
                     }
                 
@@ -35,7 +35,7 @@ $this->idRegion = $idRegion;
                     /**
                     * Get the value of idBureau
                     */ 
-                    public function getIdBureau($idBureau)
+                    public function getIdBureau($idBureau=null)
                     {
                         if ($idBureau != null && is_array($this->bureau) && count($this->bureau)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -48,8 +48,8 @@ $d=$data[0];
 $this->setIdBureau($d['idBureau']);
 $this->setLibellebureau($d['libellebureau']);
 $this->setTypebureau($d['typebureau']);
-$this->setPoste($d['poste']);
-$this->setIdRegion($d['idRegion']);
+$this->setIdVille($d['idVille']);
+$this->setSub_bureau($d['sub_bureau']);
 $this->bureau =$data; 
  return $this;
                                 }
@@ -62,7 +62,7 @@ $this->bureau =$data;
                     /**
                     * Get the value of libellebureau
                     */ 
-                    public function getLibellebureau($libellebureau)
+                    public function getLibellebureau($libellebureau=null)
                     {
                         if ($libellebureau != null && is_array($this->bureau) && count($this->bureau)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -75,8 +75,8 @@ $d=$data[0];
 $this->setIdBureau($d['idBureau']);
 $this->setLibellebureau($d['libellebureau']);
 $this->setTypebureau($d['typebureau']);
-$this->setPoste($d['poste']);
-$this->setIdRegion($d['idRegion']);
+$this->setIdVille($d['idVille']);
+$this->setSub_bureau($d['sub_bureau']);
 $this->bureau =$data; 
  return $this;
                                 }
@@ -89,7 +89,7 @@ $this->bureau =$data;
                     /**
                     * Get the value of typebureau
                     */ 
-                    public function getTypebureau($typebureau)
+                    public function getTypebureau($typebureau=null)
                     {
                         if ($typebureau != null && is_array($this->bureau) && count($this->bureau)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -102,8 +102,8 @@ $d=$data[0];
 $this->setIdBureau($d['idBureau']);
 $this->setLibellebureau($d['libellebureau']);
 $this->setTypebureau($d['typebureau']);
-$this->setPoste($d['poste']);
-$this->setIdRegion($d['idRegion']);
+$this->setIdVille($d['idVille']);
+$this->setSub_bureau($d['sub_bureau']);
 $this->bureau =$data; 
  return $this;
                                 }
@@ -114,56 +114,56 @@ $this->bureau =$data;
                         
                     }
                     /**
-                    * Get the value of poste
+                    * Get the value of idVille
                     */ 
-                    public function getPoste($poste)
+                    public function getIdVille($idVille=null)
                     {
-                        if ($poste != null && is_array($this->bureau) && count($this->bureau)!=0) {
+                        if ($idVille != null && is_array($this->bureau) && count($this->bureau)!=0) {
                             $table_name = strtolower(get_class($this));
-                            $query = "SELECT * FROM $table_name WHERE poste = ?";
+                            $query = "SELECT * FROM $table_name WHERE idVille = ?";
                             $req = Manager::bdd()->prepare($query);
-                            $req->execute([$poste]);
+                            $req->execute([$idVille]);
                             $data = "";
                             if ($data = $req->fetchAll(PDO::FETCH_ASSOC)) {
 $d=$data[0];
 $this->setIdBureau($d['idBureau']);
 $this->setLibellebureau($d['libellebureau']);
 $this->setTypebureau($d['typebureau']);
-$this->setPoste($d['poste']);
-$this->setIdRegion($d['idRegion']);
+$this->setIdVille($d['idVille']);
+$this->setSub_bureau($d['sub_bureau']);
 $this->bureau =$data; 
  return $this;
                                 }
                             
                         } else {
-                            return $this->poste;
+                            return $this->idVille;
                         }
                         
                     }
                     /**
-                    * Get the value of idRegion
+                    * Get the value of sub_bureau
                     */ 
-                    public function getIdRegion($idRegion)
+                    public function getSub_bureau($sub_bureau=null)
                     {
-                        if ($idRegion != null && is_array($this->bureau) && count($this->bureau)!=0) {
+                        if ($sub_bureau != null && is_array($this->bureau) && count($this->bureau)!=0) {
                             $table_name = strtolower(get_class($this));
-                            $query = "SELECT * FROM $table_name WHERE idRegion = ?";
+                            $query = "SELECT * FROM $table_name WHERE sub_bureau = ?";
                             $req = Manager::bdd()->prepare($query);
-                            $req->execute([$idRegion]);
+                            $req->execute([$sub_bureau]);
                             $data = "";
                             if ($data = $req->fetchAll(PDO::FETCH_ASSOC)) {
 $d=$data[0];
 $this->setIdBureau($d['idBureau']);
 $this->setLibellebureau($d['libellebureau']);
 $this->setTypebureau($d['typebureau']);
-$this->setPoste($d['poste']);
-$this->setIdRegion($d['idRegion']);
+$this->setIdVille($d['idVille']);
+$this->setSub_bureau($d['sub_bureau']);
 $this->bureau =$data; 
  return $this;
                                 }
                             
                         } else {
-                            return $this->idRegion;
+                            return $this->sub_bureau;
                         }
                         
                     }
@@ -203,24 +203,24 @@ $this->bureau =$data;
                        return $this;
                    }
                     /**
-                    * Set the value of poste
+                    * Set the value of idVille
                     *
                     * @return  self
                     */ 
-                   public function setPoste($poste)
+                   public function setIdVille($idVille)
                    {
-                    $this->poste = $poste;
+                    $this->idVille = $idVille;
                
                        return $this;
                    }
                     /**
-                    * Set the value of idRegion
+                    * Set the value of sub_bureau
                     *
                     * @return  self
                     */ 
-                   public function setIdRegion($idRegion)
+                   public function setSub_bureau($sub_bureau)
                    {
-                    $this->idRegion = $idRegion;
+                    $this->sub_bureau = $sub_bureau;
                
                        return $this;
                    }

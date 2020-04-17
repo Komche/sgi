@@ -29,7 +29,7 @@ $this->label = $label;
                     /**
                     * Get the value of id
                     */ 
-                    public function getId($id)
+                    public function getId($id=null)
                     {
                         if ($id != null && is_array($this->type_agent) && count($this->type_agent)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -53,7 +53,7 @@ $this->type_agent =$data;
                     /**
                     * Get the value of label
                     */ 
-                    public function getLabel($label)
+                    public function getLabel($label=null)
                     {
                         if ($label != null && is_array($this->type_agent) && count($this->type_agent)!=0) {
                             $table_name = strtolower(get_class($this));

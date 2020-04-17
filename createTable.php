@@ -41,7 +41,7 @@ if (!empty($_POST)) {
                 $oth = $fields;
                 $last_key = count($oth)-1;
                 $l_last_key = $last_key - 1;
-                var_dump($oth);
+                //var_dump($oth);
                 foreach ($oth as $otherkey => $otherfield) {
                     $set .= '$this->' . "$otherfield = $$otherfield;\n";
                     if ($otherkey ==  $last_key) {
@@ -78,7 +78,7 @@ if (!empty($_POST)) {
                     /**
                     * Get the value of $field
                     */ 
-                    public function get" . ucfirst($field) . "($$field)
+                    public function get" . ucfirst($field) . "($$field=null)
                     {
                         if ($$field != null && is_array(" . '$this->' . "$tables) && count(" . '$this->' . "$tables)!=0) {
                             " . '$table_name = strtolower(get_class($this));' . "

@@ -6,6 +6,8 @@ include_once('model/class/MenuManager.php');
 include_once('model/class/Files.php');
 include_once('model/database/module.php');
 include_once('model/database/roles.php');
+include_once('model/database/ville.php');
+include_once('model/database/bureau.php');
 
 function addData($data, $table)
 {

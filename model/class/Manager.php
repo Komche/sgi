@@ -322,7 +322,8 @@ class Manager extends Managers
     {
         $table = get_object_vars($object);
         $table_name = strtolower(get_class($object));
-        //var_dump($table); die($table_name);
+        $table = $table[$table_name];
+       // var_dump($table); die($table_name);
         if (count($table) > 0) {
             end($table);
             $last = key($table);
@@ -392,10 +393,13 @@ class Manager extends Managers
                 $req = self::bdd()->prepare($query);
 
                 $req->execute([$property => $val, $prop => $val]);
+                //die(var_dump)
                 if (self::$results['data'] = $req->fetchAll(PDO::FETCH_ASSOC)) {
                     $object_table = new $$table(self::$results['data']);
                     return $object_table;
                 } else {
+                    $object_table = new $$table();
+                    return $object_table;
                     echo self::throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true)['message'];
                 }
             } else {
@@ -417,6 +421,8 @@ class Manager extends Managers
                 return $object_table;
             } else {
                 echo self::throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true)['message'];
+                $object_table = new $table_name(self::$results);
+                return $object_table;
             }
         }
     }

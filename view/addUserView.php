@@ -29,26 +29,26 @@
                   <label for="phone_number">N° de téléphone</label>
                   <input type="tel" required class="form-control" id="phone_number" name="phone_number" placeholder="Veuillez entrer le N° de téléphone de l'utilisateur">
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label>Centre de sécours</label>
                   <select class="form-control" id="casern" name="casern">
                   <?php 
-                  $data = Manager::getData('rescue_center')['data'];
+                  //$data = Manager::getData('rescue_center')['data'];
                   //Manager::showError($data);
-                  if (is_array($data) || is_object($data)) {
-                    foreach ($data as $value) {
+                  // if (is_array($data) || is_object($data)) {
+                  //   foreach ($data as $value) {
                       
                    
                 ?>
                 <option value="<?= $value['id'] ?>"><?= $value['label'] ?></option>
                 <?php 
-                   }
-                  }else {
-                     Manager::messages('Aucune donnée trouvé', 'alert-warning');
-                  }
+                  //  }
+                  // }else {
+                  //    Manager::messages('Aucune donnée trouvé', 'alert-warning');
+                  // // }
                 ?>
               </select>
-              </div>
+              </div> -->
               <div class="form-group">
                   <label>Type d'agent</label>
                   <select class="form-control" id="type_agent" name="type_agent">

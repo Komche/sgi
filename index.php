@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 require('controller/Administration.php');
 
@@ -10,106 +10,116 @@ if (isset($_SESSION['messages'])) {
 // $roles = new roles();
 // $roles->role(11, "Test", "Mon test");
 // Manager::update($roles, "id", 11);
-// var_dump(Manager::getDatas($roles)->getName("test")->all()); die;
+ //var_dump(Manager::getDatas(new ville())->getIdVille(3)); die;
 
 if (isset($_SESSION['user'])) {
     getModules();
     if (!empty($_GET['action'])) {
         extract($_GET);
-        if ($action=='role') {
+        if ($action == 'role') {
             if (!empty($_POST)) {
                 $data = $_POST;
                 $roles = new roles($data);
                 //var_dump($roles); die;
                 $res = insert($roles);
                 //$res = addData($data, 'roles');
-    
+
                 //if ($res['code'] != 1) {
-                    $_SESSION['messages'] = $res;
-               // }
+                $_SESSION['messages'] = $res;
+                // }
             }
             require_once("view/roleView.php");
-        } elseif($action=='module') {
+        } elseif ($action == 'module') {
             if (!empty($_POST)) {
                 $data = $_POST;
                 $res = addData($data, 'module');
-    
+
                 if ($res != 1) {
                     $_SESSION['messages'] = $res;
                 }
             }
             require_once("view/moduleView.php");
-        } elseif($action=='permission') {
+        } elseif ($action == 'permission') {
             if (!empty($_POST)) {
                 $data = $_POST;
                 $data['action_url'] = setActionUrl($data['name']);
                 $res = addData($data, 'actions');
-    
+
                 if ($res != 1) {
                     $_SESSION['messages'] = $res;
                 }
             }
             require_once("view/permissionView.php");
-        }elseif($action=='regional_group') {
+        } elseif ($action == 'regional_group') {
             if (!empty($_POST)) {
                 $data = $_POST;
                 $res = addData($data, 'regional_group');
-    
+
                 if ($res != 1) {
                     $_SESSION['messages'] = $res;
                 }
             }
             require_once("view/regionalGroupView.php");
-        }elseif($action=='compagnie') {
+        } elseif ($action == 'compagnie') {
             if (!empty($_POST)) {
                 $data = $_POST;
                 $res = addData($data, 'company');
-    
+
                 if ($res != 1) {
                     $_SESSION['messages'] = $res;
                 }
             }
             require_once("view/companyView.php");
-        }elseif($action=='rescue') {
+        } elseif ($action == 'rescue') {
             if (!empty($_POST)) {
                 $data = $_POST;
                 $res = addData($data, 'rescue_center');
-    
+
                 if ($res != 1) {
                     $_SESSION['messages'] = $res;
                 }
             }
             require_once("view/rescueCenterView.php");
-        }elseif($action=='cities') {
+        } elseif ($action == 'ville') {
             if (!empty($_POST)) {
                 $data = $_POST;
-                $res = addData($data, 'city');
-    
-                if ($res != 1) {
-                    $_SESSION['messages'] = $res;
-                }
+                $ville = new ville($data);
+                //var_dump($ville); die;
+                $res = insert($ville);
+
+                $_SESSION['messages'] = $res;
             }
-            require_once("view/cityView.php");
-        }elseif($action=='type') {
+            require_once("view/villeView.php");
+        }elseif ($action == 'bureau') {
+            if (!empty($_POST)) {
+                $data = $_POST;
+                $bureau = new bureau($data);
+                //var_dump($bureau); die;
+                $res = insert($bureau);
+
+                $_SESSION['messages'] = $res;
+            }
+            require_once("view/bureauView.php");
+        } elseif ($action == 'type') {
             if (!empty($_POST)) {
                 $data = $_POST;
                 $res = addData($data, 'type_agent');
-    
+
                 if ($res != 1) {
                     $_SESSION['messages'] = $res;
                 }
             }
             require_once("view/typeAgentView.php");
-        }elseif($action=='addUser') {
+        } elseif ($action == 'addUser') {
             //Manager::showError($_FILES);
             if (!empty($_POST) && !empty($_FILES)) {
                 $data = $_POST;
                 $data['profile_picture'] = $_FILES['profile_picture'];
                 $res = UserManager::addUser($data);
-               // Manager::showError($res);
+                // Manager::showError($res);
                 if ($res != 1) {
                     $_SESSION['messages'] = $res;
-                }else {
+                } else {
                     header('Location: index.php?action=showUser');
                 }
             }
@@ -119,7 +129,8 @@ if (isset($_SESSION['user'])) {
             if (!empty($_POST) && !empty($_FILES)) {
                 $data = $_POST;
                 $file = new Files();
-                var_dump($file->uploadFilePicture($_FILES['files'])); die;
+                var_dump($file->uploadFilePicture($_FILES['files']));
+                die;
                 $data['files'] = $_FILES['files'];
                 $res = EmergencyManager::addEmergency($data);
                 //Manager::showError($data);
@@ -130,8 +141,8 @@ if (isset($_SESSION['user'])) {
                 }
             }
             require_once("view/addEmergencyGestView.php");
-        }elseif($action=='showEmergency') {
-           
+        } elseif ($action == 'showEmergency') {
+
             require_once("view/showEmergencyGestView.php");
         } elseif ($action == 'ajout-plan') {
             //Manager::showError($_FILES);
@@ -153,17 +164,17 @@ if (isset($_SESSION['user'])) {
         } elseif ($action == 'showUser') {
 
             require_once("view/showUserView.php");
-        }elseif($action=='roleModule') {
+        } elseif ($action == 'roleModule') {
             require_once("view/roleModuleView.php");
         } elseif ($action == 'profile') {
             require_once("view/profileView.php");
         } elseif ($action == 'logout') {
             require_once("view/logout.php");
         }
-    }else {
+    } else {
         require_once("view/roleView.php");
     }
-}elseif (isset($_GET['signup'])) {
+} elseif (isset($_GET['signup'])) {
     if (!empty($_POST)) {
         $res = UserManager::activeUser($_POST);
         //print_r($_POST); die;
@@ -176,11 +187,11 @@ if (isset($_SESSION['user'])) {
     require('view/registerView.php');
 } else {
     if (!empty($_POST)) {
-        
+
         $res = UserManager::connectUser($_POST);
         if ($res != 1) {
             $_SESSION['messages'] = $res;
-        }else {
+        } else {
             header('Location: index.php?action=profile');
         }
     }

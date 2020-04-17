@@ -31,7 +31,7 @@ $this->module = $module;
                     /**
                     * Get the value of id
                     */ 
-                    public function getId($id)
+                    public function getId($id=null)
                     {
                         if ($id != null && is_array($this->module_role) && count($this->module_role)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -56,7 +56,7 @@ $this->module_role =$data;
                     /**
                     * Get the value of role_id
                     */ 
-                    public function getRole_id($role_id)
+                    public function getRole_id($role_id=null)
                     {
                         if ($role_id != null && is_array($this->module_role) && count($this->module_role)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -81,7 +81,7 @@ $this->module_role =$data;
                     /**
                     * Get the value of module
                     */ 
-                    public function getModule($module)
+                    public function getModule($module=null)
                     {
                         if ($module != null && is_array($this->module_role) && count($this->module_role)!=0) {
                             $table_name = strtolower(get_class($this));

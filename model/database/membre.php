@@ -1,15 +1,13 @@
 
 <?php 
 class membre {
+	 public $id_membre;
 	 public $matricule;
 	 public $nom;
 	 public $prenom;
 	 public $adresse;
 	 public $numero;
 	 public $photo;
-	 public $typeMembre;
-	 public $etablissement;
-	 public $commission;
 	 public $membre=array();
 
 
@@ -24,26 +22,53 @@ class membre {
                     return $this->membre;
                 }
 
-                public function role($matricule, $nom, $prenom, $adresse, $numero, $photo, $typeMembre, $etablissement, $commission)
+                public function role($id_membre, $matricule, $nom, $prenom, $adresse, $numero, $photo)
                     {
-                        $this->matricule = $matricule;
+                        $this->id_membre = $id_membre;
+$this->matricule = $matricule;
 $this->nom = $nom;
 $this->prenom = $prenom;
 $this->adresse = $adresse;
 $this->numero = $numero;
 $this->photo = $photo;
-$this->typeMembre = $typeMembre;
-$this->etablissement = $etablissement;
-$this->commission = $commission;
 
                     }
                 
 
 
                     /**
+                    * Get the value of id_membre
+                    */ 
+                    public function getId_membre($id_membre=null)
+                    {
+                        if ($id_membre != null && is_array($this->membre) && count($this->membre)!=0) {
+                            $table_name = strtolower(get_class($this));
+                            $query = "SELECT * FROM $table_name WHERE id_membre = ?";
+                            $req = Manager::bdd()->prepare($query);
+                            $req->execute([$id_membre]);
+                            $data = "";
+                            if ($data = $req->fetchAll(PDO::FETCH_ASSOC)) {
+$d=$data[0];
+$this->setId_membre($d['id_membre']);
+$this->setMatricule($d['matricule']);
+$this->setNom($d['nom']);
+$this->setPrenom($d['prenom']);
+$this->setAdresse($d['adresse']);
+$this->setNumero($d['numero']);
+$this->setPhoto($d['photo']);
+$this->membre =$data; 
+ return $this;
+                                }
+                            
+                        } else {
+                            return $this->id_membre;
+                        }
+                        
+                    }
+                    /**
                     * Get the value of matricule
                     */ 
-                    public function getMatricule($matricule)
+                    public function getMatricule($matricule=null)
                     {
                         if ($matricule != null && is_array($this->membre) && count($this->membre)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -53,15 +78,13 @@ $this->commission = $commission;
                             $data = "";
                             if ($data = $req->fetchAll(PDO::FETCH_ASSOC)) {
 $d=$data[0];
+$this->setId_membre($d['id_membre']);
 $this->setMatricule($d['matricule']);
 $this->setNom($d['nom']);
 $this->setPrenom($d['prenom']);
 $this->setAdresse($d['adresse']);
 $this->setNumero($d['numero']);
 $this->setPhoto($d['photo']);
-$this->setTypeMembre($d['typeMembre']);
-$this->setEtablissement($d['etablissement']);
-$this->setCommission($d['commission']);
 $this->membre =$data; 
  return $this;
                                 }
@@ -74,7 +97,7 @@ $this->membre =$data;
                     /**
                     * Get the value of nom
                     */ 
-                    public function getNom($nom)
+                    public function getNom($nom=null)
                     {
                         if ($nom != null && is_array($this->membre) && count($this->membre)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -84,15 +107,13 @@ $this->membre =$data;
                             $data = "";
                             if ($data = $req->fetchAll(PDO::FETCH_ASSOC)) {
 $d=$data[0];
+$this->setId_membre($d['id_membre']);
 $this->setMatricule($d['matricule']);
 $this->setNom($d['nom']);
 $this->setPrenom($d['prenom']);
 $this->setAdresse($d['adresse']);
 $this->setNumero($d['numero']);
 $this->setPhoto($d['photo']);
-$this->setTypeMembre($d['typeMembre']);
-$this->setEtablissement($d['etablissement']);
-$this->setCommission($d['commission']);
 $this->membre =$data; 
  return $this;
                                 }
@@ -105,7 +126,7 @@ $this->membre =$data;
                     /**
                     * Get the value of prenom
                     */ 
-                    public function getPrenom($prenom)
+                    public function getPrenom($prenom=null)
                     {
                         if ($prenom != null && is_array($this->membre) && count($this->membre)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -115,15 +136,13 @@ $this->membre =$data;
                             $data = "";
                             if ($data = $req->fetchAll(PDO::FETCH_ASSOC)) {
 $d=$data[0];
+$this->setId_membre($d['id_membre']);
 $this->setMatricule($d['matricule']);
 $this->setNom($d['nom']);
 $this->setPrenom($d['prenom']);
 $this->setAdresse($d['adresse']);
 $this->setNumero($d['numero']);
 $this->setPhoto($d['photo']);
-$this->setTypeMembre($d['typeMembre']);
-$this->setEtablissement($d['etablissement']);
-$this->setCommission($d['commission']);
 $this->membre =$data; 
  return $this;
                                 }
@@ -136,7 +155,7 @@ $this->membre =$data;
                     /**
                     * Get the value of adresse
                     */ 
-                    public function getAdresse($adresse)
+                    public function getAdresse($adresse=null)
                     {
                         if ($adresse != null && is_array($this->membre) && count($this->membre)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -146,15 +165,13 @@ $this->membre =$data;
                             $data = "";
                             if ($data = $req->fetchAll(PDO::FETCH_ASSOC)) {
 $d=$data[0];
+$this->setId_membre($d['id_membre']);
 $this->setMatricule($d['matricule']);
 $this->setNom($d['nom']);
 $this->setPrenom($d['prenom']);
 $this->setAdresse($d['adresse']);
 $this->setNumero($d['numero']);
 $this->setPhoto($d['photo']);
-$this->setTypeMembre($d['typeMembre']);
-$this->setEtablissement($d['etablissement']);
-$this->setCommission($d['commission']);
 $this->membre =$data; 
  return $this;
                                 }
@@ -167,7 +184,7 @@ $this->membre =$data;
                     /**
                     * Get the value of numero
                     */ 
-                    public function getNumero($numero)
+                    public function getNumero($numero=null)
                     {
                         if ($numero != null && is_array($this->membre) && count($this->membre)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -177,15 +194,13 @@ $this->membre =$data;
                             $data = "";
                             if ($data = $req->fetchAll(PDO::FETCH_ASSOC)) {
 $d=$data[0];
+$this->setId_membre($d['id_membre']);
 $this->setMatricule($d['matricule']);
 $this->setNom($d['nom']);
 $this->setPrenom($d['prenom']);
 $this->setAdresse($d['adresse']);
 $this->setNumero($d['numero']);
 $this->setPhoto($d['photo']);
-$this->setTypeMembre($d['typeMembre']);
-$this->setEtablissement($d['etablissement']);
-$this->setCommission($d['commission']);
 $this->membre =$data; 
  return $this;
                                 }
@@ -198,7 +213,7 @@ $this->membre =$data;
                     /**
                     * Get the value of photo
                     */ 
-                    public function getPhoto($photo)
+                    public function getPhoto($photo=null)
                     {
                         if ($photo != null && is_array($this->membre) && count($this->membre)!=0) {
                             $table_name = strtolower(get_class($this));
@@ -208,15 +223,13 @@ $this->membre =$data;
                             $data = "";
                             if ($data = $req->fetchAll(PDO::FETCH_ASSOC)) {
 $d=$data[0];
+$this->setId_membre($d['id_membre']);
 $this->setMatricule($d['matricule']);
 $this->setNom($d['nom']);
 $this->setPrenom($d['prenom']);
 $this->setAdresse($d['adresse']);
 $this->setNumero($d['numero']);
 $this->setPhoto($d['photo']);
-$this->setTypeMembre($d['typeMembre']);
-$this->setEtablissement($d['etablissement']);
-$this->setCommission($d['commission']);
 $this->membre =$data; 
  return $this;
                                 }
@@ -226,101 +239,19 @@ $this->membre =$data;
                         }
                         
                     }
-                    /**
-                    * Get the value of typeMembre
-                    */ 
-                    public function getTypeMembre($typeMembre)
-                    {
-                        if ($typeMembre != null && is_array($this->membre) && count($this->membre)!=0) {
-                            $table_name = strtolower(get_class($this));
-                            $query = "SELECT * FROM $table_name WHERE typeMembre = ?";
-                            $req = Manager::bdd()->prepare($query);
-                            $req->execute([$typeMembre]);
-                            $data = "";
-                            if ($data = $req->fetchAll(PDO::FETCH_ASSOC)) {
-$d=$data[0];
-$this->setMatricule($d['matricule']);
-$this->setNom($d['nom']);
-$this->setPrenom($d['prenom']);
-$this->setAdresse($d['adresse']);
-$this->setNumero($d['numero']);
-$this->setPhoto($d['photo']);
-$this->setTypeMembre($d['typeMembre']);
-$this->setEtablissement($d['etablissement']);
-$this->setCommission($d['commission']);
-$this->membre =$data; 
- return $this;
-                                }
-                            
-                        } else {
-                            return $this->typeMembre;
-                        }
-                        
-                    }
-                    /**
-                    * Get the value of etablissement
-                    */ 
-                    public function getEtablissement($etablissement)
-                    {
-                        if ($etablissement != null && is_array($this->membre) && count($this->membre)!=0) {
-                            $table_name = strtolower(get_class($this));
-                            $query = "SELECT * FROM $table_name WHERE etablissement = ?";
-                            $req = Manager::bdd()->prepare($query);
-                            $req->execute([$etablissement]);
-                            $data = "";
-                            if ($data = $req->fetchAll(PDO::FETCH_ASSOC)) {
-$d=$data[0];
-$this->setMatricule($d['matricule']);
-$this->setNom($d['nom']);
-$this->setPrenom($d['prenom']);
-$this->setAdresse($d['adresse']);
-$this->setNumero($d['numero']);
-$this->setPhoto($d['photo']);
-$this->setTypeMembre($d['typeMembre']);
-$this->setEtablissement($d['etablissement']);
-$this->setCommission($d['commission']);
-$this->membre =$data; 
- return $this;
-                                }
-                            
-                        } else {
-                            return $this->etablissement;
-                        }
-                        
-                    }
-                    /**
-                    * Get the value of commission
-                    */ 
-                    public function getCommission($commission)
-                    {
-                        if ($commission != null && is_array($this->membre) && count($this->membre)!=0) {
-                            $table_name = strtolower(get_class($this));
-                            $query = "SELECT * FROM $table_name WHERE commission = ?";
-                            $req = Manager::bdd()->prepare($query);
-                            $req->execute([$commission]);
-                            $data = "";
-                            if ($data = $req->fetchAll(PDO::FETCH_ASSOC)) {
-$d=$data[0];
-$this->setMatricule($d['matricule']);
-$this->setNom($d['nom']);
-$this->setPrenom($d['prenom']);
-$this->setAdresse($d['adresse']);
-$this->setNumero($d['numero']);
-$this->setPhoto($d['photo']);
-$this->setTypeMembre($d['typeMembre']);
-$this->setEtablissement($d['etablissement']);
-$this->setCommission($d['commission']);
-$this->membre =$data; 
- return $this;
-                                }
-                            
-                        } else {
-                            return $this->commission;
-                        }
-                        
-                    }
 
 
+                    /**
+                    * Set the value of id_membre
+                    *
+                    * @return  self
+                    */ 
+                   public function setId_membre($id_membre)
+                   {
+                    $this->id_membre = $id_membre;
+               
+                       return $this;
+                   }
                     /**
                     * Set the value of matricule
                     *
@@ -384,39 +315,6 @@ $this->membre =$data;
                    public function setPhoto($photo)
                    {
                     $this->photo = $photo;
-               
-                       return $this;
-                   }
-                    /**
-                    * Set the value of typeMembre
-                    *
-                    * @return  self
-                    */ 
-                   public function setTypeMembre($typeMembre)
-                   {
-                    $this->typeMembre = $typeMembre;
-               
-                       return $this;
-                   }
-                    /**
-                    * Set the value of etablissement
-                    *
-                    * @return  self
-                    */ 
-                   public function setEtablissement($etablissement)
-                   {
-                    $this->etablissement = $etablissement;
-               
-                       return $this;
-                   }
-                    /**
-                    * Set the value of commission
-                    *
-                    * @return  self
-                    */ 
-                   public function setCommission($commission)
-                   {
-                    $this->commission = $commission;
                
                        return $this;
                    }

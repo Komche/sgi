@@ -187,10 +187,12 @@
               $menu = new MenuManager($name['name']);
               $sMenu = getActions($name['id']);
               //print_r($sMenu); die;
-              foreach ($sMenu as $key => $smValue) {
+              if (is_array($sMenu) || is_object($sMenu)) {
+                foreach ($sMenu as $key => $smValue) {
                   if (haveAction($_SESSION['user']['roleId'], $smValue['id'])) {                    
                     $thisSMenu["index.php?action=" . $smValue['action_url']] = $smValue['name'];
                   }
+              }
               }
               $menu->setmSousMenu($thisSMenu);
               echo $menu->getMenu($name['icon']);
