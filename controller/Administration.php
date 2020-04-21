@@ -8,6 +8,7 @@ include_once('model/database/module.php');
 include_once('model/database/roles.php');
 include_once('model/database/ville.php');
 include_once('model/database/bureau.php');
+include_once('model/database/etablissement.php');
 
 function addData($data, $table)
 {

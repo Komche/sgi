@@ -32,7 +32,6 @@ ob_start();
                   <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 182.467px;" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Nom & Prénom</th>
                   <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 155.9px;" aria-label="Engine version: activate to sort column ascending">Matricule</th>
                   <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 110.883px;" aria-label="CSS grade: activate to sort column ascending">N° de téléphone</th>
-                  <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 110.883px;" aria-label="CSS grade: activate to sort column ascending">Casern</th>
                   <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 110.883px;" aria-label="CSS grade: activate to sort column ascending">Type agent</th>
                   <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 110.883px;" aria-label="CSS grade: activate to sort column ascending">Rôle</th>
                   <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" style="width: 110.883px;" aria-label="CSS grade: activate to sort column ascending">Action</th>
@@ -52,7 +51,6 @@ ob_start();
                   <td class="sorting_1"><?= $value['last_name'] . ' ' . $value['first_name'] ?></td>
                   <td><?= $value['matricule'] ?></td>
                   <td><?= $value['phone_number'] ?></td>
-                  <td><?= Manager::getData('rescue_center', 'id', $value['casern'])['data']['label'] ?></td>
                   <td><?= Manager::getData('type_agent', 'id', $value['type_agent'])['data']['label'] ?></td>
                   <td><?= Manager::getData('roles', 'id', $value['role'])['data']['name'] ?></td>
                   <td>A</td>
@@ -62,7 +60,6 @@ ob_start();
                   <td class="sorting_1"><?= $value['last_name'] . ' ' . $value['first_name'] ?></td>
                   <td><?= $value['matricule'] ?></td>
                   <td><?= $value['phone_number'] ?></td>
-                  <td><?= Manager::getData('rescue_center', 'id', $value['casern'])['data']['label'] ?></td>
                   <td><?= Manager::getData('type_agent', 'id', $value['type_agent'])['data']['label'] ?></td>
                   <td><?= Manager::getData('roles', 'id', $value['role'])['data']['name'] ?></td>
                   <td>A</td>
@@ -80,7 +77,6 @@ ob_start();
                   <th rowspan="1" colspan="1">Nom et Prénom</th>
                   <th rowspan="1" colspan="1">Matricule</th>
                   <th rowspan="1" colspan="1">N° de téléphone</th>
-                  <th rowspan="1" colspan="1">Casern</th>
                   <th rowspan="1" colspan="1">Type agent</th>
                   <th rowspan="1" colspan="1">Rôle</th>
                   <th rowspan="1" colspan="1">Action</th>

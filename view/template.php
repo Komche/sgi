@@ -50,9 +50,9 @@
       <!-- Logo -->
       <a href="#" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>A</b>EMN</span>
+        <span class="logo-mini"><b>Coro</b>na</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Base</b>AEMN</span>
+        <span class="logo-lg"><b>Corona</b>ckathon</span>
       </a>
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="navbar navbar-static-top">
@@ -389,7 +389,7 @@
       <div class="pull-right hidden-xs">
         <!-- <b>Version</b> 2.4.13-->
       </div>
-      <strong>Copyright &copy; 2019 <a href="#">AEMN</a>.</strong>
+      <strong>Copyright &copy; 2020 <a href="#">Coronackathon</a>.</strong>
 
     </footer>
 
@@ -594,7 +594,7 @@
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span></button>
-          <h4 class="modal-title">AEMN</h4>
+          <h4 class="modal-title">Coronackathon</h4>
         </div>
         <div id="danger_content" class="modal-body">
 

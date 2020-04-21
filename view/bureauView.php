@@ -1,5 +1,5 @@
 <?php
-$title = "Ajouter un bureau";
+$title = "Gestion un bureau";
 ob_start();
 ?>
 <div class="row">

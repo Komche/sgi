@@ -16,10 +16,10 @@ ob_start();
 
         <ul class="list-group list-group-unbordered">
           <li class="list-group-item">
-            <b>Section/sous-Section</b> <a class="pull-right">SR</a>
+            <b></b> <a class="pull-right"></a>
           </li>
           <li class="list-group-item">
-            <b>Poste</b> <a class="pull-right">SCASC</a>
+            <b>Poste</b> <a class="pull-right"></a>
           </li>
         </ul>
 

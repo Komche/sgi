@@ -100,6 +100,16 @@ if (isset($_SESSION['user'])) {
                 $_SESSION['messages'] = $res;
             }
             require_once("view/bureauView.php");
+        }elseif ($action == 'etablissement') {
+            if (!empty($_POST)) {
+                $data = $_POST;
+                $etablissement = new etablissement($data);
+                //var_dump($etablissement); die;
+                $res = insert($etablissement);
+
+                $_SESSION['messages'] = $res;
+            }
+            require_once("view/etablissementView.php");
         } elseif ($action == 'type') {
             if (!empty($_POST)) {
                 $data = $_POST;

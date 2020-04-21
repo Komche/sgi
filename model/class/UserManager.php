@@ -142,6 +142,7 @@ class UserManager  extends Manager
             return $data['photo'];
         }
         
+        //die(print_r($data['photo']));
         unset($data['profile_picture']);
         $url = API_ROOT_PATH."/users";
         $res = self::addoNTable($url, $data);

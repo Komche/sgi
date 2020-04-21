@@ -3,7 +3,7 @@
     ob_start();
 ?>
     <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
@@ -41,7 +41,7 @@
           </div>
     </div>
 
-        <div class="col-md-6">
+        <div class="col-md-8">
           <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title">Rôles</h3>
