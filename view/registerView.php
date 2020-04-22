@@ -32,7 +32,7 @@
 <body class="hold-transition register-page">
   <div class="register-box">
     <div class="register-logo">
-      <a href="public/vendor/index2.html"><b>Saro</b>App</a>
+      <a href="public/vendor/index2.html"><b>Corona</b>ckathon</a>
     </div>
 
     <div class="register-box-body">
