@@ -42,7 +42,7 @@ ob_start();
         <img class="modal-content" id="img01">
       </span>
       <!-- Descripcion de la imagen -->
-      <div id="caption">AEMN</div>
+      <div id="caption">Coronackathon</div>
     </div>
   </div>
 
