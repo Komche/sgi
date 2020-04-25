@@ -22,7 +22,7 @@ class Manager extends Managers
             $pass = '';
             $host = 'localhost';
         }
-        die($dbname);
+        echo($dbname." ". $user."  ". $pass); die;
         try {
             $pdo_options = array(
                 PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
