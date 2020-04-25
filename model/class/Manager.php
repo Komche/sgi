@@ -336,7 +336,7 @@ class Manager extends Managers
         $table = get_object_vars($object);
         $table_name = strtolower(get_class($object));
         $table = $table[$table_name];
-       var_dump($table); die($table_name);
+    //    var_dump($table); die($table_name);
         if (is_array($table) || is_object($table)) {
             if (count($table) > 0) {
                 end($table);
