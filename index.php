@@ -122,9 +122,9 @@ if (isset($_SESSION['user'])) {
                 $data = $_POST;
                 $files = new file();
                 $data['photo'] = $files->uploadFilePicture($_FILES['profile_picture']);
-
+                var_dump($data); die;
                 $users = new users($data);
-                var_dump($users); die;
+                
                 $res = insert($users);
                 //$res = addData($data, 'roles');
 
