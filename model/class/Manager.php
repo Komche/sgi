@@ -336,39 +336,41 @@ class Manager extends Managers
         $table = get_object_vars($object);
         $table_name = strtolower(get_class($object));
         $table = $table[$table_name];
-       // var_dump($table); die($table_name);
-        if (count($table) > 0) {
-            end($table);
-            $last = key($table);
-            $sql = "INSERT INTO $table_name(";
-            foreach ($table as $key => $field) {
-                if ($last != $key) {
-                    $sql .= $key . ", ";
-                } else {
-                    $sql .= $key . ") ";
+       var_dump($table); die($table_name);
+        if (is_array($table) || is_object($table)) {
+            if (count($table) > 0) {
+                end($table);
+                $last = key($table);
+                $sql = "INSERT INTO $table_name(";
+                foreach ($table as $key => $field) {
+                    if ($last != $key) {
+                        $sql .= $key . ", ";
+                    } else {
+                        $sql .= $key . ") ";
+                    }
                 }
+                $sql .= "VALUES(";
+                foreach ($table as $key => $field) {
+                    if ($last != $key) {
+                        $sql .= ":$key, ";
+                    } else {
+                        $sql .= ":$key)";
+                    }
+                }
+    
+                $req = self::bdd()->prepare($sql);
+                //if ($this->is_not_empty($table)) {
+                    try {
+                        $req->execute($table);
+                        $lastId = self::bdd()->lastInsertId();
+                        return $this->throwError(1, "Enregistrement effectué avec succès", false, $lastId);
+                    } catch (PDOException $e) {
+                        return $this->throwError(0, "Enregistrement échoué; $e", true);
+                    }
+                // } else {
+                //     return $this->throwError(0, "Un ou plusieurs champs mal renseigner", true);
+                // }
             }
-            $sql .= "VALUES(";
-            foreach ($table as $key => $field) {
-                if ($last != $key) {
-                    $sql .= ":$key, ";
-                } else {
-                    $sql .= ":$key)";
-                }
-            }
-
-            $req = self::bdd()->prepare($sql);
-            //if ($this->is_not_empty($table)) {
-                try {
-                    $req->execute($table);
-                    $lastId = self::bdd()->lastInsertId();
-                    return $this->throwError(1, "Enregistrement effectué avec succès", false, $lastId);
-                } catch (PDOException $e) {
-                    return $this->throwError(0, "Enregistrement échoué; $e", true);
-                }
-            // } else {
-            //     return $this->throwError(0, "Un ou plusieurs champs mal renseigner", true);
-            // }
         }
     }
     /*
