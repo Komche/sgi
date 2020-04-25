@@ -6,7 +6,7 @@ class users {
 	 public $last_name;
 	 public $matricule;
 	 public $phone_number;
-	 public $casern;
+	 public $email;
 	 public $type_agent;
 	 public $created_at;
 	 public $updated_at;
@@ -28,14 +28,14 @@ class users {
                     return $this->users;
                 }
 
-                public function role($id, $first_name, $last_name, $matricule, $phone_number, $casern, $type_agent, $created_at, $updated_at, $photo, $role, $status, $password_)
+                public function role($id, $first_name, $last_name, $matricule, $phone_number, $email, $type_agent, $created_at, $updated_at, $photo, $role, $status, $password_)
                     {
                         $this->id = $id;
 $this->first_name = $first_name;
 $this->last_name = $last_name;
 $this->matricule = $matricule;
 $this->phone_number = $phone_number;
-$this->casern = $casern;
+$this->email = $email;
 $this->type_agent = $type_agent;
 $this->created_at = $created_at;
 $this->updated_at = $updated_at;
@@ -66,7 +66,7 @@ $this->setFirst_name($d['first_name']);
 $this->setLast_name($d['last_name']);
 $this->setMatricule($d['matricule']);
 $this->setPhone_number($d['phone_number']);
-$this->setCasern($d['casern']);
+$this->setEmail($d['email']);
 $this->setType_agent($d['type_agent']);
 $this->setCreated_at($d['created_at']);
 $this->setUpdated_at($d['updated_at']);
@@ -101,7 +101,7 @@ $this->setFirst_name($d['first_name']);
 $this->setLast_name($d['last_name']);
 $this->setMatricule($d['matricule']);
 $this->setPhone_number($d['phone_number']);
-$this->setCasern($d['casern']);
+$this->setEmail($d['email']);
 $this->setType_agent($d['type_agent']);
 $this->setCreated_at($d['created_at']);
 $this->setUpdated_at($d['updated_at']);
@@ -136,7 +136,7 @@ $this->setFirst_name($d['first_name']);
 $this->setLast_name($d['last_name']);
 $this->setMatricule($d['matricule']);
 $this->setPhone_number($d['phone_number']);
-$this->setCasern($d['casern']);
+$this->setEmail($d['email']);
 $this->setType_agent($d['type_agent']);
 $this->setCreated_at($d['created_at']);
 $this->setUpdated_at($d['updated_at']);
@@ -171,7 +171,7 @@ $this->setFirst_name($d['first_name']);
 $this->setLast_name($d['last_name']);
 $this->setMatricule($d['matricule']);
 $this->setPhone_number($d['phone_number']);
-$this->setCasern($d['casern']);
+$this->setEmail($d['email']);
 $this->setType_agent($d['type_agent']);
 $this->setCreated_at($d['created_at']);
 $this->setUpdated_at($d['updated_at']);
@@ -206,7 +206,7 @@ $this->setFirst_name($d['first_name']);
 $this->setLast_name($d['last_name']);
 $this->setMatricule($d['matricule']);
 $this->setPhone_number($d['phone_number']);
-$this->setCasern($d['casern']);
+$this->setEmail($d['email']);
 $this->setType_agent($d['type_agent']);
 $this->setCreated_at($d['created_at']);
 $this->setUpdated_at($d['updated_at']);
@@ -224,15 +224,15 @@ $this->users =$data;
                         
                     }
                     /**
-                    * Get the value of casern
+                    * Get the value of email
                     */ 
-                    public function getCasern($casern=null)
+                    public function getEmail($email=null)
                     {
-                        if ($casern != null && is_array($this->users) && count($this->users)!=0) {
+                        if ($email != null && is_array($this->users) && count($this->users)!=0) {
                             $table_name = strtolower(get_class($this));
-                            $query = "SELECT * FROM $table_name WHERE casern = ?";
+                            $query = "SELECT * FROM $table_name WHERE email = ?";
                             $req = Manager::bdd()->prepare($query);
-                            $req->execute([$casern]);
+                            $req->execute([$email]);
                             $data = "";
                             if ($data = $req->fetchAll(PDO::FETCH_ASSOC)) {
 $d=$data[0];
@@ -241,7 +241,7 @@ $this->setFirst_name($d['first_name']);
 $this->setLast_name($d['last_name']);
 $this->setMatricule($d['matricule']);
 $this->setPhone_number($d['phone_number']);
-$this->setCasern($d['casern']);
+$this->setEmail($d['email']);
 $this->setType_agent($d['type_agent']);
 $this->setCreated_at($d['created_at']);
 $this->setUpdated_at($d['updated_at']);
@@ -254,7 +254,7 @@ $this->users =$data;
                                 }
                             
                         } else {
-                            return $this->casern;
+                            return $this->email;
                         }
                         
                     }
@@ -276,7 +276,7 @@ $this->setFirst_name($d['first_name']);
 $this->setLast_name($d['last_name']);
 $this->setMatricule($d['matricule']);
 $this->setPhone_number($d['phone_number']);
-$this->setCasern($d['casern']);
+$this->setEmail($d['email']);
 $this->setType_agent($d['type_agent']);
 $this->setCreated_at($d['created_at']);
 $this->setUpdated_at($d['updated_at']);
@@ -311,7 +311,7 @@ $this->setFirst_name($d['first_name']);
 $this->setLast_name($d['last_name']);
 $this->setMatricule($d['matricule']);
 $this->setPhone_number($d['phone_number']);
-$this->setCasern($d['casern']);
+$this->setEmail($d['email']);
 $this->setType_agent($d['type_agent']);
 $this->setCreated_at($d['created_at']);
 $this->setUpdated_at($d['updated_at']);
@@ -346,7 +346,7 @@ $this->setFirst_name($d['first_name']);
 $this->setLast_name($d['last_name']);
 $this->setMatricule($d['matricule']);
 $this->setPhone_number($d['phone_number']);
-$this->setCasern($d['casern']);
+$this->setEmail($d['email']);
 $this->setType_agent($d['type_agent']);
 $this->setCreated_at($d['created_at']);
 $this->setUpdated_at($d['updated_at']);
@@ -381,7 +381,7 @@ $this->setFirst_name($d['first_name']);
 $this->setLast_name($d['last_name']);
 $this->setMatricule($d['matricule']);
 $this->setPhone_number($d['phone_number']);
-$this->setCasern($d['casern']);
+$this->setEmail($d['email']);
 $this->setType_agent($d['type_agent']);
 $this->setCreated_at($d['created_at']);
 $this->setUpdated_at($d['updated_at']);
@@ -416,7 +416,7 @@ $this->setFirst_name($d['first_name']);
 $this->setLast_name($d['last_name']);
 $this->setMatricule($d['matricule']);
 $this->setPhone_number($d['phone_number']);
-$this->setCasern($d['casern']);
+$this->setEmail($d['email']);
 $this->setType_agent($d['type_agent']);
 $this->setCreated_at($d['created_at']);
 $this->setUpdated_at($d['updated_at']);
@@ -451,7 +451,7 @@ $this->setFirst_name($d['first_name']);
 $this->setLast_name($d['last_name']);
 $this->setMatricule($d['matricule']);
 $this->setPhone_number($d['phone_number']);
-$this->setCasern($d['casern']);
+$this->setEmail($d['email']);
 $this->setType_agent($d['type_agent']);
 $this->setCreated_at($d['created_at']);
 $this->setUpdated_at($d['updated_at']);
@@ -486,7 +486,7 @@ $this->setFirst_name($d['first_name']);
 $this->setLast_name($d['last_name']);
 $this->setMatricule($d['matricule']);
 $this->setPhone_number($d['phone_number']);
-$this->setCasern($d['casern']);
+$this->setEmail($d['email']);
 $this->setType_agent($d['type_agent']);
 $this->setCreated_at($d['created_at']);
 $this->setUpdated_at($d['updated_at']);
@@ -561,13 +561,13 @@ $this->users =$data;
                        return $this;
                    }
                     /**
-                    * Set the value of casern
+                    * Set the value of email
                     *
                     * @return  self
                     */ 
-                   public function setCasern($casern)
+                   public function setEmail($email)
                    {
-                    $this->casern = $casern;
+                    $this->email = $email;
                
                        return $this;
                    }

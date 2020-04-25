@@ -10,7 +10,7 @@ if (isset($_SESSION['messages'])) {
 // $roles = new roles();
 // $roles->role(11, "Test", "Mon test");
 // Manager::update($roles, "id", 11);
- //var_dump(Manager::getDatas(new ville())->getIdVille(3)); die;
+ //var_dump(Manager::getDatas(new region())->getIdregion(3)); die;
 
 if (isset($_SESSION['user'])) {
     getModules();
@@ -80,30 +80,23 @@ if (isset($_SESSION['user'])) {
                 }
             }
             require_once("view/rescueCenterView.php");
-        } elseif ($action == 'ville') {
+        } elseif ($action == 'region') {
             if (!empty($_POST)) {
                 $data = $_POST;
-                $ville = new ville($data);
-                //var_dump($ville); die;
-                $res = insert($ville);
+                $region = new region($data);
+                //var_dump($region); die;
+                $res = insert($region);
 
                 $_SESSION['messages'] = $res;
             }
-            require_once("view/villeView.php");
-        }elseif ($action == 'bureau') {
-            if (!empty($_POST)) {
-                $data = $_POST;
-                $bureau = new bureau($data);
-                //var_dump($bureau); die;
-                $res = insert($bureau);
-
-                $_SESSION['messages'] = $res;
-            }
-            require_once("view/bureauView.php");
+            require_once("view/regionView.php");
+        }elseif ($action == 'listeOrganisateur') {
+          
+            require_once("view/listeOrganisateurView.php");
         }elseif ($action == 'etablissement') {
             if (!empty($_POST)) {
                 $data = $_POST;
-                $etablissement = new etablissement($data);
+                //$etablissement = new etablissement($data);
                 //var_dump($etablissement); die;
                 $res = insert($etablissement);
 
@@ -124,21 +117,25 @@ if (isset($_SESSION['user'])) {
             //Manager::showError($_FILES);
             if (!empty($_POST) && !empty($_FILES)) {
                 $data = $_POST;
-                $data['profile_picture'] = $_FILES['profile_picture'];
-                $res = UserManager::addUser($data);
-                // Manager::showError($res);
-                if ($res != 1) {
-                    $_SESSION['messages'] = $res;
-                } else {
-                    header('Location: index.php?action=showUser');
-                }
+                $files = new file();
+                $data['photo'] = $files->uploadFilePicture($_FILES['profile_picture']);
+
+                $users = new users($data);
+                //var_dump($users); die;
+                $res = insert($users);
+                //$res = addData($data, 'roles');
+
+                //if ($res['code'] != 1) {
+                $_SESSION['messages'] = $res;
+                // }
+                
             }
             require_once("view/addUserView.php");
         } elseif ($action == 'addEmergency') {
             //Manager::showError($_FILES);
             if (!empty($_POST) && !empty($_FILES)) {
                 $data = $_POST;
-                $file = new Files();
+                $file = new file();
                 var_dump($file->uploadFilePicture($_FILES['files']));
                 die;
                 $data['files'] = $_FILES['files'];
@@ -182,7 +179,7 @@ if (isset($_SESSION['user'])) {
             require_once("view/logout.php");
         }
     } else {
-        require_once("view/roleView.php");
+        require_once("view/profileView.php");
     }
 } elseif (isset($_GET['signup'])) {
     if (!empty($_POST)) {

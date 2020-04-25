@@ -1,5 +1,5 @@
 <?php 
-    $title = "Villes";
+    $title = "regions";
     ob_start();
 ?>
     <div class="row">
@@ -14,8 +14,8 @@
             <form role="form" method="post">
               <div class="box-body">
                 <div class="form-group">
-                  <label for="nomVille">Nom de la ville</label>
-                  <input type="text" required class="form-control" id="nomVille" name="nomVille" placeholder="ville">
+                  <label for="nom_region">Nom de la region</label>
+                  <input type="text" required class="form-control" id="nom_region" name="nom_region" placeholder="region">
                 </div>
               </div>
               <div class="box-footer">
@@ -48,15 +48,15 @@
                   <th>Action</th>
                 </tr>
                 <?php 
-                $ville = new ville();
-                $data = Manager::getDatas($ville)->all();
+                $region = new region();
+                $data = Manager::getDatas($region)->all();
                   if (is_array($data) || is_object($data)) {
                     foreach ($data as $value) {
                       
                    
                 ?>
                 <tr>
-                  <td><?= $value['nomVille'] ?></td>
+                  <td><?= $value['nom_region'] ?></td>
                   <td>
                     <a class="btn btn-primary">
                       <i class="fa fa-edit"></i>

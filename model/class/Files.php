@@ -2,13 +2,14 @@
 require_once("Manager.php");
 require_once("model/global.php");
 
-class Files
+class file
 {
    
     public $file_name;
     public $file_url;
     public $file_type;
     public $file_size;
+    public $files = array();
     
    
     
@@ -18,6 +19,7 @@ class Files
         //Manager::showError($file['profile_picture']);
         // if file was sent from signup form ...
         if (!empty($file) && !empty($file['name'])) {
+            
             // Get image name
             $profile_picture = date("Y.m.d.H.i.s") . $file['name'];
             // define Where image will be stored
@@ -32,6 +34,7 @@ class Files
                 $this->setFile_type($file['type']);
                 $this->setFile_size($file['size']);
                 $manager = new Manager();
+                $file = new file();
                 $res = $manager->insert($this);
                 Manager::showError($res);
                 //$res = self::addoNTable($url, $res);
@@ -45,6 +48,8 @@ class Files
             } else {
                 return 'Erreur lors de l\'jout de la photo';
             }
+        }else {
+            return 0 ;
         }
     }
 

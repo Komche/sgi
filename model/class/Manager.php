@@ -129,7 +129,7 @@ class Manager extends Managers
         if ($res != 1) {
             return $res;
         }
-
+       // print_r($data); die;
         $res = self::file_post_contents($url, $data);
         return $res;
     }
@@ -147,7 +147,8 @@ class Manager extends Managers
             return 'Une erreur s\'est produite';
         }
 
-        $res = self::is_not_empty($data);
+        $res = self::is_not_empty_($data);
+        //var_dump($res); die;
         if ($res != 1) {
             $res['message'] = $res;
             return $res;
@@ -213,6 +214,17 @@ class Manager extends Managers
                 if (empty($field) && trim($field) == "") {
                     $this->throwError(503, "$key est vide");
                     return false;
+                }
+            }
+            return true;
+        }
+    }
+    public function is_not_empty_($fields = [])
+    {
+        if (count($fields) != 0) {
+            foreach ($fields as $key => $field) {
+                if (empty($field) && trim($field) == "") {
+                    $fields[$key] = null;
                 }
             }
             return true;
@@ -345,7 +357,7 @@ class Manager extends Managers
             }
 
             $req = self::bdd()->prepare($sql);
-            if ($this->is_not_empty($table)) {
+            //if ($this->is_not_empty($table)) {
                 try {
                     $req->execute($table);
                     $lastId = self::bdd()->lastInsertId();
@@ -353,9 +365,9 @@ class Manager extends Managers
                 } catch (PDOException $e) {
                     return $this->throwError(0, "Enregistrement échoué; $e", true);
                 }
-            } else {
-                return $this->throwError(0, "Un ou plusieurs champs mal renseigner", true);
-            }
+            // } else {
+            //     return $this->throwError(0, "Un ou plusieurs champs mal renseigner", true);
+            // }
         }
     }
     /*

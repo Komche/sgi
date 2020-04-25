@@ -9,7 +9,7 @@ document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
 
 function addTableRow() {
     $tr = `<tr id="addPermission">
-    <form >
+    
             <td>
             <div class="form-group">
                 <input type="text" required class="form-control" id="name" name="name" placeholder="Le nom du module">
