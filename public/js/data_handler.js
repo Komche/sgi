@@ -3,6 +3,8 @@ protocol = $(location).attr('protocol');
 folder = '';
 if (host == 'localhost') {
     folder = '/coronackathon_admin';
+}else {
+    folder = '/admin';
 }
 myurl = protocol + '//' + host + folder + '/api/object/';
 var $_GET = {};

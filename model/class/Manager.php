@@ -12,9 +12,9 @@ class Manager extends Managers
 
     public static function bdd()
     {
-        $dbname = 'akoybizc_';
-        $user = 'akoybizcom';
-        $pass = '@damoukomche';
+        $dbname = 'coron1363653';
+        $user = 'coron1363653';
+        $pass = 'qtl1xghbdn';
         $host = 'localhost';
         if ($_SERVER["SERVER_NAME"] == 'localhost') {
             $dbname = 'coronackathon';
