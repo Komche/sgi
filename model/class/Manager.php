@@ -15,14 +15,14 @@ class Manager extends Managers
         $dbname = 'coron1363653';
         $user = 'coron1363653';
         $pass = 'qtl1xghbdn';
-        $host = 'localhost';
+        $host = '185.98.131.128';
         if ($_SERVER["SERVER_NAME"] == 'localhost') {
             $dbname = 'coronackathon';
             $user = 'root';
             $pass = '';
             $host = 'localhost';
         }
-        echo($dbname." ". $user."  ". $pass); die;
+        //echo($dbname." ". $user."  ". $pass); die;
         try {
             $pdo_options = array(
                 PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
