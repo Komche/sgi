@@ -121,8 +121,9 @@ if (isset($_SESSION['user'])) {
             if (!empty($_POST) && !empty($_FILES)) {
                 $data = $_POST;
                 $files = new file();
-                $data['photo'] = $files->uploadFilePicture($_FILES['profile_picture']);
                 var_dump($data); die;
+                $data['photo'] = $files->uploadFilePicture($_FILES['profile_picture']);
+                
                 $users = new users($data);
                 
                 $res = insert($users);
