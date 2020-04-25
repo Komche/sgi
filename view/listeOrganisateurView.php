@@ -1,5 +1,5 @@
 <?php
-$title = "Gestion un bureau";
+$title = Manager::getDatas(new roles())->getId($_GET['role'])->getName() ;
 ob_start();
 ?>
 <div class="row">
@@ -11,7 +11,8 @@ ob_start();
             <!-- /.box-header -->
             <div class="box-body">
               <table class="table table-bordered">
-                <tbody><tr>
+                <tbody>
+                <tr>
                   <th>Nom & prénom</th>
                   <th>Email</th>
                   <th>Téléphone</th>
@@ -20,9 +21,9 @@ ob_start();
                 </tr>
                 <?php 
                   $users = new users();
-                  $data = Manager::getDatas($users)->getRole(8)->all();
+                  $data = Manager::getDatas($users)->getRole($_GET['role'])->all();
                   //print_r($data);
-                  if (is_array($data) || is_object($data)) {
+                  if ((is_array($data) || is_object($data)) && empty($data['message'])) {
                     foreach ($data as $value) {
                       
                    

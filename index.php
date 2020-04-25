@@ -90,9 +90,12 @@ if (isset($_SESSION['user'])) {
                 $_SESSION['messages'] = $res;
             }
             require_once("view/regionView.php");
-        }elseif ($action == 'listeOrganisateur') {
+        }elseif ($action == 'users' && !empty($_GET['role'])) {
           
             require_once("view/listeOrganisateurView.php");
+        }elseif ($action == 'users') {
+          
+            require_once("view/UsersView.php");
         }elseif ($action == 'etablissement') {
             if (!empty($_POST)) {
                 $data = $_POST;
