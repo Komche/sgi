@@ -34,7 +34,7 @@ class file
                 $this->setFile_type($file['type']);
                 $this->setFile_size($file['size']);
                 $manager = new Manager();
-                $file = new file();
+                $file = new files();
                 $res = $manager->insert($file);
                 Manager::showError($res);
                 //$res = self::addoNTable($url, $res);
