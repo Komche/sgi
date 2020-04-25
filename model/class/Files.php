@@ -34,7 +34,7 @@ class file
                 $this->setFile_type($file['type']);
                 $this->setFile_size($file['size']);
                 $manager = new Manager();
-                $file = new files();
+                $file = new files($this);
                 var_dump($file); die();
                 $res = $manager->insert($file);
                 Manager::showError($res);
