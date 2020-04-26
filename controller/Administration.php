@@ -10,6 +10,9 @@ include_once('model/database/region.php');
 include_once('model/database/users.php');
 include_once('model/database/type_agent.php');
 include_once('model/database/files.php');
+include_once('model/database/equipe.php');
+include_once('model/database/projet.php');
+include_once('model/database/candidat.php');
 
 function addData($data, $table)
 {
