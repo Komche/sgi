@@ -11,7 +11,8 @@ if (isset($_SESSION['messages'])) {
 // $roles->role(11, "Test", "Mon test");
 // Manager::update($roles, "id", 11);
  //var_dump(Manager::getDatas(new region())->getIdregion(3)); die;
-
+ $server_ip = gethostbyname(gethostname());
+ die($server_ip);
 if (isset($_SESSION['user'])) {
     getModules();
     if (!empty($_GET['action'])) {
