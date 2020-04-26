@@ -23,6 +23,12 @@ ob_start();
                   <th>Logo</th>
                 </tr>
                 <?php 
+                $target = '';
+                if ($_SERVER["SERVER_NAME"] == 'localhost') {
+                    $target = "http://localhost/Coronackathon/";
+                } else {
+                    $target = "http://coronackathon.org/";
+                }
                   $projet = new projet();
                   $data = Manager::getDatas($projet)->all();
                   //print_r($data);
@@ -38,9 +44,9 @@ ob_start();
                   <td><?= $value['besoin_tech'] ?></td>
                   <td><?= $value['description'] ?></td>
                   <td><?= Manager::getDatas(new equipe())->getId_equipe($value['equipe'])->getNom_equipe() ?></td>
-                  <td><?= $value['retenu'] ?></td>
+                  <td><?= $value['etat_retenu'] ?></td>
                   <td>
-                  <img width="50" src="<?= Manager::getDatas(new files())->getId($value['photo'])->getFile_url() ?>" class="img-circle" alt="Cinque Terre">
+                  <img width="50" src="<?= $target. Manager::getDatas(new files())->getId($value['file'])->getFile_url() ?>" class="img-circle" alt="Cinque Terre">
                   
                   </td>
                 </tr>
