@@ -9,7 +9,6 @@ class file
     public $file_url;
     public $file_type;
     public $file_size;
-    public $files = array();
     
    
     
@@ -36,7 +35,7 @@ class file
                 $manager = new Manager();
                 $file = new files($this);
                 //var_dump($file); die();
-                $res = $manager->insert($file);
+                $res = $manager->insertF($this);
                 //Manager::showError($res);
                 //$res = self::addoNTable($url, $res);
                 //$res = self::correct($res);
