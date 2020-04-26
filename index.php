@@ -120,11 +120,11 @@ if (isset($_SESSION['user'])) {
             if (!empty($_POST) && !empty($_FILES)) {
                 $data = $_POST;
                 $files = new file();
-                // var_dump($data); die;
                 $data['photo'] = $files->uploadFilePicture($_FILES['profile_picture']);
                 
+                 var_dump($data); 
                 $users = new users($data);
-                
+                var_dump($users); die;
                 $res = insert($users);
                 //$res = addData($data, 'roles');
 
