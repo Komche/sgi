@@ -124,7 +124,7 @@ if (isset($_SESSION['user'])) {
                 
                  var_dump($data); 
                 $users = new users($data);
-                var_dump($users); die;
+                //var_dump($users); die;
                 $res = insert($users);
                 //$res = addData($data, 'roles');
 
