@@ -32,7 +32,18 @@ ob_start();
                   <td><?= $value['last_name'] . ' ' . $value['first_name'] ?></td>
                   <td><?= $value['email'] ?></td>
                   <td><?= $value['phone_number'] ?></td>
-                  <td><?= Manager::getDatas(new type_agent())->getId($value['type_agent'])->getLabel() ?></td>
+                  <?php
+                    if ($_GET['role']==7) {
+                     ?>
+                     <td><?= $value['profile'] ?></td>
+                     <?php
+                    } else {
+                      ?>
+                      <td><?= Manager::getDatas(new type_agent())->getId($value['type_agent'])->getLabel() ?></td>
+                      <?php
+                    }
+                    
+                  ?>
                   <td>
                   <img width="50" src="<?= Manager::getDatas(new files())->getId($value['photo'])->getFile_url() ?>" class="img-circle" alt="Cinque Terre">
                   
