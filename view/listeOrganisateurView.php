@@ -35,7 +35,7 @@ ob_start();
                   <?php
                     if ($_GET['role']==7) {
                      ?>
-                     <td><?= $value['profile'] ?></td>
+                     <td><?= $value['profil'] ?></td>
                      <?php
                     } else {
                       ?>
