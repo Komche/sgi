@@ -192,7 +192,7 @@ ob_start();
                         <?php } else {
                           $i++;
                         ?>
-                          <button id="btn-note-<?= $data['projet'] ?>" type="button" title="Ajouter une note" class="btn btn-note btn-primary"><i class="fa fa-plus"></i></button>
+                          <button id="btn-note-<?= $value['id_projet'] ?>" type="button" title="Ajouter une note" class="btn btn-note btn-primary"><i class="fa fa-plus"></i></button>
                           <form id="form-note<?= $i ?>" style="display: none" data-parsley-validate action="" method="post" class="form-horizontal">
                             <li>
                               <div class="form-group">
