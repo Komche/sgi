@@ -49,7 +49,7 @@ $('.btn-note').on('click', function () {
     $my_id = $(this).attr('id');
     $id = $("#"+$my_id).next().attr('id');
     $id_parent = $("#"+$my_id).parent().attr('id');
-    console.log($id, $id_parent);
+    console.log($id, $id_parent, $my_id);
     $("#"+$my_id).next().toggle();
 
     $("#" + $id).on('submit', function (e) {
