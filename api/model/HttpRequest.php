@@ -116,7 +116,7 @@ class HttpRequest
         }
 
 
-        //print_r($uriParts);
+        print_r($uriParts); die;
         // find and setup parameters starting from $_GET to $_POST
         foreach ($uriParts as $key => $value) {
             if ($value == 'object') {
