@@ -95,6 +95,9 @@ if (isset($_SESSION['user'])) {
         }elseif ($action == 'users') {
           
             require_once("view/UsersView.php");
+        }elseif ($action == 'noteProjet') {
+          
+            require_once("view/noterProjetView.php");
         }elseif ($action == 'listeProjet') {
             require_once("view/listeProjetView.php");
         } elseif ($action == 'type') {

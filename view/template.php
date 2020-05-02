@@ -368,12 +368,12 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>
-          Accueil
+          <?= $title ?>
           <small>Control panel</small>
         </h1>
         <ol class="breadcrumb">
-          <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-          <li class="active">Dashboard</li>
+          <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
+          <li class="active"><?= $title ?></li>
         </ol>
       </section>
 
@@ -652,6 +652,8 @@
   <script src="public/vendor/js/display_profile_image.js"></script>
   <script src="public/vendor/js/jquery.serializeObject.js"></script>
   <script src="public/vendor/js/moment-with-locales.min.js"></script>
+  <script src="public/vendor/parsley/parsley.min.js"></script>
+  <script src="public/vendor/parsley/i18n/fr.js"></script>
   <script src="public/js/script.js"></script>
   <script src="public/js/data_handler.js"></script>
 

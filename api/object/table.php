@@ -50,7 +50,7 @@ if (!empty(trim($url_request['property_1']))) {
 
 // check  val_1 existe 
 $table_field = getSimpleArray($config['tables'][$current_table]);
-if (!empty($url_request[ 'val_1'])) {
+if (!empty($url_request['val_1'])) {
     $val = $url_request['val_1'];
 } else {
     $val = null;

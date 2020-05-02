@@ -71,17 +71,7 @@ class Managers{
         curl_close($ch);
     }
 
-    public static function getMultipleRecords($sql, $params = [])
-    {
-        self::setDb();
-        $req = self::$db->prepare($sql);
-        if (!empty($params) && !empty($params)) { // parameters must exist before you call bind_param() method
-            $req->execute($params);
-        }
-        if($res = $req->fetchAll(PDO::FETCH_ASSOC)) {
-            return $res;
-        }
-    }
+    
     public static function getSingleRecord($sql, $params)
     {
         self::setDb();
