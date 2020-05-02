@@ -105,13 +105,16 @@ class HttpRequest
         // remove controller name from uri
         unset($uriParts[$this->controllerkey]);
 
-        // remove apikey name from uri
-        unset($uriParts[$this->apikey]);
+        if ($_SERVER["SERVER_NAME"] == 'localhost') {
+            // remove apikey name from uri
+            unset($uriParts[$this->apikey]);
+        }
 
         // if there are no parameters left
         if (empty($uriParts)) {
             return $this;
         }
+
 
         //print_r($uriParts);
         // find and setup parameters starting from $_GET to $_POST
