@@ -17,33 +17,33 @@ document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
 });
 getPermission();
 
-$(document).on('submit', "form", function () {
-    showPleaseWait();
-    var data = $(this).serializeObject();
-    var form_data = JSON.stringify(data);
-    console.log(data);
+// $(document).on('submit', "form", function () {
+//     showPleaseWait();
+//     var data = $(this).serializeObject();
+//     var form_data = JSON.stringify(data);
+//     console.log(data);
 
-    $.ajax({
-        url: myurl + "note",
-        type: "POST",
-        contentType: 'application/json',
-        dataType: "json",
-        data: form_data,
-        success: function (result) {
-            console.log(result);
-            getNote2(data.projet, $id_parent);
-            hidePleaseWait();
+//     $.ajax({
+//         url: myurl + "note",
+//         type: "POST",
+//         contentType: 'application/json',
+//         dataType: "json",
+//         data: form_data,
+//         success: function (result) {
+//             console.log(result);
+//             getNote2(data.projet, $id_parent);
+//             hidePleaseWait();
             
-        },
-        error: function (xhr, resp, text) {
-            // show error to console
-            console.log(xhr, resp, text);
+//         },
+//         error: function (xhr, resp, text) {
+//             // show error to console
+//             console.log(xhr, resp, text);
             
-        }
-    });
+//         }
+//     });
 
-    return false;
-});
+//     return false;
+// });
 
 $('.btn-note').on('click', function () {
     $my_id = $(this).attr('id');
