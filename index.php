@@ -10,7 +10,7 @@ if (isset($_SESSION['messages'])) {
 // $roles = new roles();
 // $roles->role(11, "Test", "Mon test");
 // Manager::update($roles, "id", 11);
- //var_dump(Manager::getDatas(new region())->getIdregion(3)); die;
+//var_dump(Manager::getDatas(new region())->getIdregion(3)); die;
 if (isset($_SESSION['user'])) {
     getModules();
     if (!empty($_GET['action'])) {
@@ -89,16 +89,16 @@ if (isset($_SESSION['user'])) {
                 $_SESSION['messages'] = $res;
             }
             require_once("view/regionView.php");
-        }elseif ($action == 'users' && !empty($_GET['role'])) {
-          
+        } elseif ($action == 'users' && !empty($_GET['role'])) {
+
             require_once("view/listeOrganisateurView.php");
-        }elseif ($action == 'users') {
-          
+        } elseif ($action == 'users') {
+
             require_once("view/UsersView.php");
-        }elseif ($action == 'noteProjet') {
-          
+        } elseif ($action == 'noteProjet') {
+
             require_once("view/noterProjetView.php");
-        }elseif ($action == 'listeProjet') {
+        } elseif ($action == 'listeProjet') {
             require_once("view/listeProjetView.php");
         } elseif ($action == 'type') {
             if (!empty($_POST)) {
@@ -112,22 +112,41 @@ if (isset($_SESSION['user'])) {
             require_once("view/typeAgentView.php");
         } elseif ($action == 'addUser') {
             //Manager::showError($_FILES);
-            if (!empty($_POST) && !empty($_FILES)) {
-                $data = $_POST;
-                $files = new file();
-                $data['photo'] = $files->uploadFilePicture($_FILES['profile_picture']);
-                
-                // var_dump($data); 
-                $users = new users($data);
-                //var_dump($users); die;
-                $res = insert($users);
-                //$res = addData($data, 'roles');
+            if (!empty($_GET['modif']) && ctype_digit($_GET['modif'])) {
+                if (!empty($_POST) && !empty($_FILES)) {
+                    $data = $_POST;
+                    if (empty($_FILES['file']['profile_picture'])) {
+                        $data['photo'] = Manager::getData("users", "id", $_GET['modif'])['data']['photo'];
+                    } else {
+                        $files = new file();
+                        $data['photo'] = $files->uploadFilePicture($_FILES['profile_picture']);
+                    }
+                   
+                    $res = Manager::updateData($data, 'users','id', $_GET['modif']);
+                    if ($res['code'] = 200) {
+                        header("Location:index.php?action=users&role=8");
+                    }
 
-                //if ($res['code'] != 1) {
-                $_SESSION['messages'] = $res;
-                // }
-                
+                }
+            } else {
+                if (!empty($_POST) && !empty($_FILES)) {
+                    $data = $_POST;
+                    $files = new file();
+                    $data['photo'] = $files->uploadFilePicture($_FILES['profile_picture']);
+
+                    // var_dump($data); 
+                    $users = new users($data);
+                    //var_dump($users); die;
+                    $res = insert($users);
+                    //$res = addData($data, 'roles');
+
+                    //if ($res['code'] != 1) {
+                    $_SESSION['messages'] = $res;
+                    // }
+
+                }
             }
+
             require_once("view/addUserView.php");
         } elseif ($action == 'addEmergency') {
             //Manager::showError($_FILES);

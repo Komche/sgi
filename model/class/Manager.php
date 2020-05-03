@@ -550,4 +550,39 @@ class Manager extends Managers
             }
         }
     }
+
+     /**
+     * update data
+     * 
+     * @return void
+     */
+    public static function updateData($value, $table, $property, $val)
+    {
+
+        if (count($value) > 0) {
+            $temp  = array_keys($value);
+            $last_key = end($temp);
+            $sql = "UPDATE $table SET ";
+            foreach ($value as $key => $field) {
+                if ($last_key != $key) {
+                    $sql .= "$key=:$key, ";
+                } else {
+                    $sql .= "$key=:$key ";
+                }
+            }
+            $sql .= "WHERE $property=:$property";
+
+            //s'il existe un champs password_ il sera crypter
+            if (!array_key_exists($property, $value)) {
+                $value[$property] = $val;
+            }
+
+            $req = self::bdd()->prepare($sql);
+            if ($req->execute($value)) {
+                self::throwError(200, "Enregistrement modifié avec succès");
+            } else {
+                self::throwError(503, "modification échouée", true);
+            }
+        }
+    }
 }

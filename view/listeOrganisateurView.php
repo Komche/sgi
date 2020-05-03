@@ -18,6 +18,7 @@ ob_start();
                   <th>Téléphone</th>
                   <th>Profile</th>
                   <th>Image</th>
+                  <th>Modifier</th>
                 </tr>
                 <?php 
                   $users = new users();
@@ -46,6 +47,12 @@ ob_start();
                   ?>
                   <td>
                   <img width="50" src="<?= Manager::getDatas(new files())->getId($value['photo'])->getFile_url() ?>" class="img-circle" alt="Cinque Terre">
+                  
+                  </td>
+                  <td>
+                  <a href="index.php?action=addUser&modif=<?= $value['id'] ?>" class="btn btn-primary">
+                      <i class="fa fa-edit"></i> 
+                    </a>
                   
                   </td>
                 </tr>
