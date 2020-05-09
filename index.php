@@ -141,7 +141,8 @@ if (isset($_SESSION['user'])) {
             if (!empty($_GET['modif']) && ctype_digit($_GET['modif'])) {
                 if (!empty($_POST) && !empty($_FILES)) {
                     $data = $_POST;
-                    if (empty($_FILES['file']['profile_picture'])) {
+                    if (empty($_FILES['profile_picture'])) {
+                        //Manager::showError($_FILES);
                         $data['photo'] = Manager::getData("users", "id", $_GET['modif'])['data']['photo'];
                     } else {
                         $files = new file();
