@@ -90,6 +90,7 @@ $('.btn-note').on('click', function () {
 });
 $('.btn-note-edit').on('click', function () {
     $my_id = $(this).attr('id');
+    $idp = $(this).attr('data-id');
     id_projet = $("#" + $my_id).attr('data-id');
     $id_res = "note-res" + $("#" + $my_id).attr('data-id');
     $id_form = "form-note" + $("#" + $my_id).attr('data-id');
@@ -107,10 +108,10 @@ $('.btn-note-edit').on('click', function () {
             showPleaseWait();
             var data = $(this).serializeObject();
             var form_data = JSON.stringify(data);
-            console.log(form_data);
-
+            
+            console.log(form_data, $idp+" hh");
             $.ajax({
-                url: myurl + "note/projet/" + $(this).attr('data-id'),
+                url: myurl + "note/projet/" + $idp,
                 type: "PUT",
                 contentType: 'application/json',
                 dataType: "json",
@@ -118,7 +119,7 @@ $('.btn-note-edit').on('click', function () {
                 success: function (result) {
                     console.log(result);
                     hidePleaseWait();
-                    getNote(id_projet, $id_res);
+                    getNote(id_projet, $id_res, $idp);
                     $("#" + $id_res).toggle();
                     $("#" + $id_form).toggle();
 
@@ -153,22 +154,22 @@ $('input:checkbox.module_is_checked').each(function (i, v) {
 
 function showPleaseWait() {
     if (document.querySelector("#pleaseWaitDialog") == null) {
-        var modalLoading = '<div class="modal" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false" role="dialog">\
-            <div class="modal-dialog">\
-                <div class="modal-content">\
-                    <div class="modal-header">\
-                        <h4 class="modal-title">Patientez svp...</h4>\
-                    </div>\
-                    <div class="modal-body">\
-                        <div class="progress">\
-                          <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"\
-                          aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%; height: 40px">\
-                          </div>\
-                        </div>\
-                    </div>\
-                </div>\
-            </div>\
-        </div>';
+        var modalLoading = `<div class="modal" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Patientez svp...</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="progress">
+                          <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
+                          aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%; height: 40px">
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>`;
         $(document.body).append(modalLoading);
     }
     $("#pleaseWaitDialog").modal("show");
@@ -261,17 +262,38 @@ function getPermission() {
     });
 }
 
-function getNote($projet, $id) {
+function getNote($projet, $id, $idp) {
     //console.log("perm");
 
     console.log("projet", $projet);
     $note = getData('note', 'projet', $projet);
-
+    form_data = JSON.stringify({"etat_retenu" : "Oui"});
+    console.log(form_data,  $idp);
+    
     $note.done(function ($note) {
         if (!$note.error) {
             $data = '';
             $note = $note.data;
             $total = Number($note.faisabilite) + Number($note.apport) + Number($note.originalite) + Number($note.viabilite);
+            if ($total>=10) {
+                $.ajax({
+                    url: myurl + "projet/id_projet/" + $idp,
+                    type: "PUT",
+                    contentType: 'application/json',
+                    dataType: "json",
+                    data: form_data,
+                    success: function (result) {
+                        console.log(result);
+                        getNote3();
+    
+                    },
+                    error: function (xhr, resp, text) {
+                        // show error to console
+                        console.log(xhr, resp, text);
+    
+                    }
+                });
+            }
             $data += `<a href="#">Faisabilité: ` + $note.faisabilite + `/5</a>
             <a href="#">Apport: ` + $note.apport + `/5</a>
             <a href="#">Originalité: ` + $note.originalite + `/5</a>
@@ -349,7 +371,7 @@ function getNote2($projet, $id) {
 function getNote3() {
     //console.log("perm");
 
-    
+
     console.log("projet", myurl + "custom");
     $note = $.ajax({
         url: myurl + "custom",
@@ -364,7 +386,7 @@ function getNote3() {
 
     $note.done(function ($note) {
         console.log($note);
-        
+
         $target = "";
         if (host == "localhost") {
             $target = "http://localhost/Coronackathon/";
@@ -381,10 +403,10 @@ function getNote3() {
             <div style="margin-bottom: 100px; margin-top: 100px" class="card">
               <div class="box">
                 <div class="img">
-                  <img src="`+ $target + $v.file_url +`">
+                  <img src="` + $target + $v.file_url + `">
                 </div>
-                <h2>`+$v.nom_projet + `<br><span>` + $v.domaine + `</span></h2>
-                <p> `+$v.description + `</p>
+                <h2>` + $v.nom_projet + `<br><span>` + $v.domaine + `</span></h2>
+                <p> ` + $v.description + `</p>
                 <span>
                   <ul id="">
                     <li id="note-res` + $v.projet + `">
@@ -402,7 +424,7 @@ function getNote3() {
             
             `;
             });
-            
+
             $('#menu1').html($data);
         }
     });
