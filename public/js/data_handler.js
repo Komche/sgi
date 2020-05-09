@@ -619,7 +619,7 @@ function canContinue(data) {
     }
 }
 
-$('#checkbox_etat').on('change', function () {
+$('#checkbox_etat').on('change', function () {//Changement de l'etat de l'inscription
     $my_etat = $(this).val();
     showPleaseWait();
     console.log(myurl + "inscription/id_inscription/1",$(this).prop('checked'));
