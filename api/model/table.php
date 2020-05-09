@@ -43,6 +43,9 @@ class Table
                 $this->distinct($this->table, $this->property);
             } elseif ($this->val === 'exist') {
                 echo $this->is_not_use($this->table, $this->property, $_GET['val']);
+            } elseif ($this->table === 'sql') {
+                self::$results['data'] = $this->getMultiplesRecords($_GET['val']);
+                return json_encode(self::$results);
             }elseif (isset($_GET['s'])) {
                 $query .= "WHERE $this->property=:$this->property";
 
@@ -317,5 +320,20 @@ class Table
         self::$results['lastId'] = $lastId;
         echo json_encode(self::$results);
         die();
+    }
+
+    public function getMultiplesRecords($sql, $params = [])
+    {
+        $req = $this->db->prepare($sql);
+        if (!empty($params)) { // parameters must exist before you call bind_param() method
+            $req->execute($params);
+        }else {
+            self::$results['data'] = $this->db->query($sql);
+            return json_encode(self::$results);
+        }
+        if ($res = $req->fetchAll(PDO::FETCH_ASSOC)) {
+            self::$results['data'] = $res;
+            return json_encode(self::$results);
+        }
     }
 }
