@@ -116,6 +116,16 @@ if (isset($_SESSION['user'])) {
                 
             }
             require_once("view/inscriptionView.php");
+        } elseif ($action == 'cretenu') {//Envoyer mail au candidat selectionner
+            if(!empty($_POST)){
+                $data = $_POST;
+                //Manager::showError($data);
+                $records = Manager::getData("projet", "etat_retenu", "Oui", true)['records'];
+                if($records['error']==false){
+                    include_once("model/mail.php");
+                }else{}
+            }
+            require_once("view/candidatSelectMailView.php");
         } elseif ($action == 'type') {
             if (!empty($_POST)) {
                 $data = $_POST;
