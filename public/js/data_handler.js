@@ -16,7 +16,7 @@ document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
     $_GET[decode(arguments[1])] = decode(arguments[2]);
 });
 getPermission();
-
+getNote3();
 // $(document).on('submit', "form", function () {
 //     showPleaseWait();
 //     var data = $(this).serializeObject();
@@ -33,12 +33,12 @@ getPermission();
 //             console.log(result);
 //             getNote2(data.projet, $id_parent);
 //             hidePleaseWait();
-            
+
 //         },
 //         error: function (xhr, resp, text) {
 //             // show error to console
 //             console.log(xhr, resp, text);
-            
+
 //         }
 //     });
 
@@ -47,10 +47,10 @@ getPermission();
 
 $('.btn-note').on('click', function () {
     $my_id = $(this).attr('id');
-    $id = $("#"+$my_id).next().attr('id');
-    $id_parent = $("#"+$my_id).parent().attr('id');
+    $id = $("#" + $my_id).next().attr('id');
+    $id_parent = $("#" + $my_id).parent().attr('id');
     console.log($id, $id_parent, $my_id);
-    $("#"+$my_id).next().toggle();
+    $("#" + $my_id).next().toggle();
 
     $("#" + $id).on('submit', function (e) {
         e.preventDefault();
@@ -74,28 +74,28 @@ $('.btn-note').on('click', function () {
                     console.log(result);
                     getNote2(data.projet, $id_parent);
                     hidePleaseWait();
-                    
+
                 },
                 error: function (xhr, resp, text) {
                     // show error to console
                     console.log(xhr, resp, text);
-                    
+
                 }
             });
             //alert('valid');
         }
     });
 
-    
+
 });
 $('.btn-note-edit').on('click', function () {
-    $my_id = $(this).attr('id'); 
-    id_projet = $("#"+$my_id).attr('data-id');
-    $id_res = "note-res"+$("#"+$my_id).attr('data-id');
-    $id_form = "form-note"+$("#"+$my_id).attr('data-id');
-    console.log($("#"+$my_id).next().attr('id'), "#"+$my_id);
-    $("#"+$id_res).toggle();
-    $("#"+$id_form).toggle();
+    $my_id = $(this).attr('id');
+    id_projet = $("#" + $my_id).attr('data-id');
+    $id_res = "note-res" + $("#" + $my_id).attr('data-id');
+    $id_form = "form-note" + $("#" + $my_id).attr('data-id');
+    console.log($("#" + $my_id).next().attr('id'), "#" + $my_id);
+    $("#" + $id_res).toggle();
+    $("#" + $id_form).toggle();
 
     $("#" + $id_form).on('submit', function (e) {
         e.preventDefault();
@@ -110,7 +110,7 @@ $('.btn-note-edit').on('click', function () {
             console.log(form_data);
 
             $.ajax({
-                url: myurl + "note/projet/"+$(this).attr('data-id'),
+                url: myurl + "note/projet/" + $(this).attr('data-id'),
                 type: "PUT",
                 contentType: 'application/json',
                 dataType: "json",
@@ -119,14 +119,14 @@ $('.btn-note-edit').on('click', function () {
                     console.log(result);
                     hidePleaseWait();
                     getNote(id_projet, $id_res);
-                    $("#"+$id_res).toggle();
-                    $("#"+$id_form).toggle();
-                    
+                    $("#" + $id_res).toggle();
+                    $("#" + $id_form).toggle();
+
                 },
                 error: function (xhr, resp, text) {
                     // show error to console
                     console.log(xhr, resp, text);
-                    
+
                 }
             });
             //alert('valid');
@@ -260,6 +260,7 @@ function getPermission() {
         }
     });
 }
+
 function getNote($projet, $id) {
     //console.log("perm");
 
@@ -270,16 +271,17 @@ function getNote($projet, $id) {
         if (!$note.error) {
             $data = '';
             $note = $note.data;
-            $total =Number($note.faisabilite)+Number($note.apport)+Number($note.originalite)+Number($note.viabilite);
-            $data+= `<a href="#">Faisabilité: ` +$note.faisabilite+ `/5</a>
-            <a href="#">Apport: `+ $note.apport+ `/5</a>
-            <a href="#">Originalité: `+$note.originalite+`/5</a>
-            <a href="#">Viabilité: `+$note.viabilite+`/5</a>
-            <a href="#"><b>Total: `+$total+`/20</b></a>`;
-            $('#'+$id).html($data);
+            $total = Number($note.faisabilite) + Number($note.apport) + Number($note.originalite) + Number($note.viabilite);
+            $data += `<a href="#">Faisabilité: ` + $note.faisabilite + `/5</a>
+            <a href="#">Apport: ` + $note.apport + `/5</a>
+            <a href="#">Originalité: ` + $note.originalite + `/5</a>
+            <a href="#">Viabilité: ` + $note.viabilite + `/5</a>
+            <a href="#"><b>Total: ` + $total + `/20</b></a>`;
+            $('#' + $id).html($data);
         }
     });
 }
+
 function getNote2($projet, $id) {
     //console.log("perm");
 
@@ -290,22 +292,22 @@ function getNote2($projet, $id) {
         if (!$note.error) {
             $data = '';
             $note = $note.data;
-            $total =Number($note.faisabilite)+Number($note.apport)+Number($note.originalite)+Number($note.viabilite);
-            $data+= `
-            <li><button id="btn-note-edit-`+$note.projet+ `" data-id="`+$note.projet+ `" type="button" title="Modifier une note" class="btn btn-note-edit btn-primary center-block"><i class="fa fa-pencil"></i></button></li>
+            $total = Number($note.faisabilite) + Number($note.apport) + Number($note.originalite) + Number($note.viabilite);
+            $data += `
+            <li><button id="btn-note-edit-` + $note.projet + `" data-id="` + $note.projet + `" type="button" title="Modifier une note" class="btn btn-note-edit btn-primary center-block"><i class="fa fa-pencil"></i></button></li>
             <br>
-            <li id="note-res`+$note.projet+ `"><a href="#">Faisabilité: ` +$note.faisabilite+ `/5</a>
-            <a href="#">Apport: `+ $note.apport+ `/5</a>
-            <a href="#">Originalité: `+$note.originalite+`/5</a>
-            <a href="#">Viabilité: `+$note.viabilite+`/5</a>
-            <a href="#"><b>Total: `+$total+`/20</b></a>
+            <li id="note-res` + $note.projet + `"><a href="#">Faisabilité: ` + $note.faisabilite + `/5</a>
+            <a href="#">Apport: ` + $note.apport + `/5</a>
+            <a href="#">Originalité: ` + $note.originalite + `/5</a>
+            <a href="#">Viabilité: ` + $note.viabilite + `/5</a>
+            <a href="#"><b>Total: ` + $total + `/20</b></a>
             </li>
-            <form id="form-note`+$note.projet+ `" style="display: none" data-parsley-validate action="" method="post" class="form-horizontal">
+            <form id="form-note` + $note.projet + `" style="display: none" data-parsley-validate action="" method="post" class="form-horizontal">
                             <li>
                               <div class="form-group">
                                 <label for="faisabilite" class="col-lg-4 control-label">Faisabilité: </label>
                                 <div class="col-lg-8">
-                                  <input type="number" value="` +$note.faisabilite+ `" data-parsley-min="0" data-parsley-max="5" data-parsley-required="true" class="form-control" id="faisabilite" name="faisabilite" placeholder="Faisabilité">
+                                  <input type="number" value="` + $note.faisabilite + `" data-parsley-min="0" data-parsley-max="5" data-parsley-required="true" class="form-control" id="faisabilite" name="faisabilite" placeholder="Faisabilité">
                                 </div>
                               </div>
                             </li>
@@ -313,7 +315,7 @@ function getNote2($projet, $id) {
                               <div class="form-group">
                                 <label for="apport" class="col-lg-4 control-label">Apport: </label>
                                 <div class="col-lg-8">
-                                  <input type="number" value="`+ $note.apport+ `" data-parsley-min="0" data-parsley-max="5" data-parsley-required="true" class="form-control" id="apport" name="apport" placeholder="Apport">
+                                  <input type="number" value="` + $note.apport + `" data-parsley-min="0" data-parsley-max="5" data-parsley-required="true" class="form-control" id="apport" name="apport" placeholder="Apport">
                                 </div>
                               </div>
                             </li>
@@ -321,7 +323,7 @@ function getNote2($projet, $id) {
                               <div class="form-group">
                                 <label for="originalite" class="col-lg-4 control-label">Originalité: </label>
                                 <div class="col-lg-8">
-                                  <input type="number" value="`+$note.originalite+`" data-parsley-min="0" data-parsley-max="5" data-parsley-required="true" class="form-control" id="originalite" name="originalite" placeholder="Originalité">
+                                  <input type="number" value="` + $note.originalite + `" data-parsley-min="0" data-parsley-max="5" data-parsley-required="true" class="form-control" id="originalite" name="originalite" placeholder="Originalité">
                                 </div>
                               </div>
                             </li>
@@ -329,8 +331,8 @@ function getNote2($projet, $id) {
                               <div class="form-group">
                                 <label for="viabilite" class="col-lg-4 control-label">Viabilité: </label>
                                 <div class="col-lg-8">
-                                  <input type="number" value="`+$note.viabilite+`" data-parsley-min="0" data-parsley-max="5" data-parsley-required="true" class="form-control" id="viabilite" name="viabilite" placeholder="Viabilité">
-                                  <input type="hidden" value="`+$note.projet+ `" data-parsley-required="true" class="form-control" id="projet" name="projet" placeholder="">
+                                  <input type="number" value="` + $note.viabilite + `" data-parsley-min="0" data-parsley-max="5" data-parsley-required="true" class="form-control" id="viabilite" name="viabilite" placeholder="Viabilité">
+                                  <input type="hidden" value="` + $note.projet + `" data-parsley-required="true" class="form-control" id="projet" name="projet" placeholder="">
                                 </div>
                               </div>
                             </li>
@@ -339,7 +341,69 @@ function getNote2($projet, $id) {
                             </li>
                           </form>
             `;
-            $('#'+$id).html($data);
+            $('#' + $id).html($data);
+        }
+    });
+}
+
+function getNote3() {
+    //console.log("perm");
+
+    
+    console.log("projet", myurl + "custom");
+    $note = $.ajax({
+        url: myurl + "custom",
+        type: "GET",
+        contentType: 'application/json',
+        dataType: "json",
+        error: function (xhr, resp, text) {
+            // show error to console
+            console.log(xhr, resp, text);
+        }
+    });
+
+    $note.done(function ($note) {
+        console.log($note);
+        
+        $target = "";
+        if (host == "localhost") {
+            $target = "http://localhost/Coronackathon/";
+        } else {
+            $target = "http://coronackathon.org/";
+        }
+        if (!$note.error) {
+            $data = '';
+            $note = $note.data;
+            $.each($note, function (i, $v) {
+                $total = Number($v.faisabilite) + Number($v.apport) + Number($v.originalite) + Number($v.viabilite);
+                $data += `
+            <div class="col-md-6">
+            <div style="margin-bottom: 100px; margin-top: 100px" class="card">
+              <div class="box">
+                <div class="img">
+                  <img src="`+ $target + $v.file_url +`">
+                </div>
+                <h2>`+$v.nom_projet + `<br><span>` + $v.domaine + `</span></h2>
+                <p> `+$v.description + `</p>
+                <span>
+                  <ul id="">
+                    <li id="note-res` + $v.projet + `">
+                    <a href="#">Faisabilité: ` + $v.faisabilite + `/5</a>
+                    <a href="#">Apport: ` + $v.apport + `/5</a>
+                    <a href="#">Originalité: ` + $v.originalite + `/5</a>
+                    <a href="#">Viabilité: ` + $v.viabilite + `/5</a>
+                    <a href="#"><b>Total: ` + $total + `/20</b></a>
+                    </li>
+                    </ul>
+                  </span>
+                </div>
+              </div>
+            </div>
+            
+            `;
+            });
+            
+            $('#menu1').html($data);
         }
     });
 }
