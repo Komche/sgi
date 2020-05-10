@@ -641,3 +641,47 @@ function canContinue(data) {
         return true;
     }
 }
+
+$('#checkbox_etat').on('change', function () {//Changement de l'etat de l'inscription
+    $my_etat = $(this).val();
+    showPleaseWait();
+    console.log(myurl + "inscription/id_inscription/1",$(this).prop('checked'));
+    if($(this).prop('checked') == false){
+        $data = JSON.stringify({"etat":"Non"});
+        $.ajax({
+            url: myurl + "inscription/id_inscription/1",
+            type: "PUT",
+            contentType: 'application/json',
+            dataType: "json",
+            data: $data,
+            success: function (result) {
+                console.log(result);
+                hidePleaseWait();
+                
+            },
+            error: function (xhr, resp, text) {
+                // show error to console
+                console.log(xhr, resp, text);
+                
+            }
+        });
+    } else{
+        $data = JSON.stringify({"etat":"Oui"})
+        $.ajax({
+            url: myurl + "inscription/id_inscription/1",
+            type: "PUT",
+            contentType: 'application/json',
+            dataType: "json",
+            data: $data,
+            success: function (result) {
+                console.log(result);  
+                hidePleaseWait();              
+            },
+            error: function (xhr, resp, text) {
+                // show error to console
+                console.log(xhr, resp, text);
+                
+            }
+        });
+    }
+});

@@ -101,20 +101,6 @@ if (isset($_SESSION['user'])) {
         } elseif ($action == 'listeProjet') {
             require_once("view/listeProjetView.php");
         } elseif ($action == 'inscription') {//View Lancement inscription
-            if (!empty($_POST)) {
-                $data = $_POST;
-                //var_dump($data); die();
-                //$res = updateData($value, $table, $property, $val);
-                if($data['etat']=="Non"){
-                    $res = Manager::updateData($data, 'inscription','id_inscription', 1);
-                   // $_SESSION['messages'] = $res;
-                    //var_dump($_SESSION['messages']); die();
-                } else{
-                    $res = Manager::updateData($data, 'inscription','id_inscription', 1);
-                    //$_SESSION['messages'] = $res;
-                }
-                
-            }
             require_once("view/inscriptionView.php");
         } elseif ($action == 'cretenu') {//Envoyer mail au candidat selectionner
             if(!empty($_POST)){
