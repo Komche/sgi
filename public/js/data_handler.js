@@ -17,33 +17,37 @@ document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
 });
 getPermission();
 getNote3();
-// $(document).on('submit', "form", function () {
-//     showPleaseWait();
-//     var data = $(this).serializeObject();
-//     var form_data = JSON.stringify(data);
-//     console.log(data);
 
-//     $.ajax({
-//         url: myurl + "note",
-//         type: "POST",
-//         contentType: 'application/json',
-//         dataType: "json",
-//         data: form_data,
-//         success: function (result) {
-//             console.log(result);
-//             getNote2(data.projet, $id_parent);
-//             hidePleaseWait();
+if (host=='localhost') {
+    $(document).on('submit', "form", function () {
+        showPleaseWait();
+        var data = $(this).serializeObject();
+        var form_data = JSON.stringify(data);
+        console.log(data);
+    
+        $.ajax({
+            url: myurl + "note",
+            type: "POST",
+            contentType: 'application/json',
+            dataType: "json",
+            data: form_data,
+            success: function (result) {
+                console.log(result);
+                getNote2(data.projet, $id_parent, result.lastId);
+                hidePleaseWait();
+    
+            },
+            error: function (xhr, resp, text) {
+                // show error to console
+                console.log(xhr, resp, text);
+    
+            }
+        });
+    
+        return false;
+    });
+}
 
-//         },
-//         error: function (xhr, resp, text) {
-//             // show error to console
-//             console.log(xhr, resp, text);
-
-//         }
-//     });
-
-//     return false;
-// });
 
 $('.btn-note').on('click', function () {
     $my_id = $(this).attr('id');
@@ -71,8 +75,8 @@ $('.btn-note').on('click', function () {
                 dataType: "json",
                 data: form_data,
                 success: function (result) {
-                    console.log(result);
-                    getNote2(data.projet, $id_parent);
+                    console.log(result.lastId);
+                    getNote2(data.projet, $id_parent, result.lastId);
                     hidePleaseWait();
 
                 },
@@ -304,17 +308,36 @@ function getNote($projet, $id, $idp) {
     });
 }
 
-function getNote2($projet, $id) {
+function getNote2($projet, $id, $idp) {
     //console.log("perm");
 
-    console.log("projet", $projet);
+    console.log("projet", $projet, $idp);
     $note = getData('note', 'projet', $projet);
-
+    form_data = JSON.stringify({"etat_retenu" : "Oui"});
     $note.done(function ($note) {
         if (!$note.error) {
             $data = '';
             $note = $note.data;
             $total = Number($note.faisabilite) + Number($note.apport) + Number($note.originalite) + Number($note.viabilite);
+            if ($total>=10) {
+                $.ajax({
+                    url: myurl + "projet/id_projet/" + $idp,
+                    type: "PUT",
+                    contentType: 'application/json',
+                    dataType: "json",
+                    data: form_data,
+                    success: function (result) {
+                        console.log(result);
+                        getNote3();
+    
+                    },
+                    error: function (xhr, resp, text) {
+                        // show error to console
+                        console.log(xhr, resp, text);
+    
+                    }
+                });
+            }
             $data += `
             <li><button id="btn-note-edit-` + $note.projet + `" data-id="` + $note.projet + `" type="button" title="Modifier une note" class="btn btn-note-edit btn-primary center-block"><i class="fa fa-pencil"></i></button></li>
             <br>
