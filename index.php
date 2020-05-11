@@ -98,7 +98,19 @@ if (isset($_SESSION['user'])) {
         } elseif ($action == 'noteProjet') {
 
             require_once("view/noterProjetView.php");
-        } elseif ($action == 'listeProjet') {
+        } elseif ($action == 'listeProjet') {//View liste des projets
+            if(!empty($_POST)){
+                extract($_POST);
+                $_SESSION['equipe'] = $equipe;
+                $data = Manager::getData('projet', 'equipe', $equipe)['data'];
+                if($data['etat_retenu']=="Oui"){//Candidat retenu
+                    $_SESSION['etat'] = $data['etat_retenu'];
+                    include_once("model/mail.php");
+                } else{//Candidat non retenu
+                    $_SESSION['etat'] = $data['etat_retenu'];
+                    include_once("model/mail.php");
+                }
+            }
             require_once("view/listeProjetView.php");
         } elseif ($action == 'inscription') {//View Lancement inscription
             require_once("view/inscriptionView.php");
