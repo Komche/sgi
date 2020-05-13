@@ -30,20 +30,12 @@ ob_start();
             $data = Manager::getData('users', 'role', 7 , true)['data'];
             if (is_array($data) || is_object($data)) {
               foreach ($data as $value) {
-
-
                 ?>
                 <tr>
                   <td><?= $value['first_name'] . ' ' . $value['last_name'] ?></td>
                   <td><?= $value['domaine'] ?></td>
                   <td><?= $value['profil'] ?></td>
                   <td>
-                    <!--<a class="btn btn-primary">
-                      <i class="fa fa-edit"></i>
-                    </a>
-                    <a href="index.php?action=permission&module=<?//= $value['id'] ?>" class="btn btn-primary">
-                      <i class="fa fa-plus"></i>
-                    </a>-->
                     <div class="form-group">
                           <div class="col-sm-offset-2 col-sm-10">
                             <div class="checkbox">

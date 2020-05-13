@@ -45,10 +45,10 @@ ob_start();
                   <td>
                   <img width="50" src="<?= $target. Manager::getDatas(new files())->getId($value['file'])->getFile_url() ?>" class="img-circle" alt="Cinque Terre">
                   </td>
-                  <td><?= Manager::getDatas(new users())->getId($value['user'])->getFirst_name()?></td>
+                  <td><?= ($value['user']!=NULL) ? (Manager::getDatas(new users())->getId($value['user'])->getFirst_name()) : 'Pas de coach'?></td>
                   <td>
-                    <a href="index.php?action=coach&projet=<?= $value['id_projet'] ?>" class="btn btn-primary">
-                      <i class="fa fa-plus"></i> 
+                    <a href="index.php?action=<?= ($value['user']==NULL) ? "coach&projet=".$value['id_projet'] : "attributionCoach" ?>" class="btn btn-primary">
+                      <i class="fa fa-<?= ($value['user']==NULL) ? 'plus' : 'thumbs-o-up' ?>"></i> 
                     </a>
                     </td>
                 </tr>
