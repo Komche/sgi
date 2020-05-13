@@ -151,6 +151,21 @@ $('input:checkbox.module_is_checked').each(function (i, v) {
     });
 });
 
+$('input:checkbox.coach_is_checked').each(function (i, v) {
+    $mr = getDataWith2Param('users', 'id', $(v).val(), 'id', $_GET['id']);
+
+    $mr.done(function ($mr) {
+        if (!$mr.error) {
+            $(v).attr('checked', true);
+        }
+    });
+
+    $mr.fail(function ($mr) {
+        $(v).attr('checked', false);
+
+    });
+});
+
 
 function showPleaseWait() {
     if (document.querySelector("#pleaseWaitDialog") == null) {
@@ -227,6 +242,30 @@ function addPermissionRole(chec) {
         });
     } else {
         deleteDataWith2Param('module_role', 'module', $(chec).val(), 'role_id', $_GET['role']);
+    }
+}
+
+function addCoachProjet(chec) {//Add coach to projet
+    console.log("projet", $_GET['projet']);
+    console.log(myurl + "projet/id_projet/" +$_GET['projet'],$(this).prop('checked'));
+    if ($(chec).prop('checked') == true) {
+        $data = JSON.stringify({"user":$(chec).val()});
+        $.ajax({
+            url: myurl + "projet/id_projet/" + $_GET['projet'],
+            type: "PUT",
+            contentType: 'application/x-www-form-urlencoded',
+            dataType: "json",
+            data: $data,
+            success: function (result) {
+                console.log(result);
+            },
+            error: function (xhr, resp, text) {
+                // show error to console
+                console.log(xhr, resp, text);
+            }
+        });
+    } else {
+        //deleteDataWith2Param('module_role', 'module', $(chec).val(), 'role_id', $_GET['role']);
     }
 }
 
