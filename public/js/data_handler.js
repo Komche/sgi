@@ -313,10 +313,12 @@ function getNote2($projet, $id, $idp) {
 
     console.log("projet", $projet, $idp);
     $note = getData('note', 'projet', $projet);
-    form_data = JSON.stringify({"etat_retenu" : "Oui"});
+    form_data = JSON.stringify({"etat_retenu" : "Oui", "id_projet" : $projet});
     $note.done(function ($note) {
         if (!$note.error) {
             $data = '';
+            console.log($note);
+            
             $note = $note.data;
             $total = Number($note.faisabilite) + Number($note.apport) + Number($note.originalite) + Number($note.viabilite);
             if ($total>=10) {
