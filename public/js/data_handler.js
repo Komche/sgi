@@ -249,13 +249,13 @@ function addPermissionRole(chec) {
     }
 }
 
-function addCoachProjet(chec) {//Add coach to projet
-    console.log("projet", $_GET['projet']);
-    console.log(myurl + "projet/id_projet/" +$_GET['projet'],$(this).prop('checked'));
+function addCoachEquipe(chec) {//Add coach to equipe(projet)
+    console.log("equipe", $_GET['equipe']);
+    console.log(myurl + "equipe/id_equipe/" +$_GET['equipe'],$(this).prop('checked'));
     if ($(chec).prop('checked') == true) {
         $data = JSON.stringify({"user":$(chec).val()});
         $.ajax({
-            url: myurl + "projet/id_projet/" + $_GET['projet'],
+            url: myurl + "equipe/id_equipe/" + $_GET['equipe'],
             type: "PUT",
             contentType: 'application/x-www-form-urlencoded',
             dataType: "json",

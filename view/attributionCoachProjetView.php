@@ -1,7 +1,7 @@
 <?php
-$title = "Attribution de coach au projet";
-$projet = 1;
-if (isset($_GET['projet'])) extract($_GET);
+$title = "Attribution de coach à l'équipe/projet";
+$equipe = 1;
+if (isset($_GET['equipe'])) extract($_GET);
 ob_start();
 ?>
 <div class="row">
@@ -10,7 +10,7 @@ ob_start();
     <div class="box">
       <div class="box-header with-border">
         <i class="fa  fa-key"></i>
-        <h3 class="box-title"><b><?= Manager::getData('projet', 'id_projet', $projet)['data']['nom_projet'] ?></b></h3>
+        <h3 class="box-title"><b><?= Manager::getData('projet', 'equipe', $equipe)['data']['nom_projet'] . ' / ' . Manager::getData('equipe', 'id_equipe', $equipe)['data']['nom_equipe']?></b></h3>
       </div>
       <!-- /.box-header -->
       <div class="box-body">
@@ -40,7 +40,7 @@ ob_start();
                           <div class="col-sm-offset-2 col-sm-10">
                             <div class="checkbox">
                               <label>
-                                <input class="coach_is_checked" onchange="addCoachProjet(this)" value="<?= $value['id'] ?>" type="checkbox"> ajouter au projet
+                                <input class="coach_is_checked" onchange="addCoachEquipe(this)" value="<?= $value['id'] ?>" type="checkbox"> coacher l'équipe
                               </label>
                             </div>
                           </div>
