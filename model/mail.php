@@ -8,19 +8,17 @@ use PHPMailer\PHPMailer\Exception;
 // Load Composer's autoloader
 require 'vendor/autoload.php';
 
-if (isset($_POST)) {//Send Mail to Coach
-  Manager::showError($_POST);
-  //extract($_POST);
-  //$data = Manager::getData("projet", "etat_retenu", "Oui", true)['data'];
-  $datas = Manager::getData("candidat", "equipe" , $records['equipe'], true)['datas'];
-  Manager::showError($datas);
-  die();
-  if (is_array($datas) || is_object($datas)) {
-    $temp = array_keys($datas);
+if ($_SESSION['etat']=="Oui") {//Send Mail to Candidat retenu
+  $data = Manager::getData("candidat", "equipe", $_SESSION['equipe'], true)['data'];
+  //Manager::showError($data);
+  //die();
+  if (is_array($data) || is_object($data)) {
+    $temp = array_keys($data);
     $last_key = end($temp);
-    foreach ($datas as $key => $value) {
+    foreach ($data as $key => $value) {
 
-      $object = "Présélection au Hackathon";
+      $object = "Preselection au Hackathon";
+      $message = "Félicitaion votre equipe a été présélection pour le Hackathon";
 
       // Instantiation and passing `true` enables exceptions
       $mail = new PHPMailer(true);
@@ -56,27 +54,30 @@ if (isset($_POST)) {//Send Mail to Coach
           $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
           $mail->send();
-          //if ($key = $last_key) {
-            //header("Location:index.php?action=notif");
-          //}
-          //if (count($datas)==1) {
-            //header("Location:index.php?action=notif");
-          //}
+          if ($key = $last_key) {
+            die("ok");
+            header("Location:index.php?action=listeProjet");
+          }
+          if (count($data)==1) {
+            die("ok");
+            header("Location:index.php?action=listeProjet");
+          }
       } catch (Exception $e) {
           //echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
       }
     }
   }
-}elseif(isset($_SESSION['equipe'])) {//Send Mail to Canditats
-  $equipe = $data['equipe'];
-  $data = Manager::getData("candidat", "equipe", $equipe, true)['data'];
+} elseif($_SESSION['etat']=="Non") {//Send Mail to Canditat non retenu
+  $data = Manager::getData("candidat", "equipe", $_SESSION['equipe'], true)['data'];
   //Manager::showError($data);
+  //die();
   if (is_array($data) || is_object($data)) {
     $temp = array_keys($data);
     $last_key = end($temp);
     foreach ($data as $key => $value) {
-      $object = "Inscription Coronackathon";
-      $messages = "Nous vous remercions pour votre inscription au profil de candidat au Coronackathon!";
+
+      $object = "Preselection au Hackathon";
+      $message = "Désolé votre equipe n'est pas présélection pour le Hackathon";
 
       // Instantiation and passing `true` enables exceptions
       $mail = new PHPMailer(true);
@@ -97,7 +98,7 @@ if (isset($_POST)) {//Send Mail to Coach
           $mail->setFrom('hello@coronackathon.org', 'Coronackathon');
           $mail->addAddress($value['email'], $value['nom_candidat']);     // Add a recipient
           //$mail->addAddress('ellen@example.com');               // Name is optional
-          $mail->addReplyTo('hello@coronackathon.org', 'Inscription Coach');
+          $mail->addReplyTo('hello@coronackathon.org', 'Présélection au Hackathon');
           // $mail->addCC('cc@example.com');
           // $mail->addBCC('bcc@example.com');
 
@@ -108,21 +109,21 @@ if (isset($_POST)) {//Send Mail to Coach
           // Content
           $mail->isHTML(true);                                  // Set email format to HTML
           $mail->Subject = $object;
-          $mail->Body    = $messages;
+          $mail->Body    = $message;
           $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
           $mail->send();
           if ($key = $last_key) {
-            header("Location:index.php?action=notif");
+            die("ok");
+            header("Location:index.php?action=listeProjet");
           }
-
           if (count($data)==1) {
-            header("Location:index.php?action=notif");
+            die("ok");
+            header("Location:index.php?action=listeProjet");
           }
       } catch (Exception $e) {
           //echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
       }
     }
-    
   }
 }

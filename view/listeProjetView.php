@@ -21,6 +21,7 @@ ob_start();
                   <th>Equipe</th>
                   <th>Retenu</th>
                   <th>Logo</th>
+                  <th>Action</th>
                 </tr>
                 <?php 
                 $target = '';
@@ -49,6 +50,7 @@ ob_start();
                   <img width="50" src="<?= $target. Manager::getDatas(new files())->getId($value['file'])->getFile_url() ?>" class="img-circle" alt="Cinque Terre">
                   
                   </td>
+                  <td><form action="" method="post"><button type="submit" name="equipe" value="<?= $value['equipe']?>" class="btn btn-info">Mail</button></form></td>
                 </tr>
                 <?php 
                    }

@@ -98,20 +98,26 @@ if (isset($_SESSION['user'])) {
         } elseif ($action == 'noteProjet') {
 
             require_once("view/noterProjetView.php");
-        } elseif ($action == 'listeProjet') {
+        } elseif ($action == 'listeProjet') {//View liste des projets
+            if(!empty($_POST)){
+                extract($_POST);
+                $_SESSION['equipe'] = $equipe;
+                $data = Manager::getData('projet', 'equipe', $equipe)['data'];
+                if($data['etat_retenu']=="Oui"){//Candidat retenu
+                    $_SESSION['etat'] = $data['etat_retenu'];
+                    include_once("model/mail.php");
+                } else{//Candidat non retenu
+                    $_SESSION['etat'] = $data['etat_retenu'];
+                    include_once("model/mail.php");
+                }
+            }
             require_once("view/listeProjetView.php");
         } elseif ($action == 'inscription') {//View Lancement inscription
             require_once("view/inscriptionView.php");
-        } elseif ($action == 'cretenu') {//Envoyer mail au candidat selectionner
-            if(!empty($_POST)){
-                $data = $_POST;
-                //Manager::showError($data);
-                $records = Manager::getData("projet", "etat_retenu", "Oui", true)['records'];
-                if($records['error']==false){
-                    include_once("model/mail.php");
-                }else{}
-            }
-            require_once("view/candidatSelectMailView.php");
+        } elseif ($action == 'attributionCoach') {//Attribution de Coach aux projets
+            require_once("view/attributionCoachView.php");
+        } elseif ($action == 'coach') {
+            require_once("view/attributionCoachProjetView.php");
         } elseif ($action == 'type') {
             if (!empty($_POST)) {
                 $data = $_POST;
