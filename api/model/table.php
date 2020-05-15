@@ -185,6 +185,10 @@ class Table
             $sql .= "WHERE $this->property=:$this->property";
 
             //s'il existe un champs password_ il sera crypter
+            if (array_key_exists('password_', $this->values)) {
+                $this->values['password_'] = password_hash($this->values['password_'], PASSWORD_BCRYPT);
+            }
+            
             if (!array_key_exists($this->property, $this->values)) {
                 $this->values[$this->property] = $this->val;
             }
