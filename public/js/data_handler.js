@@ -686,8 +686,8 @@ function canContinue(data) {
 function changeEtat(checkbox) {
     $my_etat = $(checkbox).val();
     showPleaseWait();
-    console.log(myurl + "inscription/id_inscription/1",$(this).prop('checked'));
-    if($(this).prop('checked') == false){
+    console.log(myurl + "inscription/id_inscription/1",$(checkbox).prop('checked'));
+    if($(checkbox).prop('checked') == false){
         $data = JSON.stringify({"etat":"Non"});
         $.ajax({
             url: myurl + "inscription/id_inscription/1",
@@ -707,7 +707,7 @@ function changeEtat(checkbox) {
             }
         });
     } else{
-        $data = JSON.stringify({"etat":"Oui"})
+        $data = JSON.stringify({"etat":"Oui"});
         $.ajax({
             url: myurl + "inscription/id_inscription/1",
             type: "PUT",
