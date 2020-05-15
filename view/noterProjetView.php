@@ -248,8 +248,8 @@ ob_start();
         </div>
       </div>
       <div id="menu1" class="container tab-pane fade"><br>
-        <h3>Menu 1</h3>
-        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <h3>Aucun projet n'a été selectionner pour le moment</h3>
+        
       </div>
     </div>
   </div>
