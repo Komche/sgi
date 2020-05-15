@@ -113,7 +113,6 @@ if (isset($_SESSION['user'])) {
             }
             require_once("view/listeProjetView.php");
         } elseif ($action == 'inscription') {//View Lancement inscription
-            echo('ok');
             require_once("view/inscriptionView.php");
         } elseif ($action == 'attributionCoach') {//Attribution de Coach aux projets
             require_once("view/attributionCoachView.php");
