@@ -142,6 +142,7 @@ $('.btn-note-edit').on('click', function () {
 
 $('input:checkbox.module_is_checked').each(function (i, v) {
     $mr = getDataWith2Param('module_role', 'module', $(v).val(), 'role_id', $_GET['role']);
+//console.log(v);
 
     $mr.done(function ($mr) {
         if (!$mr.error) {
