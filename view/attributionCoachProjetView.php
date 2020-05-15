@@ -40,7 +40,7 @@ ob_start();
                           <div class="col-sm-offset-2 col-sm-10">
                             <div class="checkbox">
                               <label>
-                                <input class="coach_is_checked" onchange="addCoachEquipe(this)" value="<?= $value['id'] ?>" type="checkbox"> coacher l'équipe
+                                <input class="coach_is_checked" onchange="addCoachEquipe(this)" value="<?= $value['id'] ?>" type="radio"> coacher l'équipe
                               </label>
                             </div>
                           </div>

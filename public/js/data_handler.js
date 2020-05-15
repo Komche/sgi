@@ -252,6 +252,8 @@ function addPermissionRole(chec) {
 function addCoachEquipe(chec) {//Add coach to equipe(projet)
     console.log("equipe", $_GET['equipe']);
     console.log(myurl + "equipe/id_equipe/" +$_GET['equipe'],$(this).prop('checked'));
+    $mr = getDataWith2Param('equipe', 'user', $(chec).val(), 'id_equipe', $_GET['equipe']);
+    console.log($mr, "coacher");
     if ($(chec).prop('checked') == true) {
         $data = JSON.stringify({"user":$(chec).val()});
         $.ajax({
