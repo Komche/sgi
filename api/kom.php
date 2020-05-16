@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <form class="my-form" action="index.php" method="post">
+    <form class="my-form" action="kom.php" method="post">
         <div class="form-control">
             <label for="db_name">Nom de la base de nom</label>
             <input type="text" name="db_name">

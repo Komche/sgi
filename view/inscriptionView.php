@@ -15,7 +15,7 @@
               <div class="box-body">
                 <div class="form-group">
                     <?php $data = Manager::getData('inscription', 'id_inscription', 1)['data']['etat'] ?>
-                    <input id="checkbox_etat" type="checkbox" <?= ($data=='Oui') ? 'checked' : '' ?> data-toggle="toggle" data-onstyle="success" data-offstyle="danger" name="etat">
+                    <input onchange="changeEtat(this)" id="checkbox_etat" type="checkbox" <?= ($data=='Oui') ? 'checked' : '' ?> data-toggle="toggle" data-onstyle="success" data-offstyle="danger" name="etat">
                 </div>
               </div>
               <!-- /.box-body -->
