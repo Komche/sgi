@@ -8,3 +8,6 @@ INSERT INTO `module_role` (`id`, `role_id`, `module`) VALUES (40, 1, 44);
 //Alter Table Equipe
 ALTER TABLE `equipe` ADD `user` INT NULL AFTER `pays`, ADD INDEX (`user`);
 ALTER TABLE `equipe` ADD FOREIGN KEY (`user`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--MAJ
+ALTER TABLE `projet` ADD `date_post` DATETIME on update CURRENT_TIMESTAMP NOT NULL AFTER `statut`;
