@@ -585,4 +585,25 @@ class Manager extends Managers
             }
         }
     }
+    /**
+     * @param String table
+     * @param Int id de la table
+     */
+    public static function Count($table, $id, $proprety=null, $value=null){
+        $query = "SELECT COUNT($id) as total FROM $table ";
+        if($proprety!=null && $value!=null){
+            $query .= "WHERE $proprety=:$proprety";
+            $req = self::bdd()->prepare($query);
+            $req->execute([$proprety => $value]);
+            if ($res = $req->fetch(PDO::FETCH_ASSOC)) {
+                return $res;
+            }
+        } else{
+            $req = self::bdd()->query($query);
+            if ($res = $req->fetch(PDO::FETCH_ASSOC)) {
+                return $res;
+            }
+        }
+        
+    }
 }

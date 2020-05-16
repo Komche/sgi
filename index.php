@@ -211,11 +211,13 @@ if (isset($_SESSION['user'])) {
             require_once("view/roleModuleView.php");
         } elseif ($action == 'profile') {
             require_once("view/profileView.php");
+        }elseif ($action == 'dashboard') {//View Dashboard
+            require_once("view/dashboardView.php");
         } elseif ($action == 'logout') {
             require_once("view/logout.php");
         }
     } else {
-        require_once("view/profileView.php");
+        require_once("view/dashboardView.php");
     }
 } elseif (isset($_GET['signup'])) {
     if (!empty($_POST)) {
@@ -235,7 +237,7 @@ if (isset($_SESSION['user'])) {
         if ($res != 1) {
             $_SESSION['messages'] = $res;
         } else {
-            header('Location: index.php?action=profile');
+            header('Location: index.php?action=dashboardView');
         }
     }
     require('view/loginView.php');
