@@ -211,8 +211,10 @@ if (isset($_SESSION['user'])) {
             require_once("view/roleModuleView.php");
         } elseif ($action == 'profile') {
             require_once("view/profileView.php");
-        }elseif ($action == 'dashboard') {//View Dashboard
+        } elseif ($action == 'dashboard') {//View Dashboard
             require_once("view/dashboardView.php");
+        } elseif ($action == 'detailProjet') {//View Detail du Projet
+            require_once("view/detailProjetView.php");
         } elseif ($action == 'logout') {
             require_once("view/logout.php");
         }
