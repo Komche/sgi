@@ -215,6 +215,10 @@ if (isset($_SESSION['user'])) {
             require_once("view/dashboardView.php");
         } elseif ($action == 'detailProjet') {//View Detail du Projet
             require_once("view/detailProjetView.php");
+        } elseif ($action == 'listesProjets') {//View listes des Projets
+            require_once("view/listesProjetsView.php");
+        } elseif ($action == 'listeEquipe') {//View listes des Equipes
+            require_once("view/listeEquipeView.php");
         } elseif ($action == 'logout') {
             require_once("view/logout.php");
         }
