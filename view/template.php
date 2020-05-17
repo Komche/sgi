@@ -649,7 +649,7 @@
   <!-- AdminLTE App -->
   <script src="public/vendor/dist/js/adminlte.min.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-  <script src="public/vendor/dist/js/pages/dashboard.js"></script>
+  <script src="public/vendor/dist/js/pages/dashboard2.js"></script>
   <script src="public/vendor/bower_components/ckeditor/ckeditor.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="public/vendor/dist/js/demo.js"></script>

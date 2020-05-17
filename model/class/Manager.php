@@ -606,4 +606,15 @@ class Manager extends Managers
         }
         
     }
+
+    public static function CountVille(){
+        $query = "SELECT region.id_region, region.nom_region,
+            (SELECT COUNT(projet.id_projet) FROM projet, equipe WHERE equipe.region=region.id_region and equipe.id_equipe=projet.equipe) as nombre
+            FROM region
+        ";
+            $req = self::bdd()->query($query);
+            if (self::$results['data'] = $req->fetch(PDO::FETCH_ASSOC)) {
+                return self::$results;
+            }
+    }
 }
