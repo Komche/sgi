@@ -88,7 +88,7 @@ switch ($request_method) {
             }elseif ($url_request['property_1']=="projects_by_date") {
                 $res = [];
                 $sql = "SELECT COUNT(*) as nb, date_post FROM projet WHERE DATE(date_post) = ?";
-                for ($i=20200515; $i <= date("Ymd"); $i++) { 
+                for ($i=20200514; $i <= date("Ymd"); $i++) { 
                    $res[$i] =  $table->getMultiplesRecords($sql, [$i]);
                     
                 }
