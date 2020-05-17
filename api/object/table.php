@@ -86,11 +86,13 @@ switch ($request_method) {
                 AND p.id_projet = n.projet AND etat_retenu=? GROUP BY p.id_projet";
                 echo $table->getMultiplesRecords($sql, ['Oui']);
             }elseif ($url_request['property_1']=="projects_by_date") {
+                $res = [];
                 $sql = "SELECT COUNT(*) as nb, date_post FROM projet WHERE DATE(date_post) = ?";
                 for ($i=20200515; $i <= date("Ymd"); $i++) { 
-                    echo $table->getMultiplesRecords($sql, [$i]);
-                    die;
+                   $res[$i] =  $table->getMultiplesRecords($sql, [$i]);
+                    
                 }
+                echo json_encode($res);
             }
            
         } else {

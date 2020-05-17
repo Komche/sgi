@@ -322,7 +322,7 @@ class Table
         die();
     }
 
-    public function getMultiplesRecords($sql, $params = [])
+    public function getMultiplesRecords($sql, $params = [], $return_json=false)
     {
         $req = $this->db->prepare($sql);
         if (!empty($params)) { // parameters must exist before you call bind_param() method
@@ -332,8 +332,12 @@ class Table
             return json_encode(self::$results);
         }
         if ($res = $req->fetchAll(PDO::FETCH_ASSOC)) {
-            self::$results['data'] = $res;
-            return json_encode(self::$results);
+            if ($return_json) {
+                self::$results['data'] = $res;
+                return json_encode(self::$results);
+            }else {
+                return $res;
+            }
         }
     }
 }
