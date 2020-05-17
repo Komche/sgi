@@ -250,13 +250,15 @@ function addPermissionRole(chec) {
     }
 }
 
-function addCoachProjet(chec) {//Add coach to projet
-    console.log("projet", $_GET['projet']);
-    console.log(myurl + "projet/id_projet/" +$_GET['projet'],$(this).prop('checked'));
+function addCoachEquipe(chec) {//Add coach to equipe(projet)
+    console.log("equipe", $_GET['equipe']);
+    console.log(myurl + "equipe/id_equipe/" +$_GET['equipe'],$(this).prop('checked'));
+    $mr = getDataWith2Param('equipe', 'user', $(chec).val(), 'id_equipe', $_GET['equipe']);
+    console.log($mr, "coacher");
     if ($(chec).prop('checked') == true) {
         $data = JSON.stringify({"user":$(chec).val()});
         $.ajax({
-            url: myurl + "projet/id_projet/" + $_GET['projet'],
+            url: myurl + "equipe/id_equipe/" + $_GET['equipe'],
             type: "PUT",
             contentType: 'application/x-www-form-urlencoded',
             dataType: "json",
@@ -439,7 +441,7 @@ function getNote3() {
 
     console.log("projet", myurl + "custom");
     $note = $.ajax({
-        url: myurl + "custom",
+        url: myurl + "custom/list_project",
         type: "GET",
         contentType: 'application/json',
         dataType: "json",

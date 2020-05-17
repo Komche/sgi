@@ -13,10 +13,10 @@ ob_start();
               <table class="table table-bordered">
                 <tbody>
                 <tr>
+                  <th>Equipe</th>
                   <th>Nom du projet</th>
                   <th>Domaine</th>
                   <th>Description</th>
-                  <th>Equipe</th>
                   <th>Logo</th>
                   <th>Coach</th>
                   <th>Action</th>
@@ -34,21 +34,26 @@ ob_start();
                   //print_r($data);
                   //if ((is_array($data) || is_object($data)) && empty($data['message'])) {
                     foreach ($data as $value) {
-                      
+                      $equipe = Manager::getDatas(new equipe())->getId_equipe($value['equipe']);
+                      $equipe_nom = $equipe->getNom_equipe();
+                      $equipe_user = $equipe->getUser();
+
+                      //var_dump($value);
+                      //die();
                    
                 ?>
                 <tr>
+                  <td><?= $equipe_nom ?></td>
                   <td><?= $value['nom_projet'] ?></td>
                   <td><?= $value['domaine'] ?></td>
                   <td><?= $value['description'] ?></td>
-                  <td><?= Manager::getDatas(new equipe())->getId_equipe($value['equipe'])->getNom_equipe() ?></td>
                   <td>
                   <img width="50" src="<?= $target. Manager::getDatas(new files())->getId($value['file'])->getFile_url() ?>" class="img-circle" alt="Cinque Terre">
                   </td>
-                  <td><?= ($value['user']!=NULL) ? (Manager::getDatas(new users())->getId($value['user'])->getFirst_name()) : 'Pas de coach'?></td>
+                  <td><?= ($equipe_user!=NULL) ? (Manager::getDatas(new users())->getId($equipe_user)->getFirst_name()) : 'Pas de coach'?></td>
                   <td>
-                    <a href="index.php?action=<?= ($value['user']==NULL) ? "coach&projet=".$value['id_projet'] : "attributionCoach" ?>" class="btn btn-primary">
-                      <i class="fa fa-<?= ($value['user']==NULL) ? 'plus' : 'thumbs-o-up' ?>"></i> 
+                    <a href="index.php?action=<?= ($equipe_user===NULL) ? "coach&equipe=".$value['equipe'] : "attributionCoach" ?>" class="btn btn-primary">
+                      <i class="fa fa-<?= ($equipe_user===NULL) ? 'plus' : 'thumbs-o-up' ?>"></i> 
                     </a>
                     </td>
                 </tr>

@@ -80,10 +80,19 @@ switch ($request_method) {
     case 'GET':
         header("Access-Control-Allow-Methods: GET");
         if ($current_table == "custom") {
-            $sql  = "SELECT * FROM projet p, equipe e, region r, files f, note n 
-            WHERE p.equipe = e.id_equipe AND e.region = r.id_region AND f.id = p.file  
-            AND p.id_projet = n.projet AND etat_retenu=? GROUP BY p.id_projet";
-            echo $table->getMultiplesRecords($sql, ['Oui']);
+            if ($url_request['property_1']=="list_project") {
+                $sql  = "SELECT * FROM projet p, equipe e, region r, files f, note n 
+                WHERE p.equipe = e.id_equipe AND e.region = r.id_region AND f.id = p.file  
+                AND p.id_projet = n.projet AND etat_retenu=? GROUP BY p.id_projet";
+                echo $table->getMultiplesRecords($sql, ['Oui']);
+            }elseif ($url_request['property_1']=="projects_by_date") {
+                $sql = "SELECT COUNT(*) as nb, date_post FROM projet WHERE DATE(date_post) = ?";
+                for ($i=20200515; $i <= date("Ymd"); $i++) { 
+                    echo $table->getMultiplesRecords($sql, [$i]);
+                    die;
+                }
+            }
+           
         } else {
 
             echo $table->getData();

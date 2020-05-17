@@ -648,8 +648,10 @@
   <script src="public/vendor/bower_components/fastclick/lib/fastclick.js"></script>
   <!-- AdminLTE App -->
   <script src="public/vendor/dist/js/adminlte.min.js"></script>
+  <!-- ChartJS -->
+  <script src="public/vendor/bower_components/Chart.js/Chart.js"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-  <script src="public/vendor/dist/js/pages/dashboard.js"></script>
+  <script src="public/vendor/dist/js/pages/dashboard2.js"></script>
   <script src="public/vendor/bower_components/ckeditor/ckeditor.js"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="public/vendor/dist/js/demo.js"></script>
@@ -660,8 +662,14 @@
   <script src="public/vendor/parsley/i18n/fr.js"></script>
   <script src="public/js/script.js"></script>
   <script src="public/js/data_handler.js"></script>
-
+  <!-- Sparkline -->
+  <script src="public/vendor/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
   <script>
+    //INITIALIZE SPARKLINE CHARTS
+    $(".sparkline").each(function () {
+      var $this = $(this);
+      $this.sparkline('html', $this.data());
+    });
     $(function() {
       // Replace the <textarea id="editor1"> with a CKEditor
       // instance, using default configuration.

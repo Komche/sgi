@@ -585,4 +585,36 @@ class Manager extends Managers
             }
         }
     }
+    /**
+     * @param String table
+     * @param Int id de la table
+     */
+    public static function Count($table, $id, $proprety=null, $value=null){
+        $query = "SELECT COUNT($id) as total FROM $table ";
+        if($proprety!=null && $value!=null){
+            $query .= "WHERE $proprety=:$proprety";
+            $req = self::bdd()->prepare($query);
+            $req->execute([$proprety => $value]);
+            if ($res = $req->fetch(PDO::FETCH_ASSOC)) {
+                return $res;
+            }
+        } else{
+            $req = self::bdd()->query($query);
+            if ($res = $req->fetch(PDO::FETCH_ASSOC)) {
+                return $res;
+            }
+        }
+        
+    }
+
+    public static function CountVille(){
+        $query = "SELECT region.id_region, region.nom_region,
+            (SELECT COUNT(projet.id_projet) FROM projet, equipe WHERE equipe.region=region.id_region and equipe.id_equipe=projet.equipe) as nombre
+            FROM region
+        ";
+            $req = self::bdd()->query($query);
+            if (self::$results['data'] = $req->fetch(PDO::FETCH_ASSOC)) {
+                return self::$results;
+            }
+    }
 }
