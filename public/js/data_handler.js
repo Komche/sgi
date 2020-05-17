@@ -441,7 +441,7 @@ function getNote3() {
 
     console.log("projet", myurl + "custom");
     $note = $.ajax({
-        url: myurl + "custom",
+        url: myurl + "custom/list_project",
         type: "GET",
         contentType: 'application/json',
         dataType: "json",

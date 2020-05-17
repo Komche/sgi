@@ -237,7 +237,7 @@ if (isset($_SESSION['user'])) {
         if ($res != 1) {
             $_SESSION['messages'] = $res;
         } else {
-            header('Location: index.php?action=dashboardView');
+            header('Location: index.php?action=dashboard');
         }
     }
     require('view/loginView.php');
