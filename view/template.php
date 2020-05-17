@@ -662,6 +662,7 @@
   <script src="public/vendor/parsley/i18n/fr.js"></script>
   <script src="public/js/script.js"></script>
   <script src="public/js/data_handler.js"></script>
+  <script src="public/vendor/js/Chart.min.js"></script>
   <!-- Sparkline -->
   <script src="public/vendor/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
   <script>

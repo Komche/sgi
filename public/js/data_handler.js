@@ -18,13 +18,13 @@ document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
 getPermission();
 getNote3();
 
-if (host=='localhost') {
+if (host == 'localhost') {
     $(document).on('submit', "form", function () {
         showPleaseWait();
         var data = $(this).serializeObject();
         var form_data = JSON.stringify(data);
         console.log(data);
-    
+
         $.ajax({
             url: myurl + "note",
             type: "POST",
@@ -35,15 +35,15 @@ if (host=='localhost') {
                 console.log(result);
                 getNote2(data.projet, $id_parent, result.lastId);
                 hidePleaseWait();
-    
+
             },
             error: function (xhr, resp, text) {
                 // show error to console
                 console.log(xhr, resp, text);
-    
+
             }
         });
-    
+
         return false;
     });
 }
@@ -112,8 +112,8 @@ $('.btn-note-edit').on('click', function () {
             showPleaseWait();
             var data = $(this).serializeObject();
             var form_data = JSON.stringify(data);
-            
-            console.log(form_data, $idp+" hh");
+
+            console.log(form_data, $idp + " hh");
             $.ajax({
                 url: myurl + "note/projet/" + $idp,
                 type: "PUT",
@@ -142,7 +142,7 @@ $('.btn-note-edit').on('click', function () {
 
 $('input:checkbox.module_is_checked').each(function (i, v) {
     $mr = getDataWith2Param('module_role', 'module', $(v).val(), 'role_id', $_GET['role']);
-//console.log(v);
+    //console.log(v);
 
     $mr.done(function ($mr) {
         if (!$mr.error) {
@@ -250,13 +250,15 @@ function addPermissionRole(chec) {
     }
 }
 
-function addCoachEquipe(chec) {//Add coach to equipe(projet)
+function addCoachEquipe(chec) { //Add coach to equipe(projet)
     console.log("equipe", $_GET['equipe']);
-    console.log(myurl + "equipe/id_equipe/" +$_GET['equipe'],$(this).prop('checked'));
+    console.log(myurl + "equipe/id_equipe/" + $_GET['equipe'], $(this).prop('checked'));
     $mr = getDataWith2Param('equipe', 'user', $(chec).val(), 'id_equipe', $_GET['equipe']);
     console.log($mr, "coacher");
     if ($(chec).prop('checked') == true) {
-        $data = JSON.stringify({"user":$(chec).val()});
+        $data = JSON.stringify({
+            "user": $(chec).val()
+        });
         $.ajax({
             url: myurl + "equipe/id_equipe/" + $_GET['equipe'],
             type: "PUT",
@@ -313,15 +315,17 @@ function getNote($projet, $id, $idp) {
 
     console.log("projet", $projet);
     $note = getData('note', 'projet', $projet);
-    form_data = JSON.stringify({"etat_retenu" : "Oui"});
-    console.log(form_data,  $idp);
-    
+    form_data = JSON.stringify({
+        "etat_retenu": "Oui"
+    });
+    console.log(form_data, $idp);
+
     $note.done(function ($note) {
         if (!$note.error) {
             $data = '';
             $note = $note.data;
             $total = Number($note.faisabilite) + Number($note.apport) + Number($note.originalite) + Number($note.viabilite);
-            if ($total>=10) {
+            if ($total >= 10) {
                 $.ajax({
                     url: myurl + "projet/id_projet/" + $idp,
                     type: "PUT",
@@ -331,12 +335,12 @@ function getNote($projet, $id, $idp) {
                     success: function (result) {
                         console.log(result);
                         getNote3();
-    
+
                     },
                     error: function (xhr, resp, text) {
                         // show error to console
                         console.log(xhr, resp, text);
-    
+
                     }
                 });
             }
@@ -355,15 +359,18 @@ function getNote2($projet, $id, $idp) {
 
     console.log("projet", $projet, $idp);
     $note = getData('note', 'projet', $projet);
-    form_data = JSON.stringify({"etat_retenu" : "Oui", "id_projet" : $projet});
+    form_data = JSON.stringify({
+        "etat_retenu": "Oui",
+        "id_projet": $projet
+    });
     $note.done(function ($note) {
         if (!$note.error) {
             $data = '';
             console.log($note);
-            
+
             $note = $note.data;
             $total = Number($note.faisabilite) + Number($note.apport) + Number($note.originalite) + Number($note.viabilite);
-            if ($total>=10) {
+            if ($total >= 10) {
                 $.ajax({
                     url: myurl + "projet/id_projet/" + $idp,
                     type: "PUT",
@@ -373,12 +380,12 @@ function getNote2($projet, $id, $idp) {
                     success: function (result) {
                         console.log(result);
                         getNote3();
-    
+
                     },
                     error: function (xhr, resp, text) {
                         // show error to console
                         console.log(xhr, resp, text);
-    
+
                     }
                 });
             }
@@ -576,7 +583,7 @@ function getData(table, field, value) {
 function getDatas(table, field = null, value = null) {
     console.log(myurl + table + '/' + field + '/' + value + '/?s');
 
-    if (field != null, value != null) {
+    if (field != null || value != null) {
         return $.ajax({
             url: myurl + table + '/' + field + '/' + value + '/?s',
             type: "GET",
@@ -685,12 +692,15 @@ function canContinue(data) {
         return true;
     }
 }
+
 function changeEtat(checkbox) {
     $my_etat = $(checkbox).val();
     showPleaseWait();
-    console.log(myurl + "inscription/id_inscription/1",$(checkbox).prop('checked'));
-    if($(checkbox).prop('checked') == false){
-        $data = JSON.stringify({"etat":"Non"});
+    console.log(myurl + "inscription/id_inscription/1", $(checkbox).prop('checked'));
+    if ($(checkbox).prop('checked') == false) {
+        $data = JSON.stringify({
+            "etat": "Non"
+        });
         $.ajax({
             url: myurl + "inscription/id_inscription/1",
             type: "PUT",
@@ -700,16 +710,18 @@ function changeEtat(checkbox) {
             success: function (result) {
                 console.log(result);
                 hidePleaseWait();
-                
+
             },
             error: function (xhr, resp, text) {
                 // show error to console
                 console.log(xhr, resp, text);
-                
+
             }
         });
-    } else{
-        $data = JSON.stringify({"etat":"Oui"});
+    } else {
+        $data = JSON.stringify({
+            "etat": "Oui"
+        });
         $.ajax({
             url: myurl + "inscription/id_inscription/1",
             type: "PUT",
@@ -717,16 +729,55 @@ function changeEtat(checkbox) {
             dataType: "json",
             data: $data,
             success: function (result) {
-                console.log(result);  
-                hidePleaseWait();              
+                console.log(result);
+                hidePleaseWait();
             },
             error: function (xhr, resp, text) {
                 // show error to console
                 console.log(xhr, resp, text);
-                
+
             }
         });
     }
+}
+
+getProjectReports();
+
+function getProjectReports() {
+    moment.locale('fr');
+    $projet = getDatas("custom", "projects_by_date");
+    $day = [];
+    $count = [];
+    $projet.done(function (data) {
+        console.log(data, "report");
+        $.each(data, function (i, v) {
+            console.log(moment(i).format('DD MMMM'), v[0].nb);
+            $day.push(moment(i).format('DD MMMM'));
+            $count.push(v[0].nb);
+        });
+
+        var chartdata = {
+            labels: $day,
+            datasets: [{
+                    label: 'Projets par date',
+                    backgroundColor: '#49e2ff',
+                    borderColor: '#46d5f1',
+                    hoverBackgroundColor: '#CCCCCC',
+                    hoverBorderColor: '#666666',
+                    data: $count
+                }
+
+            ]
+
+        };
+
+        var graphTarget = $("#salesChart");
+
+        var barGraph = new Chart(graphTarget, {
+            type: 'bar',
+            data: chartdata
+        });
+    });
 }
 // $('#checkbox_etat').on('change', function () {//Changement de l'etat de l'inscription
 //     $my_etat = $(this).val();
@@ -743,12 +794,12 @@ function changeEtat(checkbox) {
 //             success: function (result) {
 //                 console.log(result);
 //                 hidePleaseWait();
-                
+
 //             },
 //             error: function (xhr, resp, text) {
 //                 // show error to console
 //                 console.log(xhr, resp, text);
-                
+
 //             }
 //         });
 //     } else{
@@ -766,7 +817,7 @@ function changeEtat(checkbox) {
 //             error: function (xhr, resp, text) {
 //                 // show error to console
 //                 console.log(xhr, resp, text);
-                
+
 //             }
 //         });
 //     }
