@@ -589,10 +589,13 @@ class Manager extends Managers
      * @param String table
      * @param Int id de la table
      */
-    public static function Count($table, $id, $proprety=null, $value=null){
+    public static function Count($table, $id, $proprety=null, $value=null, $regroupe=null){
         $query = "SELECT COUNT($id) as total FROM $table ";
         if($proprety!=null && $value!=null){
             $query .= "WHERE $proprety=:$proprety";
+            if (!is_null($regroupe)) {
+                $query .= "GROUP BY $regroupe";
+            }
             $req = self::bdd()->prepare($query);
             $req->execute([$proprety => $value]);
             if ($res = $req->fetch(PDO::FETCH_ASSOC)) {
@@ -612,6 +615,14 @@ class Manager extends Managers
             (SELECT COUNT(projet.id_projet) FROM projet, equipe WHERE equipe.region=region.id_region and equipe.id_equipe=projet.equipe) as nombre
             FROM region
         ";
+            $req = self::bdd()->query($query);
+            if (self::$results['data'] = $req->fetch(PDO::FETCH_ASSOC)) {
+                return self::$results;
+            }
+    }
+
+    public static function CountEquipe(){
+        $query = "SELECT COUNT(id_equipe) as total FROM equipe e, projet p WHERE e.id_equipe = p.equipe";
             $req = self::bdd()->query($query);
             if (self::$results['data'] = $req->fetch(PDO::FETCH_ASSOC)) {
                 return self::$results;

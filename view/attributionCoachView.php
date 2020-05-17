@@ -32,7 +32,7 @@ ob_start();
                   //$projet = new projet();
                   //$data = Manager::getDatas($projet)->all();
                   //print_r($data);
-                  //if ((is_array($data) || is_object($data)) && empty($data['message'])) {
+                  if ((is_array($data) || is_object($data))) {
                     foreach ($data as $value) {
                       $equipe = Manager::getDatas(new equipe())->getId_equipe($value['equipe']);
                       $equipe_nom = $equipe->getNom_equipe();
@@ -59,9 +59,9 @@ ob_start();
                 </tr>
                 <?php 
                    }
-                  //}else {
-                    // Manager::messages('Aucune donnée trouvé', 'alert-warning');
-                  //}
+                  }else {
+                    Manager::messages('Aucune donnée trouvé', 'alert-warning');
+                  }
                 ?>
               </tbody>
             </table>

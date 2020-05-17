@@ -57,7 +57,7 @@ ob_start();
 
         <div class="info-box-content">
           <span class="info-box-text">Equipe</span>
-          <span class="info-box-number"><?= Manager::Count('equipe','id_equipe')['total']; ?></span>
+          <span class="info-box-number"><?= Manager::CountEquipe()['data']['total']; ?></span>
         </div>
         <!-- /.info-box-content -->
       </div>
@@ -99,7 +99,7 @@ ob_start();
 
               <div class="chart">
                 <!-- Sales Chart Canvas -->
-                <canvas id="salesChart" style="height: 180px;"></canvas>
+                <canvas id="salesChart" style="height: 200px;"></canvas>
               </div>
               <!-- /.chart-responsive -->
             </div>
