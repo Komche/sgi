@@ -99,7 +99,7 @@ ob_start();
 
               <div class="chart">
                 <!-- Sales Chart Canvas -->
-                <canvas id="salesChart" style="height: 180px;"></canvas>
+                <canvas id="salesChart" style="height: 200px;"></canvas>
               </div>
               <!-- /.chart-responsive -->
             </div>
