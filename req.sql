@@ -11,3 +11,9 @@ ALTER TABLE `equipe` ADD FOREIGN KEY (`user`) REFERENCES `users`(`id`) ON DELETE
 
 --MAJ
 ALTER TABLE `projet` ADD `date_post` DATETIME on update CURRENT_TIMESTAMP NOT NULL AFTER `statut`;
+
+--MAJ note
+ALTER TABLE `note` ADD `created_by` INT NOT NULL AFTER `projet`, ADD `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `created_by`, ADD `update_by` INT NULL AFTER `created_at`, ADD `update_at` DATETIME NULL AFTER `update_by`, ADD INDEX (`created_by`), ADD INDEX (`update_by`);
+ALTER TABLE projet DROP FOREIGN KEY projet_ibfk_2;
+`ALTER TABLE ``projet`` DROP INDEX ``user``;`
+`ALTER TABLE ``projet`` DROP INDEX ``user``;`

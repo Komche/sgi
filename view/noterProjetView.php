@@ -136,7 +136,7 @@ ob_start();
                     <span>
                       <ul id="ul<?= $value['id_projet'] ?>">
                         <?php
-
+                        $d = strtotime("now");
                         $sql = "SELECT * FROM note WHERE projet=?";
                         $data = Manager::getSingleRecords($sql, [$value['id_projet']]);
                         if (is_array($data) || is_object($data)) {
@@ -183,6 +183,8 @@ ob_start();
                                 <div class="col-lg-8">
                                   <input type="number" value="<?= $data['viabilite'] ?>" data-parsley-min="0" data-parsley-max="5" data-parsley-required="true" class="form-control" id="viabilite" name="viabilite" placeholder="Viabilité">
                                   <input type="hidden" value="<?= $data['projet'] ?>" data-parsley-required="true" class="form-control" id="projet" name="projet" placeholder="">
+                                  <input type="hidden" value="<?= $_SESSION['user']['id'] ?>" data-parsley-required="true" class="form-control" id="update_by" name="update_by" placeholder="">
+                                  <input type="hidden" value="<?= date("Y-m-d h:i:s", $d);  ?>" data-parsley-required="true" class="form-control" id="update_at" name="update_at" placeholder="">
                                 </div>
                               </div>
                             </li>
@@ -225,6 +227,7 @@ ob_start();
                                 <div class="col-lg-8">
                                   <input type="number" data-parsley-min="0" data-parsley-max="5" data-parsley-required="true" class="form-control" id="viabilite" name="viabilite" placeholder="Viabilité">
                                   <input type="hidden" value="<?= $value['id_projet'] ?>" data-parsley-required="true" class="form-control" id="projet" name="projet" placeholder="">
+                                  <input type="hidden" value="<?= $_SESSION['user']['id'] ?>" data-parsley-required="true" class="form-control" id="created_by" name="created_by" placeholder="">
                                 </div>
                               </div>
                             </li>

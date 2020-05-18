@@ -75,7 +75,7 @@ ob_start();
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
             </button>
-            <div class="btn-group">
+            <!-- <div class="btn-group">
               <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
                 <i class="fa fa-wrench"></i></button>
               <ul class="dropdown-menu" role="menu">
@@ -86,7 +86,7 @@ ob_start();
                 <li><a href="#">Separated link</a></li>
               </ul>
             </div>
-            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button> -->
           </div>
         </div>
         <!-- /.box-header -->

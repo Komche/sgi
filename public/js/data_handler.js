@@ -26,6 +26,7 @@ if (host == 'localhost' && $_GET['action']=="noteProjet") {
         console.log(data);
 
         if (ip==0) {
+            ip++;
             $.ajax({
                 url: myurl + "note",
                 type: "POST",
@@ -33,9 +34,8 @@ if (host == 'localhost' && $_GET['action']=="noteProjet") {
                 dataType: "json",
                 data: form_data,
                 success: function (result) {
-                    ip++;
                     console.log(result);
-                    getNote2(data.projet, $id_parent, result.lastId, $("#mySessionId").text());
+                    getNote2(data.projet, $id_parent, result.lastId);
                     hidePleaseWait();
     
                 },
@@ -72,6 +72,7 @@ $('.btn-note').on('click', function () {
             console.log(data);
 
             if (ip==0) {
+                ip++;
                 $.ajax({
                     url: myurl + "note",
                     type: "POST",
@@ -79,9 +80,9 @@ $('.btn-note').on('click', function () {
                     dataType: "json",
                     data: form_data,
                     success: function (result) {
-                        ip++;
+                        
                         console.log(result.lastId);
-                        getNote2(data.projet, $id_parent, result.lastId, $("#mySessionId").text());
+                        getNote2(data.projet, $id_parent, result.lastId);
                         hidePleaseWait();
     
                     },
@@ -99,8 +100,11 @@ $('.btn-note').on('click', function () {
 
 });
 $('.btn-note-edit').on('click', function () {
+    moment.locale('fr');
+
     $my_id = $(this).attr('id');
     $idp = $(this).attr('data-id');
+    $("#update_at").val(moment());
     id_projet = $("#" + $my_id).attr('data-id');
     $id_res = "note-res" + $("#" + $my_id).attr('data-id');
     $id_form = "form-note" + $("#" + $my_id).attr('data-id');
@@ -367,8 +371,7 @@ function getNote2($projet, $id, $idp, $userId) {
     $note = getData('note', 'projet', $projet);
     form_data = JSON.stringify({
         "etat_retenu": "Oui",
-        "id_projet": $projet,        
-        "user" : $userId
+        "id_projet": $projet
     });
     $note.done(function ($note) {
         if (!$note.error) {
