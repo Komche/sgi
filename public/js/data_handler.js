@@ -400,8 +400,8 @@ function getNote2($projet, $id, $idp, $userId) {
                 });
             }else{
                 form_data = JSON.stringify({
-                    "id_projet": $projet,        
-                    "user" : $userId
+                    "etat_retenu": "Non",
+                    "id_projet": $projet
                 });
                 $.ajax({
                     url: myurl + "projet/id_projet/" + $idp,
