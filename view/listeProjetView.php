@@ -43,14 +43,18 @@ ob_start();
                   <td><?= $value['domaine'] ?></td>
                   <td><?= $value['statut'] ?></td>
                   <td><?= $value['besoin_tech'] ?></td>
-                  <td><?= $value['description'] ?></td>
+                  <td><?= limit_text($value['description'], 30) ?></td>
                   <td><?= Manager::getDatas(new equipe())->getId_equipe($value['equipe'])->getNom_equipe() ?></td>
                   <td><?= $value['etat_retenu'] ?></td>
                   <td>
                   <img width="50" src="<?= $target. Manager::getDatas(new files())->getId($value['file'])->getFile_url() ?>" class="img-circle" alt="Cinque Terre">
                   
                   </td>
-                  <td><form action="" method="post"><button type="submit" name="equipe" value="<?= $value['equipe']?>" class="btn btn-info">Mail</button></form></td>
+                  <td>
+                    <form action="" method="post"><button type="submit" name="equipe" value="<?= $value['equipe']?>" class="btn btn-info">Mail</button></form>
+                    <br>
+                    <a href="index.php?action=detailProjet&projet=<?= $value['id_projet'] ?>" type="button" value="<?= $value['equipe']?>" class="btn btn-success">Detail</a>
+                </td>
                 </tr>
                 <?php 
                    }
