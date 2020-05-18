@@ -50,7 +50,7 @@
 
     <header class="main-header">
       <!-- Logo -->
-      <a href="#" class="logo">
+      <a href="index.php" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>Coro</b>na</span>
         <!-- logo for regular state and mobile devices -->
@@ -73,7 +73,7 @@
 
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <a href="index.php?action=profile" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="<?= !empty($_SESSION['user']['photo']) ? $_SESSION['user']['photo'] : 'public/vendor/dist/img/avatar.png' ?>" class=" user-image" alt="User Image">
                 <span class="hidden-xs"><?= $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'] ?></span>
               </a>
