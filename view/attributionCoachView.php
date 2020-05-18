@@ -46,7 +46,7 @@ ob_start();
                   <td><?= $equipe_nom ?></td>
                   <td><?= $value['nom_projet'] ?></td>
                   <td><?= $value['domaine'] ?></td>
-                  <td><?= $value['description'] ?></td>
+                  <td><?= limit_text($value['description'], 30) ?></td>
                   <td>
                   <img width="50" src="<?= $target. Manager::getDatas(new files())->getId($value['file'])->getFile_url() ?>" class="img-circle" alt="Cinque Terre">
                   </td>
