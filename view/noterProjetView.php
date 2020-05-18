@@ -92,7 +92,7 @@ ob_start();
   }
 </style>
 <div class="row">
-
+<div style="display: none" id="mySessionId"><?=$_SESSION['user']['id']?></div>
   <div class="container">
     <ul class="nav nav-tabs" role="tablist">
       <li class="nav-item active">

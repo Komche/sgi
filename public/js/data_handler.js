@@ -17,33 +17,36 @@ document.location.search.replace(/\??(?:([^=]+)=([^&]*)&?)/g, function () {
 });
 getPermission();
 getNote3();
-
-if (host == 'localhost') {
+ip = 0;
+if (host == 'localhost' && $_GET['action']=="noteProjet") {
     $(document).on('submit', "form", function () {
         showPleaseWait();
         var data = $(this).serializeObject();
         var form_data = JSON.stringify(data);
         console.log(data);
 
-        $.ajax({
-            url: myurl + "note",
-            type: "POST",
-            contentType: 'application/json',
-            dataType: "json",
-            data: form_data,
-            success: function (result) {
-                console.log(result);
-                getNote2(data.projet, $id_parent, result.lastId);
-                hidePleaseWait();
-
-            },
-            error: function (xhr, resp, text) {
-                // show error to console
-                console.log(xhr, resp, text);
-
-            }
-        });
-
+        if (ip==0) {
+            $.ajax({
+                url: myurl + "note",
+                type: "POST",
+                contentType: 'application/json',
+                dataType: "json",
+                data: form_data,
+                success: function (result) {
+                    ip++;
+                    console.log(result);
+                    getNote2(data.projet, $id_parent, result.lastId, $("#mySessionId").text());
+                    hidePleaseWait();
+    
+                },
+                error: function (xhr, resp, text) {
+                    // show error to console
+                    console.log(xhr, resp, text);
+    
+                }
+            });
+    
+        }
         return false;
     });
 }
@@ -68,24 +71,27 @@ $('.btn-note').on('click', function () {
             var form_data = JSON.stringify(data);
             console.log(data);
 
-            $.ajax({
-                url: myurl + "note",
-                type: "POST",
-                contentType: 'application/json',
-                dataType: "json",
-                data: form_data,
-                success: function (result) {
-                    console.log(result.lastId);
-                    getNote2(data.projet, $id_parent, result.lastId);
-                    hidePleaseWait();
-
-                },
-                error: function (xhr, resp, text) {
-                    // show error to console
-                    console.log(xhr, resp, text);
-
-                }
-            });
+            if (ip==0) {
+                $.ajax({
+                    url: myurl + "note",
+                    type: "POST",
+                    contentType: 'application/json',
+                    dataType: "json",
+                    data: form_data,
+                    success: function (result) {
+                        ip++;
+                        console.log(result.lastId);
+                        getNote2(data.projet, $id_parent, result.lastId, $("#mySessionId").text());
+                        hidePleaseWait();
+    
+                    },
+                    error: function (xhr, resp, text) {
+                        // show error to console
+                        console.log(xhr, resp, text);
+    
+                    }
+                });
+            }
             //alert('valid');
         }
     });
@@ -354,14 +360,15 @@ function getNote($projet, $id, $idp) {
     });
 }
 
-function getNote2($projet, $id, $idp) {
+function getNote2($projet, $id, $idp, $userId) {
     //console.log("perm");
 
     console.log("projet", $projet, $idp);
     $note = getData('note', 'projet', $projet);
     form_data = JSON.stringify({
         "etat_retenu": "Oui",
-        "id_projet": $projet
+        "id_projet": $projet,        
+        "user" : $userId
     });
     $note.done(function ($note) {
         if (!$note.error) {
@@ -381,6 +388,26 @@ function getNote2($projet, $id, $idp) {
                         console.log(result);
                         getNote3();
 
+                    },
+                    error: function (xhr, resp, text) {
+                        // show error to console
+                        console.log(xhr, resp, text);
+
+                    }
+                });
+            }else{
+                form_data = JSON.stringify({
+                    "id_projet": $projet,        
+                    "user" : $userId
+                });
+                $.ajax({
+                    url: myurl + "projet/id_projet/" + $idp,
+                    type: "PUT",
+                    contentType: 'application/json',
+                    dataType: "json",
+                    data: form_data,
+                    success: function (result) {
+                        console.log(result);
                     },
                     error: function (xhr, resp, text) {
                         // show error to console
