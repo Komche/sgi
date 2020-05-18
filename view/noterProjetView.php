@@ -131,7 +131,8 @@ ob_start();
                       <img src="<?= $target . $value['file_url'] ?>">
                     </div>
                     <h2><?= $value['nom_projet'] ?><br><span><?= $value['domaine'] ?></span></h2>
-                    <p> <?= $value['description'] ?></p>
+                    <p> <?= $value['description'] ?> <a href="index.php?action=detailProjet&projet=<?= $value['id_projet'] ?>" type="button" title="Voir plus" class="btn btn-note-edit btn-warning center-block">Détails</a></p>
+                    
                     <span>
                       <ul id="ul<?= $value['id_projet'] ?>">
                         <?php

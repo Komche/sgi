@@ -17,7 +17,7 @@ ob_start();
         <div class="icon">
           <i class="ion ion-bag"></i>
         </div>
-        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        <!--<a href="index.php?action=listesProjets" class="small-box-footer">Listes <i class="fa fa-arrow-circle-right"></i></a>-->
       </div>
     </div>
     <!-- ./col -->
@@ -32,7 +32,7 @@ ob_start();
         <div class="icon">
           <i class="ion ion-person-add"></i>
         </div>
-        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        <!--<a href="index.php?action=listeCoach" class="small-box-footer">Listes <i class="fa fa-arrow-circle-right"></i></a>-->
       </div>
     </div>
     <!-- ./col -->
@@ -47,7 +47,7 @@ ob_start();
         <div class="icon">
           <i class="ion ion-person-add"></i>
         </div>
-        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        <!--<a href="index.php?action=listeCandidats" class="small-box-footer">Listes <i class="fa fa-arrow-circle-right"></i></a>-->
       </div>
     </div>
     <!-- ./col -->
@@ -163,41 +163,41 @@ ob_start();
         <!-- ./box-body -->
         <div class="box-footer">
           <div class="row">
-            <div class="col-sm-3 col-xs-6">
+            <!--<div class="col-sm-3 col-xs-6">
               <div class="description-block border-right">
                 <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 17%</span>
                 <h5 class="description-header">$35,210.43</h5>
                 <span class="description-text">TOTAL REVENUE</span>
-              </div>
+              </div>-->
               <!-- /.description-block -->
-            </div>
+            <!--</div>-->
             <!-- /.col -->
-            <div class="col-sm-3 col-xs-6">
+            <!--<div class="col-sm-3 col-xs-6">
               <div class="description-block border-right">
                 <span class="description-percentage text-yellow"><i class="fa fa-caret-left"></i> 0%</span>
                 <h5 class="description-header">$10,390.90</h5>
                 <span class="description-text">TOTAL COST</span>
-              </div>
+              </div>-->
               <!-- /.description-block -->
-            </div>
+            <!--</div>-->
             <!-- /.col -->
-            <div class="col-sm-3 col-xs-6">
+            <!--<div class="col-sm-3 col-xs-6">
               <div class="description-block border-right">
                 <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>
                 <h5 class="description-header">$24,813.53</h5>
                 <span class="description-text">TOTAL PROFIT</span>
-              </div>
+              </div>-->
               <!-- /.description-block -->
-            </div>
+            <!--</div>-->
             <!-- /.col -->
-            <div class="col-sm-3 col-xs-6">
+            <!--<div class="col-sm-3 col-xs-6">
               <div class="description-block">
                 <span class="description-percentage text-red"><i class="fa fa-caret-down"></i> 18%</span>
                 <h5 class="description-header">1200</h5>
                 <span class="description-text">GOAL COMPLETIONS</span>
-              </div>
+              </div>-->
               <!-- /.description-block -->
-            </div>
+            <!--</div>-->
           </div>
           <!-- /.row -->
         </div>
@@ -208,30 +208,6 @@ ob_start();
     <!-- /.col -->
   </div>
   <!-- /.row -->
-  <div class="row">
-    <div class="col-md-4">
-      <div class="box box-solid">
-        <div class="box-header">
-          <h3 class="box-title text-warning">Sparkline Bar</h3>
-
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-          </div>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body text-center">
-          <div class="sparkline" data-type="bar" data-width="97%" data-height="100px" data-bar-Width="14" data-bar-Spacing="7" data-bar-Color="#f39c12">
-            15,4,8, 9, 10, 5, 13, 18, 21, 7, 9
-          </div>
-        </div>
-        <!-- /.box-body -->
-      </div>
-      <!-- /.box -->
-    </div>
-    <!-- /.col -->
-  </div>
-
-
 </section>
 <?php
 $content = ob_get_clean();
