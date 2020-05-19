@@ -51,7 +51,12 @@ class Table
 
                 $req = $this->db->prepare($query);
 
-                $req->execute([$this->property => $this->val]);
+                $req = $this->db->prepare($query);
+                if ($this->bindValue([$this->property => $this->val], $req)) {
+                    $req->execute();
+                } else {
+                    $this->throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true);
+                }
                 if (self::$results['data'] = $req->fetchAll(PDO::FETCH_ASSOC)) {
                     http_response_code(200);
 
@@ -65,7 +70,11 @@ class Table
 
                 $req = $this->db->prepare($query);
 
-                $req->execute([$this->property => $this->val, $prop=>$val]);
+                if ($this->bindValue([$this->property => $this->val, $prop => $val], $req)) {
+                    $req->execute();
+                } else {
+                    $this->throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true);
+                }
                 if (self::$results['data'] = $req->fetchAll(PDO::FETCH_ASSOC)) {
                     http_response_code(200);
 
@@ -77,7 +86,11 @@ class Table
                 $query .= "WHERE $this->property=:$this->property";
 
                 $req = $this->db->prepare($query);
-                $req->execute([$this->property => $this->val]);
+                if ($this->bindValue([$this->property => $this->val], $req)) {
+                    $req->execute();
+                } else {
+                    $this->throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true);
+                }
                 if (self::$results['data'] = $req->fetch(PDO::FETCH_ASSOC)) {
                     http_response_code(200);
                     return json_encode(self::$results);
@@ -150,15 +163,20 @@ class Table
                     $this->throwError(503, "Cette adresse email n'est pas au bon format", true);
             }
             $req = $this->db->prepare($sql);
-            if (!empty($this->values)) {
-                if ($req->execute($this->values)) {
-                    $lastId = $this->db->lastInsertId();
-                    $this->throwError(201, "Enregistrement effectué avec succès", false, $lastId);
+            if ($this->bindValue($this->values, $req)) {
+                //$this->throwError(201, $sql, false);
+                if (!empty($this->values)) {
+                    if ($req->execute()) {
+                        $lastId = $this->db->lastInsertId();
+                        $this->throwError(201, "Enregistrement effectué avec succès", false, $lastId);
+                    } else {
+                        $this->throwError(503, "Enregistrement échoué", true);
+                    }
                 } else {
-                    $this->throwError(503, "Enregistrement échoué", true);
+                    $this->throwError(400, "Un ou plusieurs champs mal renseigner", true);
                 }
             } else {
-                $this->throwError(400, "Un ou plusieurs champs mal renseigner", true);
+                $this->throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true);
             }
         }
     }
@@ -194,10 +212,14 @@ class Table
             }
 
             $req = $this->db->prepare($sql);
-            if ($req->execute($this->values)) {
-                $this->throwError(200, "Enregistrement modifié avec succès");
+            if ($this->bindValue($this->values, $req)) {
+                if ($req->execute()) {
+                    $this->throwError(200, "Enregistrement modifié avec succès");
+                } else {
+                    $this->throwError(503, "modification échouée", true);
+                }
             } else {
-                $this->throwError(503, "modification échouée", true);
+                $this->throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true);
             }
         }
     }
@@ -330,7 +352,11 @@ class Table
     {
         $req = $this->db->prepare($sql);
         if (!empty($params)) { // parameters must exist before you call bind_param() method
-            $req->execute($params);
+            if ($this->bindValue($params, $req)) {
+                $req->execute();
+            } else {
+                $this->throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true);
+            }
         }else {
             self::$results['data'] = $this->db->query($sql);
             return json_encode(self::$results);
@@ -342,6 +368,42 @@ class Table
             }else {
                 return $res;
             }
+        }
+    }
+
+    private static function bindValue($data, $req)
+    {
+        $data = self::slashValue($data);
+        if (is_array($data)) {
+            if ($data != false) {
+                foreach ($data as $key => $value) {
+                    if (is_int($value)) {
+                        $req->bindValue(":$key", $value, PDO::PARAM_INT);
+                    } elseif (is_string($value)) {
+                        $req->bindValue(":$key", $value, PDO::PARAM_STR);
+                    } elseif (is_bool($value)) {
+                        $req->bindValue(":$key", $value, PDO::PARAM_BOOL);
+                    }
+                }
+            }else {
+                return $data;
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private function slashValue($data)
+    {
+        $data_is_slash = array();
+        if (is_array($data)) {
+            foreach ($data as $key => $value) {
+                $data_is_slash[$key] = trim(htmlspecialchars(addslashes($value)));
+            }
+            return $data_is_slash;
+        }else {
+            return false;
         }
     }
 }
