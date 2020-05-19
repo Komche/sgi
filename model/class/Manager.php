@@ -628,4 +628,13 @@ class Manager extends Managers
                 return self::$results;
             }
     }
+
+    public static function CountCandidat(){
+        $query = "SELECT COUNT(id_candidat) as total FROM candidat c, equipe e, projet p 
+        WHERE e.id_equipe = p.equipe AND c.equipe = e.id_equipe";
+            $req = self::bdd()->query($query);
+            if (self::$results['data'] = $req->fetch(PDO::FETCH_ASSOC)) {
+                return self::$results['data'];
+            }
+    }
 }

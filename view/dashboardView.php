@@ -40,7 +40,7 @@ ob_start();
       <!-- small box -->
       <div class="small-box bg-yellow">
         <div class="inner">
-          <h3><?= Manager::Count('candidat','id_candidat')['total']; ?></h3>
+          <h3><?= Manager::CountCandidat()['total']; ?></h3>
 
           <p>Candidat</p>
         </div>
