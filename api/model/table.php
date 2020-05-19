@@ -352,11 +352,11 @@ class Table
     {
         $req = $this->db->prepare($sql);
         if (!empty($params)) { // parameters must exist before you call bind_param() method
-            if ($this->bindValue($params, $req)) {
-                $req->execute();
-            } else {
-                $this->throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true);
-            }
+            //if ($this->bindValue($params, $req)) {
+                $req->execute($params);
+            // } else {
+            //     $this->throwError(404, "Une erreur s'est produite ou enregistrement non trouvé", true);
+            // }
         }else {
             self::$results['data'] = $this->db->query($sql);
             return json_encode(self::$results);
