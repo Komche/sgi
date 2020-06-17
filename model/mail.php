@@ -29,17 +29,17 @@ if ($_SESSION['etat']=="Oui") {//Send Mail to Candidat retenu
           $mail->isSMTP();                                            // Send using SMTP
           $mail->Host       = 'mail41.lwspanel.com';                    // Set the SMTP server to send through
           $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-          $mail->Username   = 'hello@coronackathon.org';                     // SMTP username
+          $mail->Username   = 'hello@SGI.org';                     // SMTP username
           $mail->Password   = 'Hack@Covid19';                               // SMTP password
           $mail->SMTPSecure = 'tls';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
           $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
           //$mail->SMTPDebug   = 1;
           
           //Recipients
-          $mail->setFrom('hello@coronackathon.org', 'Coronackathon');
+          $mail->setFrom('hello@SGI.org', 'SGI');
           $mail->addAddress($value['email'], $value['nom']);     // Add a recipient
           //$mail->addAddress('ellen@example.com');               // Name is optional
-          $mail->addReplyTo('hello@coronackathon.org', 'Présélection au Hackathon');
+          $mail->addReplyTo('hello@SGI.org', 'Présélection au Hackathon');
           // $mail->addCC('cc@example.com');
           // $mail->addBCC('bcc@example.com');
 
@@ -88,17 +88,17 @@ if ($_SESSION['etat']=="Oui") {//Send Mail to Candidat retenu
           $mail->isSMTP();                                            // Send using SMTP
           $mail->Host       = 'mail41.lwspanel.com';                    // Set the SMTP server to send through
           $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-          $mail->Username   = 'hello@coronackathon.org';                     // SMTP username
+          $mail->Username   = 'hello@SGI.org';                     // SMTP username
           $mail->Password   = 'Hack@Covid19';                               // SMTP password
           $mail->SMTPSecure = 'tls';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
           $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
           //$mail->SMTPDebug   = 1;
           
           //Recipients
-          $mail->setFrom('hello@coronackathon.org', 'Coronackathon');
+          $mail->setFrom('hello@SGI.org', 'SGI');
           $mail->addAddress($value['email'], $value['nom_candidat']);     // Add a recipient
           //$mail->addAddress('ellen@example.com');               // Name is optional
-          $mail->addReplyTo('hello@coronackathon.org', 'Présélection au Hackathon');
+          $mail->addReplyTo('hello@SGI.org', 'Présélection au Hackathon');
           // $mail->addCC('cc@example.com');
           // $mail->addBCC('bcc@example.com');
 

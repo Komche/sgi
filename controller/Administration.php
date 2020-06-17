@@ -13,12 +13,14 @@ include_once('model/database/files.php');
 include_once('model/database/equipe.php');
 include_once('model/database/projet.php');
 include_once('model/database/candidat.php');
+include_once('model/database/client.php');
 
 function addData($data, $table)
 {
     $url = API_ROOT_PATH. "/object/$table";
     $res = Manager::addoNTable($url, $data);
     $res = Manager::correct($res);
+    // Manager::showError($res);
     if (isset($res['error'])) {
         if (!$res['error']) {
             $lastId = $res['lastId'];

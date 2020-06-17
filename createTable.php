@@ -1,9 +1,24 @@
 <?php
 //echo file_get_contents('config/Configuration.php'); die();
 require_once('api/config/Configuration.php');
-$database = new Configuration();
-global $db;
-$db = $database->getConnection();
+function bdd()
+{
+    $dbname = 'akoybizc_saroapp';
+    $user = 'akoybizcom';
+    $pass = '@damoukomche';
+    if ($_SERVER["SERVER_NAME"] == 'localhost') {
+        $dbname = 'sgi';
+        $user = 'root';
+        $pass = '';
+    }
+    try {
+        $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+        $bdd = new PDO("mysql:host=localhost;dbname=$dbname;charset=utf8", "$user", "$pass", $pdo_options);
+    } catch (Exception $e) {
+        die('Erreur :' . $e->getMessage());
+    }
+    return $bdd;
+}
 
 if (!empty($_POST)) {
     extract($_POST);
@@ -135,7 +150,7 @@ function getTables()
     }
     global $db;
     $sql = "SHOW TABLES";
-    $req = $db->prepare($sql);
+    $req = bdd()->prepare($sql);
     $req->execute();
     while ($res = $req->fetch()) {
         $data[] = $res["Tables_in_$db_name"];
@@ -147,7 +162,7 @@ function getFields($table)
 {
     global $db;
     $sql = "DESCRIBE $table";
-    $req = $db->query($sql);
+    $req = bdd()->query($sql);
     while ($res = $req->fetch()) {
         $data[] = $res['Field'];
     }

@@ -1,8 +1,8 @@
 
 <?php 
 class pays {
-	 public $id_pays;
-	 public $nom_pays;
+	 public $id;
+	 public $name;
 	 public $pays=array();
 
 
@@ -17,84 +17,84 @@ class pays {
                     return $this->pays;
                 }
 
-                public function role($id_pays, $nom_pays)
+                public function role($id, $name)
                     {
-                        $this->id_pays = $id_pays;
-$this->nom_pays = $nom_pays;
+                        $this->id = $id;
+$this->name = $name;
 
                     }
                 
 
 
                     /**
-                    * Get the value of id_pays
+                    * Get the value of id
                     */ 
-                    public function getId_pays($id_pays=null)
+                    public function getId($id=null)
                     {
-                        if ($id_pays != null && is_array($this->pays) && count($this->pays)!=0) {
+                        if ($id != null && is_array($this->pays) && count($this->pays)!=0) {
                             $table_name = strtolower(get_class($this));
-                            $query = "SELECT * FROM $table_name WHERE id_pays = ?";
+                            $query = "SELECT * FROM $table_name WHERE id = ?";
                             $req = Manager::bdd()->prepare($query);
-                            $req->execute([$id_pays]);
+                            $req->execute([$id]);
                             $data = "";
                             if ($data = $req->fetchAll(PDO::FETCH_ASSOC)) {
 $d=$data[0];
-$this->setId_pays($d['id_pays']);
-$this->setNom_pays($d['nom_pays']);
+$this->setId($d['id']);
+$this->setName($d['name']);
 $this->pays =$data; 
  return $this;
                                 }
                             
                         } else {
-                            return $this->id_pays;
+                            return $this->id;
                         }
                         
                     }
                     /**
-                    * Get the value of nom_pays
+                    * Get the value of name
                     */ 
-                    public function getNom_pays($nom_pays=null)
+                    public function getName($name=null)
                     {
-                        if ($nom_pays != null && is_array($this->pays) && count($this->pays)!=0) {
+                        if ($name != null && is_array($this->pays) && count($this->pays)!=0) {
                             $table_name = strtolower(get_class($this));
-                            $query = "SELECT * FROM $table_name WHERE nom_pays = ?";
+                            $query = "SELECT * FROM $table_name WHERE name = ?";
                             $req = Manager::bdd()->prepare($query);
-                            $req->execute([$nom_pays]);
+                            $req->execute([$name]);
                             $data = "";
                             if ($data = $req->fetchAll(PDO::FETCH_ASSOC)) {
 $d=$data[0];
-$this->setId_pays($d['id_pays']);
-$this->setNom_pays($d['nom_pays']);
+$this->setId($d['id']);
+$this->setName($d['name']);
 $this->pays =$data; 
  return $this;
                                 }
                             
                         } else {
-                            return $this->nom_pays;
+                            return $this->name;
                         }
                         
                     }
 
 
                     /**
-                    * Set the value of id_pays
+                    * Set the value of id
                     *
                     * @return  self
                     */ 
-                   public function setId_pays($id_pays)
+                   public function setId($id)
                    {
-                    $this->id_pays = $id_pays;
+                    $this->id = $id;
                
                        return $this;
                    }
                     /**
-                    * Set the value of nom_pays
+                    * Set the value of name
                     *
                     * @return  self
                     */ 
-                   public function setNom_pays($nom_pays)
+                   public function setName($name)
                    {
-                    $this->nom_pays = $nom_pays;
+                    $this->name = $name;
                
                        return $this;
                    }

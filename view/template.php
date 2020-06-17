@@ -52,9 +52,9 @@
       <!-- Logo -->
       <a href="index.php" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>Coro</b>na</span>
+        <span class="logo-mini"><b>SG</b>I</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Corona</b>ckathon</span>
+        <span class="logo-lg"><b>SG</b>I</span>
       </a>
       <!-- Header Navbar: style can be found in header.less -->
       <nav class="navbar navbar-static-top">
@@ -100,7 +100,7 @@
               </ul>
             </li>
             <!-- Control Sidebar Toggle Button -->
-            <li>
+            <li style="display:none">
               <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
             </li>
           </ul>
@@ -122,7 +122,7 @@
           </div>
         </div>
         <!-- search form -->
-        <form action="#" method="get" class="sidebar-form">
+        <!-- <form action="#" method="get" class="sidebar-form">
           <div class="input-group">
             <input type="text" name="q" class="form-control" placeholder="Recherche...">
             <span class="input-group-btn">
@@ -130,7 +130,7 @@
               </button>
             </span>
           </div>
-        </form>
+        </form> -->
         <!-- /.search form -->
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
@@ -391,7 +391,7 @@
       <div class="pull-right hidden-xs">
         <!-- <b>Version</b> 2.4.13-->
       </div>
-      <strong>Copyright &copy; 2020 <a href="#">Coronackathon</a>.</strong>
+      <strong>Copyright &copy; 2020 <a href="#">SGI</a>.</strong>
 
     </footer>
 
@@ -596,7 +596,7 @@
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span></button>
-          <h4 class="modal-title">Coronackathon</h4>
+          <h4 class="modal-title">SGI</h4>
         </div>
         <div id="danger_content" class="modal-body">
 

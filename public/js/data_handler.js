@@ -2,7 +2,7 @@ host = $(location).attr('hostname');
 protocol = $(location).attr('protocol');
 folder = '';
 if (host == 'localhost') {
-    folder = '/coronackathon_admin';
+    folder = '/sgi';
 } else {
     folder = '/admin';
 }
@@ -493,9 +493,9 @@ function getNote3() {
 
         $target = "";
         if (host == "localhost") {
-            $target = "http://localhost/Coronackathon/";
+            $target = "http://localhost/SGI/";
         } else {
-            $target = "http://coronackathon.org/";
+            $target = "http://SGI.org/";
         }
         if (!$note.error) {
             $data = '';

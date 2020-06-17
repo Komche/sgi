@@ -79,7 +79,7 @@ if (isset($_SESSION['user'])) {
                 }
             }
             require_once("view/rescueCenterView.php");
-        } elseif ($action == 'region') {
+        } elseif ($action == 'ville') {
             if (!empty($_POST)) {
                 $data = $_POST;
                 $region = new region($data);
@@ -89,6 +89,17 @@ if (isset($_SESSION['user'])) {
                 $_SESSION['messages'] = $res;
             }
             require_once("view/regionView.php");
+        } elseif ($action == 'personne-physique') {
+           
+            if (!empty($_POST)) {
+                $data = $_POST;
+                $client = new client($data);
+                //var_dump($region); die;
+                $res = insert($client);
+
+                $_SESSION['messages'] = $res;
+            }
+            require_once("view/addClientView.php");
         } elseif ($action == 'users' && !empty($_GET['role'])) {
 
             require_once("view/listeOrganisateurView.php");
@@ -98,6 +109,9 @@ if (isset($_SESSION['user'])) {
         } elseif ($action == 'noteProjet') {
 
             require_once("view/noterProjetView.php");
+        }elseif ($action == 'personne-morale') {
+
+            require_once("view/addClientMoralView.php");
         } elseif ($action == 'listeProjet') {//View liste des projets
             if(!empty($_POST)){
                 extract($_POST);
@@ -114,8 +128,8 @@ if (isset($_SESSION['user'])) {
             require_once("view/listeProjetView.php");
         } elseif ($action == 'inscription') {//View Lancement inscription
             require_once("view/inscriptionView.php");
-        } elseif ($action == 'attributionCoach') {//Attribution de Coach aux projets
-            require_once("view/attributionCoachView.php");
+        } elseif ($action == 'listClient') {//Attribution de Coach aux projets
+            require_once("view/clientListView.php");
         } elseif ($action == 'coach') {
             require_once("view/attributionCoachProjetView.php");
         } elseif ($action == 'type') {
@@ -223,7 +237,7 @@ if (isset($_SESSION['user'])) {
             require_once("view/logout.php");
         }
     } else {
-        require_once("view/dashboardView.php");
+        require_once("view/profileView.php");
     }
 } elseif (isset($_GET['signup'])) {
     if (!empty($_POST)) {
@@ -243,7 +257,7 @@ if (isset($_SESSION['user'])) {
         if ($res != 1) {
             $_SESSION['messages'] = $res;
         } else {
-            header('Location: index.php?action=dashboard');
+            header('Location: index.php?action=profile');
         }
     }
     require('view/loginView.php');

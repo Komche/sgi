@@ -1,5 +1,5 @@
 <?php
-$title = "Gestion un bureau";
+$title = "Gestion Rôle";
 ob_start();
 ?>
 <div class="row">

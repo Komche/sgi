@@ -12,12 +12,12 @@ class Manager extends Managers
 
     public static function bdd()
     {
-        $dbname = 'coron1363653';
-        $user = 'coron1363653';
-        $pass = 'qtl1xghbdn';
-        $host = '185.98.131.128';
+        $dbname = 'ummma1306561';
+        $user = 'ummma1306561';
+        $pass = 'gbabv3lp23';
+        $host = '185.98.131.91';
         if ($_SERVER["SERVER_NAME"] == 'localhost') {
-            $dbname = 'coronackathon';
+            $dbname = 'sgi';
             $user = 'root';
             $pass = '';
             $host = 'localhost';
@@ -41,7 +41,7 @@ class Manager extends Managers
         if (!empty($params)) { // parameters must exist before you call bind_param() method
             $req->execute($params);
         }else {
-            return self::bdd()->query($sql);
+            $req->execute();
         }
         if ($res = $req->fetchAll(PDO::FETCH_ASSOC)) {
             return $res;
@@ -188,7 +188,7 @@ class Manager extends Managers
         // die(var_dump($msg));
         echo  '<div class="alert ' . $type_alerte . ' alert-dismissible">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <h4><i class="icon fa fa-ban"></i> Coronackathon!</h4>
+        <h4><i class="icon fa fa-ban"></i> SGI!</h4>
         ' . $msg . '
       </div>';
     }
@@ -349,6 +349,46 @@ class Manager extends Managers
         $table = get_object_vars($object);
         $table_name = strtolower(get_class($object));
         $table = $table[$table_name];
+    //    var_dump($table); die($table_name);
+        if (is_array($table) || is_object($table)) {
+            if (count($table) > 0) {
+                end($table);
+                $last = key($table);
+                $sql = "INSERT INTO $table_name(";
+                foreach ($table as $key => $field) {
+                    if ($last != $key) {
+                        $sql .= $key . ", ";
+                    } else {
+                        $sql .= $key . ") ";
+                    }
+                }
+                $sql .= "VALUES(";
+                foreach ($table as $key => $field) {
+                    if ($last != $key) {
+                        $sql .= ":$key, ";
+                    } else {
+                        $sql .= ":$key)";
+                    }
+                }
+    
+                $req = self::bdd()->prepare($sql);
+                //if ($this->is_not_empty($table)) {
+                    try {
+                        $req->execute($table);
+                        $lastId = self::bdd()->lastInsertId();
+                        return $this->throwError(1, "Enregistrement effectué avec succès", false, $lastId);
+                    } catch (PDOException $e) {
+                        return $this->throwError(0, "Enregistrement échoué; $e", true);
+                    }
+                // } else {
+                //     return $this->throwError(0, "Un ou plusieurs champs mal renseigner", true);
+                // }
+            }
+        }
+    }
+
+    public  function simpleInsert($table, $table_name)
+    {
     //    var_dump($table); die($table_name);
         if (is_array($table) || is_object($table)) {
             if (count($table) > 0) {

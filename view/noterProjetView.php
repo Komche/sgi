@@ -111,9 +111,9 @@ ob_start();
           $i = 0;
           $target = '';
           if ($_SERVER["SERVER_NAME"] == 'localhost') {
-            $target = "http://localhost/Coronackathon/";
+            $target = "http://localhost/SGI/";
           } else {
-            $target = "http://coronackathon.org/";
+            $target = "http://SGI.org/";
           }
           $sql = "SELECT * FROM projet p, equipe e, region r, files f WHERE 
         p.equipe = e.id_equipe AND e.region = r.id_region AND f.id = p.file";

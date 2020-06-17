@@ -4,9 +4,9 @@ $folder = '';
 define ('HOST', "http://" . $_SERVER ['HTTP_HOST']); // get the hostname
 
 if ($_SERVER['HTTP_HOST'] == 'localhost') {
-    $folder = '/coronackathon_admin';
+    $folder = '/sgi';
 }else {
-    $folder = '/admin';
+    $folder = '/sgi';
 }
 
 define('ROOT_PATH', HOST . "$folder");

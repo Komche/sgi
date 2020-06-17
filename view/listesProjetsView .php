@@ -25,9 +25,9 @@ ob_start();
             <?php 
             $target = '';
             if ($_SERVER["SERVER_NAME"] == 'localhost') {
-                $target = "http://localhost/Coronackathon/";
+                $target = "http://localhost/SGI/";
             } else {
-                $target = "http://coronackathon.org/";
+                $target = "http://SGI.org/";
             }
               $projet = new projet();
               $data = Manager::getDatas($projet)->all();
